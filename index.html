@@ -1709,22 +1709,25 @@
     // Passwords/emails are stored centrally in Google Sheets. localStorage is
     // retained only as a temporary fallback if Google Sheets is unreachable.
     async function loadUsersFromGoogle() {
+        if (!navigator.onLine) return false;
         try {
-            const response = await fetch(GOOGLE_APPS_SCRIPT_URL + '?action=getUsers');
-            const result = await response.json();
+            // Use JSONP instead of fetch so GitHub Pages can communicate with
+            // the Apps Script Web App without a CORS/preflight problem.
+            const result = await callAppsScriptJSONP({action:'getUsers'});
             if (result && result.success && result.users) {
                 Object.keys(result.users).forEach(key => {
                     if (!USERS[key]) USERS[key] = result.users[key];
                     else {
-                        if (result.users[key].password) USERS[key].password = result.users[key].password;
-                        if (result.users[key].email) USERS[key].email = result.users[key].email;
-                        if (result.users[key].role) USERS[key].role = result.users[key].role;
-                        if (result.users[key].name) USERS[key].name = result.users[key].name;
+                        if (result.users[key].password !== undefined) USERS[key].password = result.users[key].password;
+                        if (result.users[key].email !== undefined) USERS[key].email = result.users[key].email;
+                        if (result.users[key].role !== undefined) USERS[key].role = result.users[key].role;
+                        if (result.users[key].name !== undefined) USERS[key].name = result.users[key].name;
                     }
                 });
                 saveUsersToStorage();
                 return true;
             }
+            console.warn('Google Sheets getUsers failed:', result?.error || 'unknown error');
         } catch (e) {
             console.warn('Could not load users from Google Sheets:', e);
         }
@@ -1738,12 +1741,14 @@
         }
         try {
             const payload = JSON.stringify(USERS);
-            const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ action: 'saveUsers', users: payload })
+            // IMPORTANT: Do not use POST/fetch here. A JSON POST from GitHub
+            // Pages can trigger a CORS preflight which Apps Script Web Apps
+            // do not handle. JSONP GET is already used by the OTP functions
+            // and avoids that problem completely.
+            const result = await callAppsScriptJSONP({
+                action:'saveUsers',
+                users:payload
             });
-            const result = await response.json();
             if (result && result.success) {
                 saveUsersToStorage();
                 return true;
