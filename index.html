@@ -1613,8 +1613,10 @@
             password = document.getElementById('teacherLoginPassword').value.trim();
         }
         
-        // Load users from storage first
-        loadUsersFromStorage();
+        // Google Sheets is authoritative for credentials.
+        // Fall back to this device's cached credentials only if the server is unreachable.
+        const usersLoadedOnline = await loadUsersFromGoogle();
+        if (!usersLoadedOnline) loadUsersFromStorage();
         
         // Check if user exists and password matches
         if (USERS[username] && USERS[username].password === password) {
@@ -1690,17 +1692,68 @@
     function saveUsersToStorage() { AppStorage.set('saved_users', JSON.stringify(USERS)); }
     function loadUsersFromStorage() {
         const saved = AppStorage.get('saved_users');
-        if (saved) { 
-            try { 
-                const users = JSON.parse(saved); 
-                Object.keys(users).forEach(key => { 
-                    if (USERS[key]) { 
-                        USERS[key].password = users[key].password; 
-                        if (users[key].email) USERS[key].email = users[key].email; 
-                    } 
-                }); 
-            } catch(e) {} 
+        if (saved) {
+            try {
+                const users = JSON.parse(saved);
+                Object.keys(users).forEach(key => {
+                    if (USERS[key]) {
+                        USERS[key].password = users[key].password;
+                        if (users[key].email) USERS[key].email = users[key].email;
+                    }
+                });
+            } catch(e) {}
         }
+    }
+
+    // ==================== CENTRAL USER CREDENTIALS ====================
+    // Passwords/emails are stored centrally in Google Sheets. localStorage is
+    // retained only as a temporary fallback if Google Sheets is unreachable.
+    async function loadUsersFromGoogle() {
+        try {
+            const response = await fetch(GOOGLE_APPS_SCRIPT_URL + '?action=getUsers');
+            const result = await response.json();
+            if (result && result.success && result.users) {
+                Object.keys(result.users).forEach(key => {
+                    if (!USERS[key]) USERS[key] = result.users[key];
+                    else {
+                        if (result.users[key].password) USERS[key].password = result.users[key].password;
+                        if (result.users[key].email) USERS[key].email = result.users[key].email;
+                        if (result.users[key].role) USERS[key].role = result.users[key].role;
+                        if (result.users[key].name) USERS[key].name = result.users[key].name;
+                    }
+                });
+                saveUsersToStorage();
+                return true;
+            }
+        } catch (e) {
+            console.warn('Could not load users from Google Sheets:', e);
+        }
+        return false;
+    }
+
+    async function saveUsersToGoogle() {
+        if (!navigator.onLine) {
+            showToast('Internet connection required. Password was NOT saved online.', 'error');
+            return false;
+        }
+        try {
+            const payload = JSON.stringify(USERS);
+            const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'saveUsers', users: payload })
+            });
+            const result = await response.json();
+            if (result && result.success) {
+                saveUsersToStorage();
+                return true;
+            }
+            showToast(result?.error || 'Could not save credentials to Google Sheets.', 'error');
+        } catch (e) {
+            console.error('Central user save error:', e);
+            showToast('❌ Password could not be saved online. Please try again.', 'error');
+        }
+        return false;
     }
 
     // ==================== DATABASE ====================
@@ -1910,7 +1963,6 @@
     // ==================== INIT ====================
     async function init() {
         populateYearSelectors();
-        loadUsersFromStorage();
 
         // ONLINE-ONLY MODE:
         // First load the authoritative database from Google Sheets.
@@ -3304,7 +3356,14 @@
                 showToast('This email is already registered to another user', 'error'); return;
             }
         }
+        const previousEmail = USERS[currentUsername].email;
         USERS[currentUsername].email = newEmail;
+        const emailSavedOnline = await saveUsersToGoogle();
+        if (!emailSavedOnline) {
+            USERS[currentUsername].email = previousEmail;
+            showToast('❌ Email was not saved to Google Sheets. Please try again.', 'error');
+            return;
+        }
         document.getElementById('profileEmail').textContent = newEmail;
         document.getElementById('currentUserEmail').textContent = newEmail;
         document.getElementById('registeredEmailDisplay').textContent = newEmail;
@@ -3327,7 +3386,12 @@
         if (newPass.length < 6) { showToast('New password must be at least 6 characters', 'error'); return; }
         if (newPass !== confirmPass) { showToast('Passwords do not match', 'error'); return; }
         USERS[currentUsername].password = newPass;
-        saveUsersToStorage();
+        const passwordSavedOnline = await saveUsersToGoogle();
+        if (!passwordSavedOnline) {
+            // Do not pretend the password was changed centrally. Restore cached value only.
+            showToast('❌ Password was not saved to Google Sheets. Please try again.', 'error');
+            return;
+        }
         profileOTPVerified = false;
         profileOTPRequestId = '';
         document.getElementById('profileChangeOTP').value = '';
@@ -3383,14 +3447,18 @@
     function otpInputHandler(input) { const index = parseInt(input.dataset.index); const value = input.value; if (value.length === 1) { input.classList.add('otp-input-filled'); const nextInput = document.querySelector(`.otp-input[data-index="${index + 1}"]`); if (nextInput) nextInput.focus(); } else { input.classList.remove('otp-input-filled'); } }
     function getOTP() { let otp = ''; document.querySelectorAll('.otp-input').forEach(input => { otp += input.value; }); return otp; }
     async function verifyOTP() { const enteredOTP = getOTP(); if (enteredOTP.length !== 6 || !resetOTPRequestId) { showToast('Please enter all 6 digits of the OTP', 'error'); return; } try { const result = await callAppsScriptJSONP({action:'verifyRecoveryOTP', requestId:resetOTPRequestId, otp:enteredOTP}); if (!result || !result.success) { showToast(result?.error || 'Invalid or expired OTP.', 'error'); return; } resetOTPVerified = true; if (otpTimer) { clearInterval(otpTimer); otpTimer = null; } document.getElementById('forgotPasswordStep2').classList.add('hidden'); document.getElementById('forgotPasswordStep3').classList.remove('hidden'); document.getElementById('newPassword').value = ''; document.getElementById('confirmPassword').value = ''; showToast('✅ OTP verified! Please set your new password.', 'success'); } catch(e) { showToast('Could not verify OTP.', 'error'); } }
-    function resetPassword() {
+    async function resetPassword() {
         const newPass = document.getElementById('newPassword').value;
         const confirmPass = document.getElementById('confirmPassword').value;
         if (!resetUsername || !resetOTPVerified) { showToast('OTP session expired or not verified. Please request a new OTP.', 'error'); return; }
         if (newPass.length < 6) { showToast('New password must be at least 6 characters', 'error'); return; }
         if (newPass !== confirmPass) { showToast('Passwords do not match', 'error'); return; }
         USERS[resetUsername].password = newPass;
-        saveUsersToStorage();
+        const passwordSavedOnline = await saveUsersToGoogle();
+        if (!passwordSavedOnline) {
+            showToast('❌ Password was not saved to Google Sheets. Please try again.', 'error');
+            return;
+        }
         resetOTPRequestId = '';
         resetOTPVerified = false;
         resetUsername = '';
