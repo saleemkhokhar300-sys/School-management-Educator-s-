@@ -388,7 +388,7 @@
             <div class="text-center mb-8">
                 <h1 class="text-4xl font-extrabold text-gray-900">The Educators</h1>
                 <p class="text-blue-600 font-bold text-sm mt-1">Ahmed Haseeb Campus, Mor Kunda</p>
-                <p class="text-gray-500 text-xs mt-2">Complete School Management System v10.1</p>
+                <p class="text-gray-500 text-xs mt-2">Complete School Management System v10.2</p>
             </div>
 
             <!-- Admin Login -->
@@ -405,6 +405,10 @@
                     <i class="fa-solid fa-right-to-bracket"></i> Sign In as Admin
                 </button>
             </form>
+
+            <div class="text-center mt-2">
+                <button type="button" onclick="openForgotPassword()" class="forgot-password-link">Forgot password?</button>
+            </div>
 
             <hr class="my-5 border-gray-200">
 
@@ -559,7 +563,7 @@
                 </div>
                 <div class="stats-card bg-white rounded-2xl shadow-sm p-4 text-center">
                     <div class="text-purple-600 text-2xl mb-1"><i class="fa-solid fa-school"></i></div>
-                    <p class="text-2xl font-bold text-gray-800">10</p>
+                    <p class="text-2xl font-bold text-gray-800">13</p>
                     <p class="text-xs text-gray-500 font-bold uppercase">Classes</p>
                 </div>
                 <div class="stats-card bg-white rounded-2xl shadow-sm p-4 text-center">
@@ -662,7 +666,7 @@
                                 <select id="classSelect" class="bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
                                     <option value="PG">PG</option><option value="Nursery">Nursery</option><option value="KG">KG</option>
                                     <option value="1">1</option><option value="2">2</option><option value="3">3</option>
-                                    <option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
+                                    <option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
                                 </select>
                                 <div class="month-year-selector">
                                     <select id="studentsMonthSelect"><option value="January">January</option><option value="February">February</option><option value="March">March</option><option value="April">April</option><option value="May">May</option><option value="June">June</option><option value="July" selected="">July</option><option value="August">August</option><option value="September">September</option><option value="October">October</option><option value="November">November</option><option value="December">December</option></select>
@@ -679,6 +683,13 @@
                                 <button onclick="printSelectedStudents()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-3 py-2 rounded-xl transition flex items-center gap-1 admin-only"><i class="fa-solid fa-print"></i> Print Selected</button>
                                 <button onclick="addNewStudent()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition flex items-center gap-1"><i class="fa-solid fa-plus"></i> Add Student</button>
                             </div>
+                        </div>
+                        <div class="mt-3 mb-4 p-3 rounded-xl border border-blue-100 bg-blue-50 flex flex-wrap items-center gap-2 admin-only" id="studentPromotionControls">
+                            <span class="text-xs font-bold text-blue-900"><i class="fa-solid fa-arrow-up-right-dots mr-1"></i> Promote Students</span>
+                            <select id="promotionTargetClass" class="bg-white border border-blue-200 rounded-lg px-3 py-2 text-xs font-semibold focus:border-blue-500 focus:outline-none"></select>
+                            <button onclick="promoteSelectedStudents()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded-lg transition"><i class="fa-solid fa-arrow-up mr-1"></i> Promote Selected</button>
+                            <button onclick="promoteAllStudentsInClass()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-4 py-2 rounded-lg transition"><i class="fa-solid fa-users mr-1"></i> Promote All in Current Class</button>
+                            <span id="promotionHint" class="text-[11px] text-blue-700"></span>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse">
@@ -814,7 +825,7 @@
                             <select id="subjectClassFilter" class="w-full md:w-64 bg-gray-50 border border-gray-200 rounded-xl px-4 py-2 text-sm focus:border-blue-500 focus:outline-none" onchange="loadSubjects()">
                                 <option value="PG">PG</option><option value="Nursery">Nursery</option><option value="KG">KG</option>
                                 <option value="1">1</option><option value="2">2</option><option value="3">3</option>
-                                <option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
+                                <option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
                             </select>
                         </div>
                         <div id="subjectsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"><div class="subject-card bg-white p-4 flex items-center justify-between">
@@ -917,7 +928,7 @@
                                 <select id="attendanceClass" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
                                     <option value="PG">PG</option><option value="Nursery">Nursery</option><option value="KG">KG</option>
                                     <option value="1">1</option><option value="2">2</option><option value="3">3</option>
-                                    <option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
+                                    <option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
                                 </select>
                             </div>
                             <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Date</label>
@@ -1070,7 +1081,7 @@
                                             <option value="All">All Classes</option>
                                             <option value="PG">PG</option><option value="Nursery">Nursery</option><option value="KG">KG</option>
                                             <option value="1">1</option><option value="2">2</option><option value="3">3</option>
-                                            <option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option>
+                                            <option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
                                         </select>
                                         <div class="month-year-selector">
                                             <select id="reportsMonthSelect" onchange="loadPerformance()"><option value="all">All Months</option><option value="January">January</option><option value="February">February</option><option value="March">March</option><option value="April">April</option><option value="May">May</option><option value="June">June</option><option value="July" selected="">July</option><option value="August">August</option><option value="September">September</option><option value="October">October</option><option value="November">November</option><option value="December">December</option></select>
@@ -1330,7 +1341,8 @@
                                 <div class="space-y-3">
                                     <button onclick="exportData()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2 admin-only"><i class="fa-solid fa-download"></i> Export All Data</button>
                                     <button onclick="importData()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2 admin-only"><i class="fa-solid fa-upload"></i> Import Data</button>
-                                    <button onclick="resetData()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2 admin-only"><i class="fa-solid fa-trash"></i> Reset All Data</button>
+                                    <button onclick="openSelectiveReset()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2 admin-only"><i class="fa-solid fa-sliders"></i> Selective Data Reset</button>
+                                    <button onclick="openBackupRestore()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2 admin-only"><i class="fa-solid fa-clock-rotate-left"></i> Backup History & Restore</button>
                                 </div>
                             </div>
                             <div class="bg-white rounded-xl border border-gray-200 p-4">
@@ -1423,7 +1435,7 @@
                 <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Teacher Name</label><input type="text" id="teacherName" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"></div>
                 <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Qualification</label><input type="text" id="teacherQualification" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"></div>
                 <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Subject</label><input type="text" id="teacherSubject" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"></div>
-                <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Class</label><select id="teacherClass" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"><option value="PG">PG</option><option value="Nursery">Nursery</option><option value="KG">KG</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select></div>
+                <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Class</label><select id="teacherClass" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"><option value="PG">PG</option><option value="Nursery">Nursery</option><option value="KG">KG</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></div>
                 <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Experience (Years)</label><input type="number" id="teacherExperience" value="1" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"></div>
                 <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Contact Number</label><input type="text" id="teacherContact" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"></div>
                 <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Joining Date</label><input type="date" id="teacherJoiningDate" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"></div>
@@ -1448,7 +1460,7 @@
             </div>
             <div class="space-y-4">
                 <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Subject Name</label><input type="text" id="subjectName" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"></div>
-                <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Class</label><select id="subjectClass" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"><option value="PG">PG</option><option value="Nursery">Nursery</option><option value="KG">KG</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select></div>
+                <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Class</label><select id="subjectClass" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"><option value="PG">PG</option><option value="Nursery">Nursery</option><option value="KG">KG</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></div>
                 <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Total Marks</label><input type="number" id="subjectTotalMarks" value="100" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"></div>
                 <input type="hidden" id="editSubjectIndex" value="-1">
                 <div class="flex gap-3">
@@ -1468,7 +1480,7 @@
             </div>
             <div class="space-y-4">
                 <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Exam Name</label><input type="text" id="examName" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"></div>
-                <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Class</label><select id="examClass" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"><option value="PG">PG</option><option value="Nursery">Nursery</option><option value="KG">KG</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select></div>
+                <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Class</label><select id="examClass" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"><option value="PG">PG</option><option value="Nursery">Nursery</option><option value="KG">KG</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></div>
                 <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Subject</label><input type="text" id="examSubject" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"></div>
                 <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Date</label><input type="date" id="examDate" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"></div>
                 <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Total Marks</label><input type="number" id="examTotalMarks" value="100" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"></div>
@@ -1613,20 +1625,33 @@
             password = document.getElementById('teacherLoginPassword').value.trim();
         }
         
-        // Google Sheets is authoritative for credentials.
-        // Fall back to this device's cached credentials only if the server is unreachable.
+        // Google Sheets credentials are tried first.
+        // If the online Users sheet rejects the password, also check the credentials
+        // previously saved by this browser. This preserves the existing password when
+        // an older HTML deployment/local copy has a valid cached credential.
+        const cachedUsers = {};
+        const savedUsersRaw = AppStorage.get('saved_users');
+        if (savedUsersRaw) {
+            try { Object.assign(cachedUsers, JSON.parse(savedUsersRaw)); } catch(e) {}
+        }
         const usersLoadedOnline = await loadUsersFromGoogle();
         if (!usersLoadedOnline) loadUsersFromStorage();
         
-        // Check if user exists and password matches
-        if (USERS[username] && USERS[username].password === password) {
+        const onlineUser = USERS[username];
+        const cachedUser = cachedUsers[username];
+        const passwordMatches = !!(onlineUser && onlineUser.password === password) ||
+            !!(cachedUser && cachedUser.password === password);
+        const loginUser = (onlineUser && onlineUser.password === password) ? onlineUser : cachedUser;
+
+        // Check central credentials first, then compatible cached credentials.
+        if (loginUser && passwordMatches) {
             // Verify the role matches
-            if (USERS[username].role.toLowerCase() !== role) {
+            if (String(loginUser.role || '').toLowerCase() !== role) {
                 showToast(`This account is not a ${role}. Please use the correct login section.`, 'error');
                 return;
             }
             
-            currentUser = USERS[username];
+            currentUser = loginUser;
             currentUsername = username;
             
             document.getElementById('loginScreen').style.display = 'none';
@@ -1774,32 +1799,35 @@
         '5': ['English', 'Urdu', 'Math', 'Islamiyat', 'Tarjuma', 'History', 'Science', 'Social Studies', 'Computer', 'Geography'],
         '6': ['English', 'Urdu', 'Math', 'Islamiyat', 'Tarjuma', 'History', 'Science', 'Social Studies', 'Computer', 'Geography', 'Physics', 'Chemistry'],
         '7': ['English', 'Urdu', 'Math', 'Islamiyat', 'Tarjuma', 'History', 'Science', 'Social Studies', 'Computer', 'Geography', 'Physics', 'Chemistry', 'Biology']
+        , '8': ['English', 'Urdu', 'Math', 'Islamiyat', 'Tarjuma', 'History', 'Science', 'Social Studies', 'Computer', 'Geography', 'Physics', 'Chemistry', 'Biology']
+        , '9': ['English', 'Urdu', 'Math', 'Islamiyat', 'Tarjuma', 'History', 'Science', 'Social Studies', 'Computer', 'Geography', 'Physics', 'Chemistry', 'Biology']
+        , '10': ['English', 'Urdu', 'Math', 'Islamiyat', 'Tarjuma', 'History', 'Science', 'Social Studies', 'Computer', 'Geography', 'Physics', 'Chemistry', 'Biology']
     };
     function defaultSubjectObjects(className) { return (DEFAULT_SUBJECTS[className] || []).map(name => ({ name, total: 100 })); }
 
     function initializeDatabase() {
         // ONLINE-ONLY MODE: Google Sheets is the only source of school data.
         db = {students:{},teachers:[],subjects:{},attendance:{},attendanceMarkedDates:{},fees:[],exams:[],examResults:{},notices:[],deleted:[]};
-        const classList=['PG','Nursery','KG','1','2','3','4','5','6','7'];
+        const classList=['PG','Nursery','KG','1','2','3','4','5','6','7','8','9','10'];
         classList.forEach(c=>{db.students[c]=[];db.subjects[c]=defaultSubjectObjects(c);});
     }
 
     function migrateSubjectsToObjects() {
-        const classList = ['PG','Nursery','KG','1','2','3','4','5','6','7'];
+        const classList = ['PG','Nursery','KG','1','2','3','4','5','6','7','8','9','10'];
         classList.forEach(c => { if (Array.isArray(db.subjects[c])) { db.subjects[c] = db.subjects[c].map(s => { if (typeof s === 'string') return { name: s, total: 100 }; if (s && typeof s === 'object' && s.name) return { name: s.name, total: s.total || 100 }; return { name: String(s), total: 100 }; }); } });
     }
     function migrateStudentRollNumbers() {
-        const classList = ['PG','Nursery','KG','1','2','3','4','5','6','7'];
+        const classList = ['PG','Nursery','KG','1','2','3','4','5','6','7','8','9','10'];
         classList.forEach(c => { (db.students[c] || []).forEach((student, idx) => { if (!student.rollNo) student.rollNo = idx + 1; if (!student.attendanceLog) student.attendanceLog = {}; }); });
     }
     function migrateStaffAndStudentDates() {
-        const classList = ['PG','Nursery','KG','1','2','3','4','5','6','7'];
+        const classList = ['PG','Nursery','KG','1','2','3','4','5','6','7','8','9','10'];
         classList.forEach(c => { (db.students[c] || []).forEach(s => { if (!s.joiningDate) s.joiningDate = ''; if (!s.studentStatus) s.studentStatus = 'Present'; if (!s.leavingDate) s.leavingDate = ''; }); });
         (db.teachers || []).forEach(t => { if (!t.joiningDate) t.joiningDate = ''; if (!t.teacherStatus) t.teacherStatus = 'Present'; if (!t.leavingDate) t.leavingDate = ''; if (t.replacementTeacherId === undefined) t.replacementTeacherId = ''; });
     }
 
     function createDefaultData() {
-        const classList = ['PG','Nursery','KG','1','2','3','4','5','6','7'];
+        const classList = ['PG','Nursery','KG','1','2','3','4','5','6','7','8','9','10'];
         db.students = {};
         classList.forEach(c => {
             db.students[c] = [];
@@ -1991,6 +2019,7 @@
         loadNotices();
         updateStats();
         updateDate();
+        populatePromotionTarget();
         applyStoredDarkModePreference();
         populateFeeStudents();
 
@@ -2005,7 +2034,7 @@
 
         document.getElementById('searchStudent').addEventListener('input', function() { loadStudents(this.value); });
         document.getElementById('studentSearchField').addEventListener('change', function() { loadStudents(document.getElementById('searchStudent').value); });
-        document.getElementById('classSelect').addEventListener('change', function() { loadStudents(); });
+        document.getElementById('classSelect').addEventListener('change', function() { loadStudents(); populatePromotionTarget(); });
         document.getElementById('attendanceClass').addEventListener('change', function() { loadAttendance(); });
         document.getElementById('searchTeacher').addEventListener('input', function() { loadTeachers(this.value); });
     }
@@ -2060,13 +2089,94 @@
                     <button onclick="openStudentModal('${student.className}','${student.id}')" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-2 py-1 rounded transition"><i class="fa-solid fa-pen"></i></button>
                     <button onclick="printSingleStudent('${student.className}','${student.id}')" class="bg-green-600 hover:bg-green-700 text-white text-xs px-2 py-1 rounded transition admin-only"><i class="fa-solid fa-print"></i></button>
                     <button onclick="deleteStudent('${student.className}','${student.id}')" class="bg-red-600 hover:bg-red-700 text-white text-xs px-2 py-1 rounded transition admin-only"><i class="fa-regular fa-trash-can"></i></button>
+                    ${getNextClassName(student.className) ? `<select title="Move to next class" class="text-[10px] border border-blue-200 rounded px-1 py-1 bg-white admin-only" onchange="if(this.value) promoteSingleStudent('${student.className}','${student.id}',this.value)"><option value="">Next</option><option value="${getNextClassName(student.className)}">${getNextClassName(student.className)}</option></select>` : `<span class="text-[10px] text-gray-400 admin-only">Final</span>`}
                 </div></td>`;
             tbody.appendChild(tr);
         });
         if (currentUser?.role === 'Teacher') tbody.querySelectorAll('.admin-only').forEach(el => el.style.display = 'none');
     }
 
-    function toggleSelectAllStudents(checkbox) { document.querySelectorAll('.student-select-checkbox').forEach(cb => { cb.checked = checkbox.checked; }); }
+    function toggleSelectAllStudents(checkbox) { document.querySelectorAll('#studentTableBody .student-select-checkbox').forEach(cb => { cb.checked = checkbox.checked; }); }
+
+    // ==================== STUDENT CLASS PROMOTION ====================
+    const STUDENT_CLASS_ORDER = ['PG','Nursery','KG','1','2','3','4','5','6','7','8','9','10'];
+    function getNextClassName(className) {
+        const idx = STUDENT_CLASS_ORDER.indexOf(String(className));
+        return idx >= 0 && idx < STUDENT_CLASS_ORDER.length - 1 ? STUDENT_CLASS_ORDER[idx + 1] : '';
+    }
+    function populatePromotionTarget() {
+        const select = document.getElementById('promotionTargetClass');
+        const hint = document.getElementById('promotionHint');
+        if (!select) return;
+        const current = document.getElementById('classSelect')?.value || 'PG';
+        const next = getNextClassName(current);
+        select.innerHTML = next ? `<option value="${next}">${next} (Next Class)</option>` : '<option value="">No next class — Class 10 is final</option>';
+        if (hint) hint.textContent = next ? `${current} → ${next}` : 'Class 10 is the final class.';
+    }
+    function moveStudentToClass_(fromClass, studentId, targetClass) {
+        const source = db.students[fromClass] || [];
+        const index = source.findIndex(s => s.id === studentId);
+        if (index < 0) return null;
+        const student = source[index];
+        const target = db.students[targetClass] || (db.students[targetClass] = []);
+        if (target.some(s => s.id === student.id)) return null;
+        const oldRoll = student.rollNo;
+        student.rollNo = target.reduce((max, s) => Math.max(max, Number(s.rollNo) || 0), 0) + 1;
+        const targetSubjects = db.subjects[targetClass] || defaultSubjectObjects(targetClass);
+        if (!student.marks) student.marks = {};
+        targetSubjects.forEach(sub => { const name = typeof sub === 'string' ? sub : sub.name; if (student.marks[name] === undefined) student.marks[name] = 0; });
+        target.push(student);
+        source.splice(index, 1);
+        (db.fees || []).forEach(f => { if (f.studentId === student.id) f.class = targetClass; });
+        return { student, oldRoll, newRoll: student.rollNo };
+    }
+    function promoteSingleStudent(fromClass, studentId, targetClass) {
+        if (currentUser?.role === 'Teacher') { showToast('Only admin can promote students', 'error'); return; }
+        const next = getNextClassName(fromClass);
+        if (!targetClass || targetClass !== next) { showToast('Please select the immediate next class.', 'error'); return; }
+        const moved = moveStudentToClass_(fromClass, studentId, targetClass);
+        if (!moved) { showToast('Student not found or already exists in the target class.', 'warning'); return; }
+        saveDatabase();
+        loadStudents();
+        updateStats();
+        showToast(`"${moved.student.name}" promoted ${fromClass} → ${targetClass}. Old Roll #${moved.oldRoll} replaced with ${moved.newRoll}. ✅`, 'success');
+    }
+    function getSelectedStudentRefs() {
+        return [...document.querySelectorAll('.student-select-checkbox:checked')].map(cb => ({ className: cb.dataset.class, id: cb.dataset.id }));
+    }
+    function promoteSelectedStudents() {
+        if (currentUser?.role === 'Teacher') { showToast('Only admin can promote students', 'error'); return; }
+        const refs = getSelectedStudentRefs();
+        const target = document.getElementById('promotionTargetClass')?.value || '';
+        if (!refs.length) { showToast('Please select at least one student.', 'warning'); return; }
+        if (!target) { showToast('Please select the next class.', 'warning'); return; }
+        const invalid = refs.filter(r => getNextClassName(r.className) !== target);
+        if (invalid.length) { showToast('Selection contains students whose immediate next class is different. Please select students from one class only.', 'error'); return; }
+        if (!confirm(`Promote ${refs.length} selected student(s) to Class ${target}?`)) return;
+        let moved = 0;
+        refs.forEach(r => { if (moveStudentToClass_(r.className, r.id, target)) moved++; });
+        if (!moved) { showToast('No students were moved.', 'warning'); return; }
+        saveDatabase();
+        loadStudents();
+        updateStats();
+        const selectAll = document.getElementById('selectAllStudents'); if (selectAll) selectAll.checked = false;
+        showToast(`${moved} student(s) promoted to Class ${target}. ✅`, 'success');
+    }
+    function promoteAllStudentsInClass() {
+        if (currentUser?.role === 'Teacher') { showToast('Only admin can promote students', 'error'); return; }
+        const fromClass = document.getElementById('classSelect')?.value || 'PG';
+        const target = getNextClassName(fromClass);
+        const list = [...(db.students[fromClass] || [])];
+        if (!target) { showToast('Class 10 is the final class; there is no next class.', 'warning'); return; }
+        if (!list.length) { showToast(`No students found in Class ${fromClass}.`, 'warning'); return; }
+        if (!confirm(`Promote ALL ${list.length} student(s) from ${fromClass} to ${target}?`)) return;
+        let moved = 0;
+        list.forEach(s => { if (moveStudentToClass_(fromClass, s.id, target)) moved++; });
+        saveDatabase();
+        loadStudents();
+        updateStats();
+        showToast(`${moved} student(s) promoted ${fromClass} → ${target}. ✅`, 'success');
+    }
 
     function addNewStudent() {
         const name = prompt('Enter student full name:');
@@ -2720,7 +2830,7 @@
     let sorState = { className: '', studentId: '', exams: [] };
 
     function openStudentOverallModal(presetClass, presetStudentId) {
-        const classList = ['PG','Nursery','KG','1','2','3','4','5','6','7'];
+        const classList = ['PG','Nursery','KG','1','2','3','4','5','6','7','8','9','10'];
         const clsSelect = document.getElementById('sorClassSelect');
         clsSelect.innerHTML = classList.map(c => `<option value="${c}">Class ${c}</option>`).join('');
         if (presetClass && classList.includes(presetClass)) clsSelect.value = presetClass;
@@ -2931,7 +3041,7 @@
     function populateFeeStudents() {
         const select = document.getElementById('feeStudent');
         select.innerHTML = '';
-        const classList = ['PG','Nursery','KG','1','2','3','4','5','6','7'];
+        const classList = ['PG','Nursery','KG','1','2','3','4','5','6','7','8','9','10'];
         classList.forEach(c => { const students = db.students[c] || []; students.forEach(s => { const option = document.createElement('option'); option.value = `${c}|${s.id}`; option.textContent = `${s.name} (${c})`; select.appendChild(option); }); });
     }
 
@@ -3036,7 +3146,7 @@
     function initClassChart() {
         if (typeof Chart === 'undefined') { document.getElementById('classChart').parentElement.innerHTML = '<p class="text-center text-gray-400 text-sm py-8">Chart library could not load.</p>'; return; }
         const ctx = document.getElementById('classChart').getContext('2d');
-        const classList = ['PG','Nursery','KG','1','2','3','4','5','6','7'];
+        const classList = ['PG','Nursery','KG','1','2','3','4','5','6','7','8','9','10'];
         const data = classList.map(c => (db.students[c] || []).length);
         if (classChart) classChart.destroy();
         const colors = ['#3b82f6','#60a5fa','#93c5fd','#bfdbfe','#dbeafe','#1e3a8a','#2563eb','#4f46e5','#7c3aed','#6d28d9'];
@@ -3071,7 +3181,7 @@
         const classFilter = document.getElementById('reportsClassFilter')?.value || 'All';
         const teacherFilter = document.getElementById('reportsTeacherFilter')?.value || 'All';
         const search = (document.getElementById('reportsSearchInput')?.value || '').toLowerCase();
-        const classList = classFilter === 'All' ? ['PG','Nursery','KG','1','2','3','4','5','6','7'] : [classFilter];
+        const classList = classFilter === 'All' ? ['PG','Nursery','KG','1','2','3','4','5','6','7','8','9','10'] : [classFilter];
         let allStudents = [];
         classList.forEach(c => { (db.students[c] || []).forEach(s => { allStudents.push({ ...s, className: c }); }); });
         if (teacherFilter !== 'All') {
@@ -3221,10 +3331,10 @@
     function buildStudentFeeListReport(c){let r=(db.students[c]||[]).map((s,i)=>`<tr><td class="center">${i+1}</td><td>${s.name||''}</td><td class="center">${c}</td><td>${s.contact||''}</td><td class="center">${getStudentFeeTotal(s,c)||0}</td></tr>`).join('');return `<div class="report-page">${reportPrintHeader(`Student Fee List — Class ${c}`)}<div class="custom-report-meta"><span><b>Class:</b> ${c}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Student Name</th><th>Class</th><th>Phone Number</th><th>Total Fees</th></tr></thead><tbody>${r||'<tr><td colspan="5" class="center">No students found.</td></tr>'}</tbody></table><div class="footer">Generated on ${new Date().toLocaleString()} | The Educators - Ahmed Haseeb Campus</div></div>`;}
     function buildStudentBasicListReport(c){let r=(db.students[c]||[]).map((s,i)=>`<tr><td class="center">${i+1}</td><td>${s.name||''}</td><td class="center">${c}</td></tr>`).join('');return `<div class="report-page">${reportPrintHeader(`Student Basic List — Class ${c}`)}<div class="custom-report-meta"><span><b>Class:</b> ${c}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Student Name</th><th>Class</th></tr></thead><tbody>${r||'<tr><td colspan="3" class="center">No students found.</td></tr>'}</tbody></table><div class="footer">Generated on ${new Date().toLocaleString()} | The Educators - Ahmed Haseeb Campus</div></div>`;}
     function buildTeacherListReport(){let r=(db.teachers||[]).map((t,i)=>`<tr><td class="center">${i+1}</td><td>${t.name||''}</td><td>${t.contact||''}</td><td>${t.qualification||'N/A'}</td><td>${t.subject||''}</td><td>${t.class||''}</td><td class="center">${t.experience||0}</td><td>${t.address||''}</td></tr>`).join('');return `<div class="report-page">${reportPrintHeader('Teacher List')}<div class="custom-report-meta"><span><b>Total Teachers:</b> ${(db.teachers||[]).length}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Teacher Name</th><th>Contact / Phone</th><th>Qualification</th><th>Subject</th><th>Class</th><th>Experience (Years)</th><th>Address</th></tr></thead><tbody>${r||'<tr><td colspan="8" class="center">No teachers found.</td></tr>'}</tbody></table><div class="footer">Generated on ${new Date().toLocaleString()} | The Educators - Ahmed Haseeb Campus</div></div>`;}
-    function buildClassPercentageReport(){let cs=['PG','Nursery','KG','1','2','3','4','5','6','7'];let r=cs.map((c,i)=>`<tr><td class="center">${i+1}</td><td class="center">${c}</td><td class="center">${getClassOverallPercentage(c)}%</td></tr>`).join('');return `<div class="report-page">${reportPrintHeader('Class Percentage Report')}<div class="custom-report-meta"><span><b>Classes:</b> All Classes</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Class Name</th><th>Overall Percentage</th></tr></thead><tbody>${r}</tbody></table><div class="footer">Generated on ${new Date().toLocaleString()} | The Educators - Ahmed Haseeb Campus</div></div>`;}
+    function buildClassPercentageReport(){let cs=['PG','Nursery','KG','1','2','3','4','5','6','7','8','9','10'];let r=cs.map((c,i)=>`<tr><td class="center">${i+1}</td><td class="center">${c}</td><td class="center">${getClassOverallPercentage(c)}%</td></tr>`).join('');return `<div class="report-page">${reportPrintHeader('Class Percentage Report')}<div class="custom-report-meta"><span><b>Classes:</b> All Classes</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Class Name</th><th>Overall Percentage</th></tr></thead><tbody>${r}</tbody></table><div class="footer">Generated on ${new Date().toLocaleString()} | The Educators - Ahmed Haseeb Campus</div></div>`;}
     function buildStudentResultSummaryReport(c){let ss=db.students[c]||[],sub=getReportSubjects(c),heads=sub.map(x=>`<th>${x.name} %</th>`).join(''),r=ss.map((s,i)=>{let x=getStudentResultSummaryData(s,c);return `<tr><td class="center">${i+1}</td><td>${s.name||''}</td><td class="center">${c}</td>${sub.map(q=>`<td class="center">${x.subjectResults[q.name]||'0.0'}%</td>`).join('')}<td class="center">${x.overall}%</td><td class="center"><b>${x.grade}</b></td></tr>`}).join('');return `<div class="report-page">${reportPrintHeader(`Student Result Summary — Class ${c}`)}<div class="custom-report-meta"><span><b>Class:</b> ${c}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Student Name</th><th>Class</th>${heads}<th>Overall %</th><th>Grade</th></tr></thead><tbody>${r||'<tr><td colspan="20" class="center">No students found.</td></tr>'}</tbody></table><div class="footer">Generated on ${new Date().toLocaleString()} | The Educators - Ahmed Haseeb Campus</div></div>`;}
     function buildCompleteStudentReport(c){let r=(db.students[c]||[]).map((s,i)=>{let x=getStudentResultSummaryData(s,c),subs=x.subjects.map(q=>`${q.name}: ${Number((s.marks||{})[q.name]||0)}/${q.total}`).join(', ');return `<tr><td class="center">${i+1}</td><td>${s.name||''}</td><td class="center">${c}</td><td>${subs||'N/A'}</td><td>${s.father||''}</td><td class="center">${x.overall}%</td></tr>`}).join('');return `<div class="report-page">${reportPrintHeader(`Complete Student Report — Class ${c}`)}<div class="custom-report-meta"><span><b>Class:</b> ${c}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Student Name</th><th>Class</th><th>Subjects</th><th>Father Name</th><th>Total / Overall %</th></tr></thead><tbody>${r||'<tr><td colspan="6" class="center">No students found.</td></tr>'}</tbody></table><div class="footer">Generated on ${new Date().toLocaleString()} | The Educators - Ahmed Haseeb Campus</div></div>`;}
-    function populateReportPrintClassSelect(){let s=document.getElementById('reportPrintClassSelect');if(s)s.innerHTML=['PG','Nursery','KG','1','2','3','4','5','6','7'].map(c=>`<option value="${c}">Class ${c}</option>`).join('');}
+    function populateReportPrintClassSelect(){let s=document.getElementById('reportPrintClassSelect');if(s)s.innerHTML=['PG','Nursery','KG','1','2','3','4','5','6','7','8','9','10'].map(c=>`<option value="${c}">Class ${c}</option>`).join('');}
     function populateReportPrintStudentSelect(){let s=document.getElementById('reportPrintStudentSelect'),c=document.getElementById('reportPrintClassSelect')?.value;if(!s||!c)return;s.innerHTML='<option value="">All students in selected class</option>'+(db.students[c]||[]).map((x,i)=>`<option value="${i}">${x.name||'Unnamed'}${x.id?' — ID: '+x.id:''}${x.rollNo?' | Roll: '+x.rollNo:''}</option>`).join('');}
     function reportPrintTypeChanged(){let t=document.getElementById('reportPrintType')?.value;document.getElementById('reportPrintClassWrap')?.classList.toggle('hidden',t==='teacher-list'||t==='class-percentage');document.getElementById('reportPrintStudentWrap')?.classList.toggle('hidden',t!=='student-result');populateReportPrintClassSelect();populateReportPrintStudentSelect();}
     function reportPrintClassChanged(){populateReportPrintStudentSelect();}
@@ -3270,7 +3380,7 @@
 
     // ==================== STATISTICS ====================
     function updateStats() {
-        let totalStudents = 0; const classList = ['PG','Nursery','KG','1','2','3','4','5','6','7'];
+        let totalStudents = 0; const classList = ['PG','Nursery','KG','1','2','3','4','5','6','7','8','9','10'];
         classList.forEach(c => { totalStudents += (db.students[c] || []).length; });
         document.getElementById('totalStudents').textContent = totalStudents;
         document.getElementById('totalTeachers').textContent = (db.teachers || []).length;
@@ -3292,10 +3402,209 @@
     function toggleDarkMode() { document.body.classList.toggle('dark-mode'); const isDark = document.body.classList.contains('dark-mode'); document.getElementById('darkModeIcon').className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon'; AppStorage.set('dark_mode', isDark ? '1' : '0'); }
     function applyStoredDarkModePreference() { if (AppStorage.get('dark_mode') === '1') { document.body.classList.add('dark-mode'); document.getElementById('darkModeIcon').className = 'fa-solid fa-sun'; } }
 
+    // ==================== BACKUP HISTORY / RESTORE ====================
+    function openBackupRestore() {
+        if (currentUser?.role === 'Teacher') { showToast('Only admin can restore backups', 'error'); return; }
+        const modal = document.getElementById('backupRestoreModal');
+        if (!modal) return;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        loadBackupHistory();
+    }
+
+    function closeBackupRestore() {
+        const modal = document.getElementById('backupRestoreModal');
+        if (!modal) return;
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+
+    function callBackupAPI(params) {
+        return new Promise((resolve, reject) => {
+            const callbackName = '__backup_cb_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+            const script = document.createElement('script');
+            const query = new URLSearchParams({...params, callback: callbackName});
+            let finished = false;
+            const cleanup = () => { try { delete window[callbackName]; script.remove(); } catch(e) {} };
+            const finishError = (err) => { if (finished) return; finished = true; cleanup(); reject(err); };
+            const timer = setTimeout(() => finishError(new Error('Backup service timeout')), 20000);
+            window[callbackName] = data => {
+                if (finished) return;
+                finished = true;
+                clearTimeout(timer);
+                cleanup();
+                resolve(data);
+            };
+            script.onerror = () => { clearTimeout(timer); finishError(new Error('Backup service unavailable')); };
+            script.src = GOOGLE_APPS_SCRIPT_URL + '?' + query.toString();
+            document.body.appendChild(script);
+        });
+    }
+
+    async function loadBackupHistory() {
+        const tbody = document.getElementById('backupHistoryTableBody');
+        const status = document.getElementById('backupRestoreStatus');
+        if (!tbody || !status) return;
+        tbody.innerHTML = '<tr><td colspan="7" class="px-3 py-8 text-center text-gray-400">Loading...</td></tr>';
+        status.textContent = 'Loading backup history...';
+        try {
+            // Backend action is getBackups (not listBackups). JSONP avoids GitHub Pages CORS issues.
+            const result = await callBackupAPI({action:'getBackups'});
+            if (!result || !result.success) throw new Error(result?.error || 'Could not load backup history');
+            const backups = result.backups || [];
+            if (!backups.length) {
+                tbody.innerHTML = '<tr><td colspan="7" class="px-3 py-8 text-center text-gray-400">No backups found.</td></tr>';
+                status.textContent = 'No backups found.';
+                return;
+            }
+            tbody.innerHTML = backups.map(function(b) {
+                const safeId = String(b.backupId || '').replace(/[^A-Za-z0-9_\-]/g, '');
+                return '<tr class="border-t hover:bg-purple-50">' +
+                    '<td class="px-3 py-2 whitespace-nowrap">' + escapeHtmlBackup_(b.backupTime || '') + '</td>' +
+                    '<td class="px-3 py-2 font-mono text-xs">' + escapeHtmlBackup_(b.backupId || '') + '</td>' +
+                    '<td class="px-3 py-2 text-center">' + (Number(b.students)||0) + '</td>' +
+                    '<td class="px-3 py-2 text-center">' + (Number(b.teachers)||0) + '</td>' +
+                    '<td class="px-3 py-2 text-center">' + (Number(b.subjects)||0) + '</td>' +
+                    '<td class="px-3 py-2 text-center">' + (Number(b.recordRows)||0) + '</td>' +
+                    '<td class="px-3 py-2 text-center"><button onclick="restoreCloudBackup(\'' + safeId + '\')" class="bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg"><i class="fa-solid fa-rotate-left mr-1"></i>Restore</button></td>' +
+                    '</tr>';
+            }).join('');
+            status.textContent = backups.length + ' backup(s) available. Restoring a backup first saves the current database as a new backup.';
+        } catch (error) {
+            console.error('Backup history error:', error);
+            tbody.innerHTML = '<tr><td colspan="7" class="px-3 py-8 text-center text-red-500">Could not load backup history.</td></tr>';
+            status.textContent = '❌ ' + error.message;
+        }
+    }
+
+    async function restoreCloudBackup(backupId) {
+        if (currentUser?.role === 'Teacher') { showToast('Only admin can restore backups', 'error'); return; }
+        if (!backupId) return;
+        const ok = confirm('⚠️ Restore this backup?\n\nThe current database will first be backed up automatically. Then the selected backup will become the live school data.');
+        if (!ok) return;
+        try {
+            showToast('Restoring backup... ⏳', 'info');
+            const result = await callBackupAPI({action:'restoreBackup', backupId:backupId});
+            if (!result || !result.success || !result.database) throw new Error(result?.error || 'Restore failed');
+            db = result.database;
+            if (!db.students) db.students = {};
+            if (!db.teachers) db.teachers = [];
+            if (!db.subjects) db.subjects = {};
+            if (!db.attendance) db.attendance = {};
+            if (!db.attendanceMarkedDates) db.attendanceMarkedDates = {};
+            if (!db.fees) db.fees = [];
+            if (!db.exams) db.exams = [];
+            if (!db.examResults) db.examResults = {};
+            if (!db.notices) db.notices = [];
+            if (!db.deleted) db.deleted = [];
+            migrateSubjectsToObjects();
+            migrateStudentRollNumbers();
+            databaseLoadedFromGoogle = true;
+            loadStudents(); loadTeachers(); loadSubjects(); loadAttendance(); loadFees(); loadExams(); loadDeletedItems(); loadPerformance(); loadNotices(); updateStats();
+            closeBackupRestore();
+            showToast('✅ Backup restored successfully!', 'success');
+        } catch (error) {
+            console.error('Restore error:', error);
+            showToast('❌ Restore failed: ' + error.message, 'error');
+        }
+    }
+
+    function escapeHtmlBackup_(value) {
+        return String(value == null ? '' : value).replace(/[&<>"']/g, function(ch) {
+            return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];
+        });
+    }
+
     // ==================== DATA EXPORT/IMPORT ====================
     function exportData() { if (currentUser?.role === 'Teacher') { showToast('Only admin can export data', 'error'); return; } const dataStr = JSON.stringify(db, null, 2); const blob = new Blob([dataStr], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `school_data_${new Date().toISOString().split('T')[0]}.json`; a.click(); URL.revokeObjectURL(url); showToast('Data exported successfully! 📥', 'success'); }
     function importData() { if (currentUser?.role === 'Teacher') { showToast('Only admin can import data', 'error'); return; } const input = document.createElement('input'); input.type = 'file'; input.accept = '.json'; input.onchange = (e) => { const file = e.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = (event) => { try { const data = JSON.parse(event.target.result); if (data.students && data.teachers !== undefined) { db = data; if (!db.subjects) db.subjects = {}; if (!db.attendanceMarkedDates) db.attendanceMarkedDates = {}; if (!db.deleted) db.deleted = []; if (!db.fees) db.fees = []; if (!db.exams) db.exams = []; if (!db.examResults) db.examResults = {}; if (!db.notices) db.notices = []; migrateSubjectsToObjects(); migrateStudentRollNumbers(); saveDatabase(); loadStudents(); loadTeachers(); loadSubjects(); loadAttendance(); loadFees(); loadExams(); loadDeletedItems(); loadPerformance(); loadNotices(); showToast('Data imported successfully! 📤', 'success'); } else { showToast('Invalid data format!', 'error'); } } catch(err) { showToast('Error reading file!', 'error'); } }; reader.readAsText(file); }; input.click(); }
-    function resetData() { if (currentUser?.role === 'Teacher') { showToast('Only admin can reset data', 'error'); return; } if (confirm('⚠️ This will reset ALL data. Are you sure?')) { createDefaultData(); loadStudents(); loadTeachers(); loadSubjects(); loadAttendance(); loadFees(); loadExams(); loadDeletedItems(); updateStats(); loadNotices(); showToast('Data reset to default', 'info'); } }
+    // ==================== SELECTIVE DATA RESET ====================
+    // Reset is always Admin-only and the password is verified again by Apps Script.
+    function openSelectiveReset() {
+        if (currentUser?.role !== 'Admin') { showToast('Only admin can reset data', 'error'); return; }
+        const modal = document.getElementById('selectiveResetModal');
+        if (!modal) return;
+        document.getElementById('selectiveResetPassword').value = '';
+        document.getElementById('selectiveResetType').value = 'students';
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        setTimeout(() => document.getElementById('selectiveResetPassword')?.focus(), 100);
+    }
+
+    function closeSelectiveReset() {
+        const modal = document.getElementById('selectiveResetModal');
+        if (!modal) return;
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+
+    function getSelectiveResetLabel(type) {
+        const labels = {
+            students: 'Students', teachers: 'Teachers', subjects: 'Subjects',
+            attendance: 'Attendance', exams: 'Exams', examResults: 'Exam Results',
+            fees: 'Fees', notices: 'Notices', deleted: 'Deleted Items',
+            backup_data: 'Backup Data', backup_history: 'Backup History',
+            all_backups: 'All Backup Data + History', all_school_data: 'ALL School Data'
+        };
+        return labels[type] || type;
+    }
+
+    async function executeSelectiveReset() {
+        if (currentUser?.role !== 'Admin') { showToast('Only admin can reset data', 'error'); return; }
+        const type = document.getElementById('selectiveResetType')?.value || '';
+        const password = document.getElementById('selectiveResetPassword')?.value || '';
+        if (!password) { showToast('Please enter your Admin password', 'error'); return; }
+
+        const label = getSelectiveResetLabel(type);
+        let warning = `⚠️ Reset ${label}?\n\nThis action will clear the selected data.`;
+        if (type === 'all_school_data') {
+            warning = '🚨 DANGER: This will clear ALL school data (students, teachers, subjects, attendance, exams, results, fees, notices and deleted items).\n\nUsers/login credentials will NOT be deleted.\n\nAre you absolutely sure?';
+        } else if (type === 'all_backups') {
+            warning = '⚠️ This will permanently clear ALL Backup_Data and Backup_History rows.\n\nSchool_Data will NOT be changed.\n\nContinue?';
+        }
+        if (!confirm(warning)) return;
+
+        const button = document.getElementById('selectiveResetButton');
+        if (button) { button.disabled = true; button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Resetting...'; }
+        try {
+            const result = await callBackupAPI({
+                action: 'resetSelectedData',
+                resetType: type,
+                username: currentUsername || 'admin',
+                adminPassword: password
+            });
+            if (!result || !result.success) throw new Error(result?.error || 'Reset failed');
+
+            if (result.database) {
+                db = result.database;
+                if (!db.students) db.students = {};
+                if (!db.teachers) db.teachers = [];
+                if (!db.subjects) db.subjects = {};
+                if (!db.attendance) db.attendance = {};
+                if (!db.attendanceMarkedDates) db.attendanceMarkedDates = {};
+                if (!db.fees) db.fees = [];
+                if (!db.exams) db.exams = [];
+                if (!db.examResults) db.examResults = {};
+                if (!db.notices) db.notices = [];
+                if (!db.deleted) db.deleted = [];
+                databaseLoadedFromGoogle = true;
+                loadStudents(); loadTeachers(); loadSubjects(); loadAttendance(); loadFees();
+                loadExams(); loadDeletedItems(); loadPerformance(); loadNotices(); updateStats();
+            }
+
+            closeSelectiveReset();
+            showToast('✅ ' + (result.message || (label + ' reset successfully.')), 'success');
+        } catch (error) {
+            console.error('Selective reset error:', error);
+            showToast('❌ ' + error.message, 'error');
+        } finally {
+            if (button) { button.disabled = false; button.innerHTML = '<i class="fa-solid fa-trash"></i> Reset Selected Data'; }
+        }
+    }
+
+    // Keep the old function name available for any older UI code, but route it
+    // through the new secure selective-reset dialog instead of resetting silently.
+    function resetData() { openSelectiveReset(); }
 
     // ==================== SETTINGS ====================
     function saveSettings() { if (currentUser?.role === 'Teacher') { showToast('Only admin can save settings', 'error'); return; } AppStorage.set('school_name', document.getElementById('schoolName').value); AppStorage.set('academic_year', document.getElementById('academicYear').value); AppStorage.set('default_fee', document.getElementById('defaultFee').value); showToast('Settings saved successfully! ✅', 'success'); }
@@ -3523,7 +3832,7 @@
         }
     });
 
-    console.log('🏫 Complete School Management System v10.1');
+    console.log('🏫 Complete School Management System v10.2');
     console.log('📋 Features: Admin + Teacher login, role-based access, admin-only delete/update/print, teacher can add marks/students/attendance/subjects but not settings/profile/password.');
     console.log('📋 Exam Overall Result: Individual student or whole class summary mode available.');
     
@@ -3546,4 +3855,84 @@
     });
 </script>
 
+
+
+    <!-- SELECTIVE DATA RESET MODAL (ADMIN ONLY) -->
+    <div id="selectiveResetModal" class="fixed inset-0 z-[10000] hidden items-center justify-center bg-black/70 p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
+            <div class="px-5 py-4 border-b bg-red-50 flex items-center justify-between">
+                <div>
+                    <h3 class="font-bold text-lg text-red-700"><i class="fa-solid fa-shield-halved mr-2"></i>Selective Data Reset</h3>
+                    <p class="text-xs text-gray-500 mt-1">Admin password is required for every reset.</p>
+                </div>
+                <button onclick="closeSelectiveReset()" class="text-gray-500 hover:text-gray-800 text-xl px-2">&times;</button>
+            </div>
+            <div class="p-5 space-y-4">
+                <div>
+                    <label class="text-xs text-gray-500 font-bold uppercase block mb-1">What do you want to reset?</label>
+                    <select id="selectiveResetType" class="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-3 py-3 text-sm focus:border-red-500 focus:outline-none">
+                        <option value="students">Students</option>
+                        <option value="teachers">Teachers</option>
+                        <option value="subjects">Subjects</option>
+                        <option value="attendance">Attendance</option>
+                        <option value="exams">Exams</option>
+                        <option value="examResults">Exam Results</option>
+                        <option value="fees">Fees</option>
+                        <option value="notices">Notices</option>
+                        <option value="deleted">Deleted Items / Trash</option>
+                        <option value="backup_data">Backup Data only</option>
+                        <option value="backup_history">Backup History only</option>
+                        <option value="all_backups">All Backup Data + History</option>
+                        <option value="all_school_data">⚠️ ALL School Data</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-xs text-gray-500 font-bold uppercase block mb-1">Confirm Admin Password</label>
+                    <input type="password" id="selectiveResetPassword" autocomplete="current-password" placeholder="Enter your current Admin password" class="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-3 py-3 text-sm focus:border-red-500 focus:outline-none" onkeydown="if(event.key==='Enter') executeSelectiveReset()">
+                </div>
+                <div class="rounded-xl bg-amber-50 border border-amber-200 p-3 text-xs text-amber-800">
+                    <i class="fa-solid fa-triangle-exclamation mr-1"></i>
+                    Resetting live school data creates a safety backup first. Clearing backup data/history is permanent for those backup rows.
+                </div>
+                <div class="flex gap-2 pt-1">
+                    <button onclick="closeSelectiveReset()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 rounded-xl">Cancel</button>
+                    <button id="selectiveResetButton" onclick="executeSelectiveReset()" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl"><i class="fa-solid fa-trash mr-1"></i> Reset Selected Data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BACKUP HISTORY / RESTORE MODAL -->
+    <div id="backupRestoreModal" class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black/60 p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-5xl max-h-[90vh] overflow-hidden">
+            <div class="flex items-center justify-between px-5 py-4 border-b bg-gray-50">
+                <div>
+                    <h3 class="font-bold text-lg text-gray-800"><i class="fa-solid fa-clock-rotate-left mr-2 text-purple-600"></i>Backup History & Restore</h3>
+                    <p class="text-xs text-gray-500 mt-1">Select a backup by time and restore the complete school database.</p>
+                </div>
+                <button onclick="closeBackupRestore()" class="text-gray-500 hover:text-gray-800 text-xl px-2">&times;</button>
+            </div>
+            <div class="p-5 overflow-y-auto max-h-[calc(90vh-82px)]">
+                <div id="backupRestoreStatus" class="text-sm text-gray-500 mb-3">Loading backup history...</div>
+                <div class="overflow-x-auto border rounded-xl">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-gray-100 text-gray-700">
+                            <tr>
+                                <th class="px-3 py-2 text-left">Backup Time</th>
+                                <th class="px-3 py-2 text-left">Backup ID</th>
+                                <th class="px-3 py-2 text-center">Students</th>
+                                <th class="px-3 py-2 text-center">Teachers</th>
+                                <th class="px-3 py-2 text-center">Subjects</th>
+                                <th class="px-3 py-2 text-center">Records</th>
+                                <th class="px-3 py-2 text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="backupHistoryTableBody">
+                            <tr><td colspan="7" class="px-3 py-8 text-center text-gray-400">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </body></html>
