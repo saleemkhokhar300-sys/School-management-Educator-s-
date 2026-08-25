@@ -2935,27 +2935,36 @@
     async function deleteStudent(className, studentId) {
         if (currentUser && currentUser.role === 'Teacher') { showToast('Only admin can delete students', 'error'); return; }
         if (!confirm('Are you sure you want to delete this student? It will be moved to trash.')) return;
-
-        const student = (db.students[className] || []).find(s => s.id === studentId);
-        if (!student) {
-            showToast('Student not found!', 'error');
-            return;
-        }
-
         if (!navigator.onLine) {
             showToast('Internet connection required. Student was NOT deleted.', 'error');
             return;
         }
 
         try {
-            // IMPORTANT: deletion is now performed by the server against the
-            // authoritative Google Sheets database. This prevents a stale
-            // browser snapshot from overwriting newer data and guarantees the
-            // existing backup protection runs before the delete.
+            // Always refresh the authoritative database immediately before a delete.
+            // This prevents a stale GitHub/browser copy from causing a false
+            // "Student not found" result or deleting against an old snapshot.
+            const live = await callAppsScriptJSONP({ action: 'getDatabase' });
+            if (!live || !live.success || !live.database) {
+                throw new Error(live?.error || 'Could not read the current database from Google Sheets.');
+            }
+            db = live.database;
+            databaseLoadedFromGoogle = true;
+
+            const student = (db.students?.[className] || []).find(s => String(s.id) === String(studentId));
+            if (!student) {
+                showToast('Student was not found in the current Google Sheets database.', 'error');
+                loadStudents();
+                return;
+            }
+
+            // The server is the only place allowed to perform the actual delete.
+            // It moves the student to trash and removes that student's live
+            // attendance/exam-result records while preserving the safety backup.
             const result = await callAppsScriptJSONP({
                 action: 'deleteStudent',
-                className: className,
-                studentId: studentId
+                className: String(className),
+                studentId: String(studentId)
             });
 
             if (result && result.success && result.database) {
@@ -3314,35 +3323,39 @@
     function ensureAttendanceLog(student) { if (!student.attendanceLog) student.attendanceLog = {}; }
     function recalcAttendanceFromLog(student) { ensureAttendanceLog(student); let present = 0, absent = 0; Object.values(student.attendanceLog).forEach(v => { if (v === 'P') present++; else if (v === 'A') absent++; }); student.present = present; student.absences = absent; }
 
-    // Dedicated Attendance selection state. This is intentionally isolated from
-    // the rest of the application so single-student selection cannot be lost.
-    let selectedAttendanceStudents = new Set();
+    // Attendance print selection: DOM checkboxes are authoritative.
+    // The Set only mirrors the current visible selections; it never controls whether
+    // a checkbox can be checked.
+    const selectedAttendanceStudents = new Set();
+    let attendanceSelectionClass = null;
 
     function attendanceSelectionKey(className, studentId) {
-        return `${String(className)}::${String(studentId)}`;
+        return String(className) + '::' + String(studentId);
     }
 
     function setAttendanceStudentSelection(checkbox) {
         if (!checkbox) return;
-        const key = attendanceSelectionKey(checkbox.dataset.class, checkbox.dataset.id);
-        if (checkbox.checked) {
-            selectedAttendanceStudents.add(key);
-        } else {
-            selectedAttendanceStudents.delete(key);
-        }
+        const key = attendanceSelectionKey(checkbox.getAttribute('data-class'), checkbox.getAttribute('data-id'));
+        if (checkbox.checked) selectedAttendanceStudents.add(key);
+        else selectedAttendanceStudents.delete(key);
         updateAttendanceSelectAllState();
+    }
+
+    function syncAttendanceSelectionFromDOM() {
+        document.querySelectorAll('#attendanceTableBody input.attendance-select-checkbox').forEach(cb => {
+            const key = attendanceSelectionKey(cb.getAttribute('data-class'), cb.getAttribute('data-id'));
+            if (cb.checked) selectedAttendanceStudents.add(key);
+            else selectedAttendanceStudents.delete(key);
+        });
     }
 
     function restoreAttendanceSelection() {
-        document.querySelectorAll('#attendanceTableBody .attendance-select-checkbox').forEach(cb => {
-            cb.checked = selectedAttendanceStudents.has(
-                attendanceSelectionKey(cb.dataset.class, cb.dataset.id)
-            );
+        document.querySelectorAll('#attendanceTableBody input.attendance-select-checkbox').forEach(cb => {
+            const key = attendanceSelectionKey(cb.getAttribute('data-class'), cb.getAttribute('data-id'));
+            cb.checked = selectedAttendanceStudents.has(key);
         });
         updateAttendanceSelectAllState();
     }
-
-    let attendanceSelectionClass = null;
 
     function loadAttendance() {
         const className = document.getElementById('attendanceClass').value;
@@ -3375,9 +3388,11 @@
             tr.innerHTML = `
                 <td class="py-3 px-3 text-center">
                     <input type="checkbox"
-                           class="attendance-select-checkbox w-4 h-4 accent-blue-600"
+                           class="attendance-select-checkbox w-5 h-5 accent-blue-600 cursor-pointer"
                            data-class="${className}"
                            data-id="${student.id}"
+                           aria-label="Select ${student.name} for attendance printing"
+                           onclick="event.stopPropagation();"
                            onchange="setAttendanceStudentSelection(this)">
                 </td>
                 <td class="py-3 px-4 font-mono text-xs font-bold">${idx + 1}</td>
@@ -3550,20 +3565,15 @@
             return;
         }
 
-        // Sync the state from the live DOM first, then print exactly the
-        // checked students. This guarantees that ONE checked student is valid.
-        document.querySelectorAll('#attendanceTableBody .attendance-select-checkbox').forEach(cb => {
-            const key = attendanceSelectionKey(cb.dataset.class, cb.dataset.id);
-            if (cb.checked) selectedAttendanceStudents.add(key);
-            else selectedAttendanceStudents.delete(key);
-        });
+        // Read the actual checked boxes at the moment Print Selected is pressed.
+        // This is the single source of truth for this print action.
+        syncAttendanceSelectionFromDOM();
 
         const selected = [];
-        selectedAttendanceStudents.forEach(key => {
-            const sep = key.indexOf('::');
-            const className = sep >= 0 ? key.slice(0, sep) : '';
-            const studentId = sep >= 0 ? key.slice(sep + 2) : '';
-            const student = (db.students[className] || []).find(s => String(s.id) === String(studentId));
+        document.querySelectorAll('#attendanceTableBody input.attendance-select-checkbox:checked').forEach(cb => {
+            const className = String(cb.getAttribute('data-class') || '');
+            const studentId = String(cb.getAttribute('data-id') || '');
+            const student = (db.students[className] || []).find(s => String(s.id) === studentId);
             if (student) selected.push({ className, student });
         });
 
@@ -4876,7 +4886,7 @@
             const script = document.createElement('script');
             const query = new URLSearchParams({...params, callback: callbackName});
             const cleanup = () => { try { delete window[callbackName]; script.remove(); } catch(e) {} };
-            const timer = setTimeout(() => { cleanup(); reject(new Error('OTP server timeout')); }, 15000);
+            const timer = setTimeout(() => { cleanup(); reject(new Error('Apps Script request timed out')); }, 20000);
             window[callbackName] = data => { clearTimeout(timer); cleanup(); resolve(data); };
             script.onerror = () => { clearTimeout(timer); cleanup(); reject(new Error('OTP server unavailable')); };
             script.src = GOOGLE_APPS_SCRIPT_URL + '?' + query.toString();
