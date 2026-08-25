@@ -3314,13 +3314,52 @@
     function ensureAttendanceLog(student) { if (!student.attendanceLog) student.attendanceLog = {}; }
     function recalcAttendanceFromLog(student) { ensureAttendanceLog(student); let present = 0, absent = 0; Object.values(student.attendanceLog).forEach(v => { if (v === 'P') present++; else if (v === 'A') absent++; }); student.present = present; student.absences = absent; }
 
+    // Dedicated Attendance selection state. This is intentionally isolated from
+    // the rest of the application so single-student selection cannot be lost.
+    let selectedAttendanceStudents = new Set();
+
+    function attendanceSelectionKey(className, studentId) {
+        return `${String(className)}::${String(studentId)}`;
+    }
+
+    function setAttendanceStudentSelection(checkbox) {
+        if (!checkbox) return;
+        const key = attendanceSelectionKey(checkbox.dataset.class, checkbox.dataset.id);
+        if (checkbox.checked) {
+            selectedAttendanceStudents.add(key);
+        } else {
+            selectedAttendanceStudents.delete(key);
+        }
+        updateAttendanceSelectAllState();
+    }
+
+    function restoreAttendanceSelection() {
+        document.querySelectorAll('#attendanceTableBody .attendance-select-checkbox').forEach(cb => {
+            cb.checked = selectedAttendanceStudents.has(
+                attendanceSelectionKey(cb.dataset.class, cb.dataset.id)
+            );
+        });
+        updateAttendanceSelectAllState();
+    }
+
+    let attendanceSelectionClass = null;
+
     function loadAttendance() {
-        window.__attendanceSelectedRefs = new Set();
         const className = document.getElementById('attendanceClass').value;
         const students = db.students[className] || [];
         const tbody = document.getElementById('attendanceTableBody');
         const selectAll = document.getElementById('attendanceSelectAll');
-        if (selectAll) selectAll.checked = false;
+
+        // A class change starts a fresh selection; data refreshes within the
+        // same class keep the selected student(s).
+        if (attendanceSelectionClass !== null && attendanceSelectionClass !== className) {
+            selectedAttendanceStudents.clear();
+        }
+        attendanceSelectionClass = className;
+        if (selectAll) {
+            selectAll.checked = false;
+            selectAll.indeterminate = false;
+        }
 
         tbody.innerHTML = '';
         if (students.length === 0) {
@@ -3339,7 +3378,7 @@
                            class="attendance-select-checkbox w-4 h-4 accent-blue-600"
                            data-class="${className}"
                            data-id="${student.id}"
-                           onchange="toggleAttendanceStudentSelection(this)">
+                           onchange="setAttendanceStudentSelection(this)">
                 </td>
                 <td class="py-3 px-4 font-mono text-xs font-bold">${idx + 1}</td>
                 <td class="py-3 px-4 font-semibold text-gray-800">
@@ -3364,23 +3403,13 @@
             `;
             tbody.appendChild(tr);
         });
-    }
-
-    function toggleAttendanceStudentSelection(cb) {
-        if (!window.__attendanceSelectedRefs) window.__attendanceSelectedRefs = new Set();
-        const key = `${cb.dataset.class || ''}::${cb.dataset.id || ''}`;
-        if (cb.checked) window.__attendanceSelectedRefs.add(key);
-        else window.__attendanceSelectedRefs.delete(key);
-        updateAttendanceSelectAllState();
+        restoreAttendanceSelection();
     }
 
     function toggleAllAttendanceSelection(checked) {
-        if (!window.__attendanceSelectedRefs) window.__attendanceSelectedRefs = new Set();
         document.querySelectorAll('#attendanceTableBody .attendance-select-checkbox').forEach(cb => {
-            cb.checked = checked;
-            const key = `${cb.dataset.class || ''}::${cb.dataset.id || ''}`;
-            if (checked) window.__attendanceSelectedRefs.add(key);
-            else window.__attendanceSelectedRefs.delete(key);
+            cb.checked = !!checked;
+            setAttendanceStudentSelection(cb);
         });
         updateAttendanceSelectAllState();
     }
@@ -3388,8 +3417,8 @@
     function updateAttendanceSelectAllState() {
         const boxes = Array.from(document.querySelectorAll('#attendanceTableBody .attendance-select-checkbox'));
         const selectAll = document.getElementById('attendanceSelectAll');
-        if (!selectAll || boxes.length === 0) return;
-        selectAll.checked = boxes.every(cb => cb.checked);
+        if (!selectAll) return;
+        selectAll.checked = boxes.length > 0 && boxes.every(cb => cb.checked);
         selectAll.indeterminate = boxes.some(cb => cb.checked) && !selectAll.checked;
     }
 
@@ -3520,29 +3549,39 @@
             showToast('Only admin can print attendance reports', 'error');
             return;
         }
-        // Only checked attendance rows are printed.  Never fall back to the
-        // whole class when exactly one student is selected.
-        if (!window.__attendanceSelectedRefs) window.__attendanceSelectedRefs = new Set();
-        const checked = Array.from(document.querySelectorAll('#attendanceTableBody .attendance-select-checkbox:checked'));
-        checked.forEach(cb => window.__attendanceSelectedRefs.add(`${cb.dataset.class || ''}::${cb.dataset.id || ''}`));
-        const selectedRefs = Array.from(window.__attendanceSelectedRefs);
-        if (selectedRefs.length === 0) {
+
+        // Sync the state from the live DOM first, then print exactly the
+        // checked students. This guarantees that ONE checked student is valid.
+        document.querySelectorAll('#attendanceTableBody .attendance-select-checkbox').forEach(cb => {
+            const key = attendanceSelectionKey(cb.dataset.class, cb.dataset.id);
+            if (cb.checked) selectedAttendanceStudents.add(key);
+            else selectedAttendanceStudents.delete(key);
+        });
+
+        const selected = [];
+        selectedAttendanceStudents.forEach(key => {
+            const sep = key.indexOf('::');
+            const className = sep >= 0 ? key.slice(0, sep) : '';
+            const studentId = sep >= 0 ? key.slice(sep + 2) : '';
+            const student = (db.students[className] || []).find(s => String(s.id) === String(studentId));
+            if (student) selected.push({ className, student });
+        });
+
+        if (selected.length === 0) {
             showToast('Please select at least one student to print', 'warning');
             return;
         }
+
         const monthInfo = getAttendanceMonthYear();
-        let pages = '';
-        selectedRefs.forEach(ref => {
-            const splitAt = ref.indexOf('::');
-            const className = splitAt >= 0 ? ref.slice(0, splitAt) : '';
-            const studentId = splitAt >= 0 ? ref.slice(splitAt + 2) : '';
-            const student = (db.students[className] || []).find(s => String(s.id) === studentId);
-            if (student) pages += buildAttendanceStudentPage(student, className, monthInfo);
-        });
+        const pages = selected.map(item =>
+            buildAttendanceStudentPage(item.student, item.className, monthInfo)
+        ).join('');
+
         if (!pages) {
             showToast('No selected students found', 'error');
             return;
         }
+
         printHTML(pages);
     }
 
