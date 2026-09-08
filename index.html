@@ -5973,8 +5973,53 @@ ${lines}
             <div class="bg-red-50 rounded-xl p-3"><div class="text-[10px] text-gray-500 font-bold uppercase">Due</div><div class="text-lg font-bold text-red-600">₨ ${due.toLocaleString()}</div></div>
             <div class="bg-gray-50 rounded-xl p-3"><div class="text-[10px] text-gray-500 font-bold uppercase">Status</div><div class="text-lg font-bold">${escFee(status)}</div></div>
         </div>
-        <div class="mt-3 text-xs text-gray-500">${currentRecords.length ? `Current month (${escFee(currentMonth)} ${escFee(currentYear)}): ${escFee(status)}${currentRecords.length>1 ? ` • ${currentRecords.length} duplicate record(s) already exist; new payments are blocked and the latest record is used.` : ''}.` : (records.length ? `${records.length} fee record(s) found${latest ? ` • Latest: ${escFee(latest.month||latest.date||'')}` : ''}.` : 'No fee record found for this student yet.')}</div>`;
+        <div class="mt-3 text-xs text-gray-500">${currentRecords.length ? `Current month (${escFee(currentMonth)} ${escFee(currentYear)}): ${escFee(status)}${currentRecords.length>1 ? ` • ${currentRecords.length} duplicate record(s) already exist; new payments are blocked and the latest record is used.` : ''}.` : (records.length ? `${records.length} fee record(s) found${latest ? ` • Latest: ${escFee(latest.month||latest.date||'')}` : ''}.` : 'No fee record found for this student yet.')}</div>
+        ${renderStudentFeeRecordsTable_(allRecords)}`;
         summary.classList.remove('hidden');
+    }
+
+    // Lists EVERY fee record for the looked-up student (all months/years), so
+    // duplicate entries (e.g. the same month saved several times) can actually be
+    // seen and cleaned up — records sharing the same month+year are highlighted
+    // in red with a "DUPLICATE" tag, and each row has its own Edit/Delete buttons.
+    function renderStudentFeeRecordsTable_(allRecords) {
+        if (!allRecords.length) return '';
+        const counts = {};
+        allRecords.forEach(f => { const key = `${f.month}|${f.academicYear||''}`; counts[key] = (counts[key]||0) + 1; });
+        const sorted = allRecords.slice().sort((a,b) => {
+            const ak = `${a.academicYear||''}|${String(FEE_MONTHS.indexOf(a.month)).padStart(2,'0')}|${a.paymentDate||a.date||''}`;
+            const bk = `${b.academicYear||''}|${String(FEE_MONTHS.indexOf(b.month)).padStart(2,'0')}|${b.paymentDate||b.date||''}`;
+            return bk.localeCompare(ak);
+        });
+        const rows = sorted.map(f => {
+            const amount=feeAmountValue(f), paid=feePaidValue(f), due=feeDueValue(f);
+            const status=normalizeFeeStatus(f.status, amount, paid);
+            const isDup = counts[`${f.month}|${f.academicYear||''}`] > 1;
+            return `<tr class="border-b border-gray-100 ${isDup ? 'bg-red-50' : ''}">
+                <td class="py-1.5 px-2 text-left">${escFee(f.month)} ${escFee(f.academicYear||'')}${isDup ? ' <span class="text-[9px] bg-red-600 text-white px-1.5 py-0.5 rounded-full font-bold ml-1 align-middle">DUPLICATE</span>' : ''}</td>
+                <td class="py-1.5 px-2 text-center">₨ ${amount.toLocaleString()}</td>
+                <td class="py-1.5 px-2 text-center">₨ ${paid.toLocaleString()}</td>
+                <td class="py-1.5 px-2 text-center">₨ ${due.toLocaleString()}</td>
+                <td class="py-1.5 px-2 text-center font-bold">${escFee(status)}</td>
+                <td class="py-1.5 px-2 text-center">${escFee(f.paymentDate || f.date || '')}</td>
+                <td class="py-1.5 px-2 text-center">${escFee(f.receiptNumber||'')}</td>
+                <td class="py-1.5 px-2 text-center whitespace-nowrap">
+                    <button onclick="editFee('${f.id}')" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-2 py-1 rounded transition admin-only" title="Edit this record"><i class="fa-solid fa-pen"></i></button>
+                    <button onclick="deleteFee('${f.id}')" class="bg-red-600 hover:bg-red-700 text-white text-xs px-2 py-1 rounded transition admin-only" title="Delete this record"><i class="fa-solid fa-trash"></i></button>
+                </td>
+            </tr>`;
+        }).join('');
+        return `<div class="mt-4 border-t pt-3">
+            <div class="text-sm font-bold text-gray-800 mb-2"><i class="fa-solid fa-list mr-1 text-yellow-600"></i> All Fee Records (${allRecords.length}) <span class="text-xs font-normal text-gray-500">— rows in red share the same month & are duplicates</span></div>
+            <div class="overflow-x-auto"><table class="w-full text-xs">
+                <thead><tr class="bg-gray-100 text-gray-600 uppercase font-bold">
+                    <th class="py-1.5 px-2 text-left">Month</th><th class="py-1.5 px-2">Fee</th><th class="py-1.5 px-2">Paid</th>
+                    <th class="py-1.5 px-2">Due</th><th class="py-1.5 px-2">Status</th><th class="py-1.5 px-2">Date</th>
+                    <th class="py-1.5 px-2">Receipt#</th><th class="py-1.5 px-2">Actions</th>
+                </tr></thead>
+                <tbody>${rows}</tbody>
+            </table></div>
+        </div>`;
     }
 
     function searchFeeStudentDirect() {
