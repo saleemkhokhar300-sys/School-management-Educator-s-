@@ -1609,6 +1609,7 @@ img, canvas, svg { max-width: 100%; height: auto; }
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead><tr class="bg-gray-100 text-gray-700 text-xs uppercase font-bold">
+                        <th class="py-2 px-3 text-center"><input type="checkbox" id="examResultsSelectAll" onchange="toggleSelectAllExamResults(this)" class="w-4 h-4 cursor-pointer" title="Select All"></th>
                         <th class="py-2 px-3">Roll #</th><th class="py-2 px-3">Student Name</th><th class="py-2 px-3 text-center">Obtained</th>
                         <th class="py-2 px-3 text-center">%</th><th class="py-2 px-3 text-center">Grade</th>
                         <th class="py-2 px-3 text-center">Print</th>
@@ -1620,6 +1621,10 @@ img, canvas, svg { max-width: 100%; height: auto; }
                 <button onclick="saveExamResults()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2"><i class="fa-solid fa-save"></i> Save Marks</button>
                 <button onclick="printExamResults(currentExamResultsId)" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2 admin-only"><i class="fa-solid fa-print"></i> Print Whole Class</button>
                 <button onclick="closeExamResultsModal()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 rounded-xl transition">Close</button>
+            </div>
+            <div class="flex gap-3 mt-3">
+                <button onclick="startBulkWhatsAppSend(currentExamResultsId, 'selected')" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2"><i class="fa-brands fa-whatsapp"></i> Send to Selected</button>
+                <button onclick="startBulkWhatsAppSend(currentExamResultsId, 'all')" class="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2"><i class="fa-brands fa-whatsapp"></i> Send to All</button>
             </div>
         </div>
     </div>
@@ -1666,6 +1671,7 @@ img, canvas, svg { max-width: 100%; height: auto; }
             </div>
             <div class="flex gap-3 mt-4 pt-4 border-t">
                 <button onclick="printStudentOverallResult()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2 admin-only"><i class="fa-solid fa-print"></i> Print Student Result (GPA)</button>
+                <button onclick="sendSorResultViaWhatsApp()" class="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2"><i class="fa-brands fa-whatsapp"></i> Send Selected Tests on WhatsApp</button>
                 <button onclick="closeStudentOverallModal()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 rounded-xl transition">Close</button>
             </div>
         </div>
@@ -5271,7 +5277,7 @@ async function saveArchiveFast_(items, label='archive') {
         const total = exam.totalMarks || 100;
         const tbody = document.getElementById('examResultsTableBody');
         tbody.innerHTML = '';
-        if (students.length === 0) { tbody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-gray-500">No students in Class ${exam.class}</td></tr>`; }
+        if (students.length === 0) { tbody.innerHTML = `<tr><td colspan="7" class="text-center py-6 text-gray-500">No students in Class ${exam.class}</td></tr>`; }
         students.forEach(student => {
             const obtained = results[student.id] !== undefined ? results[student.id] : 0;
             const pct = total > 0 ? ((obtained / total) * 100).toFixed(1) : 0;
@@ -5279,6 +5285,7 @@ async function saveArchiveFast_(items, label='archive') {
             const tr = document.createElement('tr');
             tr.className = 'border-b border-gray-100';
             tr.innerHTML = `
+                <td class="py-2 px-3 text-center"><input type="checkbox" class="exam-result-select w-4 h-4 cursor-pointer" data-student-id="${student.id}"></td>
                 <td class="py-2 px-3">${student.rollNo || 'N/A'}</td>
                 <td class="py-2 px-3 font-semibold">${student.name}</td>
                 <td class="py-2 px-3 text-center"><input type="number" min="0" max="${total}" value="${obtained}" class="exam-marks-input w-20 text-center border-2 border-gray-200 rounded px-1 py-1" data-student-id="${student.id}" onchange="updateExamResultRow(this, ${total})"></td>
@@ -5288,14 +5295,126 @@ async function saveArchiveFast_(items, label='archive') {
                     <div class="flex items-center justify-center gap-1">
                         <button onclick="printExamResults('${examId}', '${student.id}')" class="bg-green-600 hover:bg-green-700 text-white text-xs px-2 py-1 rounded transition admin-only" title="Print this subject only"><i class="fa-solid fa-print"></i></button>
                         <button onclick="openStudentOverallModal('${exam.class}', '${student.id}')" class="bg-purple-600 hover:bg-purple-700 text-white text-xs px-2 py-1 rounded transition" title="Overall result (all subjects)"><i class="fa-solid fa-graduation-cap"></i></button>
+                        <button onclick="sendExamResultViaWhatsApp('${examId}', '${student.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-2 py-2 rounded transition" title="Send result on WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
                     </div>
                 </td>
             `;
             tbody.appendChild(tr);
         });
         updateExamResultsSummary(examId);
+        const selectAllBox = document.getElementById('examResultsSelectAll');
+        if (selectAllBox) selectAllBox.checked = false;
         document.getElementById('examResultsModal').classList.remove('hidden');
         document.body.style.overflow = 'hidden';
+    }
+
+    // ==================== WHATSAPP RESULT SHARING (Click-to-Chat, no API needed) ====================
+    // Cleans a raw phone number (e.g. "0300-1234567", "+92 300 1234567") into
+    // WhatsApp's required format: country code + number, digits only.
+    function normalizeWhatsAppNumber_(raw) {
+        let digits = String(raw || '').replace(/\D/g, '');
+        if (!digits) return '';
+        if (digits.startsWith('0092')) digits = digits.slice(2);      // 0092xxxxxxxxxx -> 92xxxxxxxxxx
+        else if (digits.startsWith('0')) digits = '92' + digits.slice(1); // 03xx.... -> 923xx....
+        else if (!digits.startsWith('92')) digits = '92' + digits;    // bare 3xxxxxxxxx -> 923xxxxxxxxx
+        return digits;
+    }
+
+    // Builds the result message for one student in one exam and opens WhatsApp
+    // (web.whatsapp.com or the WhatsApp app) with the chat + message pre-filled.
+    function sendExamResultViaWhatsApp(examId, studentId) {
+        const exam = db.exams.find(e => e.id === examId);
+        if (!exam) { showToast('Exam not found!', 'error'); return; }
+        const students = db.students[exam.class] || [];
+        const student = students.find(s => s.id === studentId);
+        if (!student) { showToast('Student not found!', 'error'); return; }
+
+        const number = normalizeWhatsAppNumber_(student.whatsapp || student.contact);
+        if (!number) { showToast(`${student.name} کے لیے WhatsApp نمبر موجود نہیں ⚠️`, 'warning'); return; }
+
+        const results = (db.examResults || {})[examId] || {};
+        const obtained = results[studentId] !== undefined ? results[studentId] : 0;
+        const total = exam.totalMarks || 100;
+        const pct = total > 0 ? ((obtained / total) * 100).toFixed(1) : '0.0';
+        const grade = getGrade(pct);
+
+        const message =
+`🏫 *The Educator's School*
+
+*${student.name}* — Roll #${student.rollNo || 'N/A'}
+${exam.name}${exam.subject ? ' (' + exam.subject + ')' : ''}
+📅 Date: ${exam.date || 'N/A'}
+📝 Marks: ${obtained} / ${total}
+📊 Percentage: ${pct}%
+🏆 Grade: ${grade.label}`;
+
+        const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+    }
+
+    function toggleSelectAllExamResults(checkbox) {
+        document.querySelectorAll('.exam-result-select').forEach(cb => cb.checked = checkbox.checked);
+    }
+
+    // Bulk sending: WhatsApp's free click-to-chat link can only open ONE chat per
+    // click (browsers block auto-opened popups), so this queues the selected
+    // students and opens the next chat only when the user presses "Send Next" —
+    // each press is a genuine click, so nothing gets popup-blocked.
+    let waBulkQueue = { list: [], index: 0, examId: null };
+
+    function startBulkWhatsAppSend(examId, mode) {
+        if (!examId) { showToast('Exam not found!', 'error'); return; }
+        let studentIds;
+        if (mode === 'all') {
+            studentIds = Array.from(document.querySelectorAll('.exam-result-select')).map(cb => cb.dataset.studentId);
+        } else {
+            studentIds = Array.from(document.querySelectorAll('.exam-result-select:checked')).map(cb => cb.dataset.studentId);
+        }
+        if (studentIds.length === 0) { showToast(mode === 'all' ? 'Is class mein students nahi hain ⚠️' : 'Pehle students select karein ⚠️ (checkbox tick karein)', 'warning'); return; }
+        waBulkQueue = { list: studentIds, index: 0, examId };
+        showWaBulkBar();
+        sendNextWaBulk();
+    }
+
+    function showWaBulkBar() {
+        let bar = document.getElementById('waBulkBar');
+        if (!bar) {
+            bar = document.createElement('div');
+            bar.id = 'waBulkBar';
+            bar.className = 'fixed bottom-5 left-1/2 -translate-x-1/2 bg-white border-2 border-emerald-500 rounded-2xl shadow-2xl px-5 py-3 flex items-center gap-3 z-[9999]';
+            document.body.appendChild(bar);
+        }
+        bar.classList.remove('hidden');
+    }
+
+    function updateWaBulkBar() {
+        const bar = document.getElementById('waBulkBar');
+        if (!bar) return;
+        const total = waBulkQueue.list.length;
+        const done = waBulkQueue.index;
+        if (done >= total) {
+            bar.innerHTML = `<span class="font-bold text-emerald-700"><i class="fa-solid fa-circle-check mr-1"></i> Sab ${total} results WhatsApp par bhej diye gaye!</span> <button onclick="closeWaBulkBar()" class="bg-gray-200 hover:bg-gray-300 text-xs px-3 py-1.5 rounded-lg font-bold">Close</button>`;
+            return;
+        }
+        bar.innerHTML = `
+            <span class="font-bold text-gray-700"><i class="fa-brands fa-whatsapp text-emerald-600 mr-1"></i> Sending: ${done} / ${total}</span>
+            <button onclick="sendNextWaBulk()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3 py-1.5 rounded-lg font-bold">Send Next ▶</button>
+            <button onclick="closeWaBulkBar()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 text-xs px-3 py-1.5 rounded-lg font-bold">Stop</button>
+        `;
+    }
+
+    function sendNextWaBulk() {
+        if (waBulkQueue.index >= waBulkQueue.list.length) { updateWaBulkBar(); return; }
+        const studentId = waBulkQueue.list[waBulkQueue.index];
+        sendExamResultViaWhatsApp(waBulkQueue.examId, studentId);
+        waBulkQueue.index++;
+        updateWaBulkBar();
+    }
+
+    function closeWaBulkBar() {
+        const bar = document.getElementById('waBulkBar');
+        if (bar) bar.classList.add('hidden');
+        waBulkQueue = { list: [], index: 0, examId: null };
     }
 
     function updateExamResultRow(input, total) {
@@ -5493,6 +5612,49 @@ async function saveArchiveFast_(items, label='archive') {
                 <div class="bg-emerald-50 rounded-xl p-3 text-center"><p class="text-xs text-gray-500 font-bold uppercase">Class Average</p><p class="text-xl font-bold text-emerald-600">${classAvg}%</p></div>
             `;
         }
+    }
+
+    // Sends ALL currently-ticked tests (from the "Tests Taken" dropdown above) for
+    // ONE student as a single combined WhatsApp message to that student's number.
+    function sendSorResultViaWhatsApp() {
+        const mode = document.getElementById('sorResultMode')?.value || 'individual';
+        if (mode !== 'individual') { showToast('WhatsApp bhejnay ke liye "Individual Student" mode chunein ⚠️', 'warning'); return; }
+        if (!sorState.studentId) { showToast('Pehle ek student select karein ⚠️', 'warning'); return; }
+        const selected = sorState.exams.filter(e => e.checked);
+        if (selected.length === 0) { showToast('Kam az kam ek test select karein (upar dropdown se) ⚠️', 'warning'); return; }
+
+        const student = (db.students[sorState.className] || []).find(s => s.id === sorState.studentId);
+        if (!student) { showToast('Student not found!', 'error'); return; }
+
+        const number = normalizeWhatsAppNumber_(student.whatsapp || student.contact);
+        if (!number) { showToast(`${student.name} کے لیے WhatsApp نمبر موجود نہیں ⚠️`, 'warning'); return; }
+
+        let sumObtained = 0, sumTotal = 0;
+        const lines = selected.map(ex => {
+            const pct = ex.totalMarks > 0 ? ((ex.obtained / ex.totalMarks) * 100).toFixed(1) : '0.0';
+            const grade = getGrade(pct);
+            sumObtained += ex.obtained;
+            sumTotal += ex.totalMarks;
+            return `▪ ${ex.subject} — ${ex.name} (${ex.date || 'N/A'}): ${ex.obtained}/${ex.totalMarks} (${pct}% — ${grade.label})`;
+        }).join('\n');
+
+        const overallPct = sumTotal > 0 ? ((sumObtained / sumTotal) * 100).toFixed(1) : '0.0';
+        const overallGrade = getGrade(overallPct);
+
+        const message =
+`🏫 *The Educator's School*
+
+*${student.name}* — Roll #${student.rollNo || 'N/A'}
+Class: ${sorState.className}
+Tests Included: ${selected.length}
+
+${lines}
+
+📊 *Overall: ${sumObtained} / ${sumTotal} (${overallPct}%)*
+🏆 *Grade: ${overallGrade.label}*`;
+
+        const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
     }
 
     function closeStudentOverallModal() { document.getElementById('studentOverallModal').classList.add('hidden'); document.body.style.overflow = 'auto'; document.getElementById('sorDropdownPanel').classList.add('hidden'); }
