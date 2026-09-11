@@ -3,7 +3,7 @@
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Educator's School</title>
+    <title>THE EDUCATORS SCHOOL</title>
     <!-- Tailwind CSS: CDN replacement for the missing local _files/saved_resource -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome: GitHub Pages compatible CDN (replaces missing local _files/all.min.css) -->
@@ -659,12 +659,12 @@ img, canvas, svg { max-width: 100%; height: auto; }
             <div class="absolute bottom-0 left-0 w-40 h-40 bg-indigo-100 rounded-full opacity-20 -ml-16 -mb-16"></div>
             <div class="flex justify-center mb-5 relative">
                 <div class="w-32 h-32 bg-white rounded-3xl shadow-xl flex items-center justify-center overflow-hidden border border-gray-100">
-                    <img id="loginSchoolLogo" src="" alt="The Educator's School Logo" class="w-full h-full object-contain p-2">
+                    <img id="loginSchoolLogo" src="" alt="THE EDUCATORS SCHOOL Logo" class="w-full h-full object-contain p-2">
                 </div>
             </div>
             <div class="text-center mb-8">
-                <h1 class="text-3xl font-extrabold text-gray-900">The Educator's School</h1>
-                <p class="text-blue-600 font-bold text-sm mt-1 uppercase">AHMAD HASEEB CAMPUS MORE KHUNDA</p>
+                <h1 class="text-3xl font-extrabold text-gray-900">THE EDUCATORS SCHOOL</h1>
+                <p class="text-blue-600 font-bold text-sm mt-1 uppercase">Ahmd Haseeb Campus</p>
                 <p class="text-gray-500 text-xs mt-1 font-semibold uppercase">A PROJECT OF BEACONHOUSE</p>
                 <p class="text-gray-500 text-xs mt-2">Complete School Management System v10.2</p>
             </div>
@@ -786,11 +786,11 @@ img, canvas, svg { max-width: 100%; height: auto; }
                 <div class="flex items-center justify-between h-16">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-md overflow-hidden">
-                            <img id="headerSchoolLogo" src="" alt="The Educator's School Logo" class="w-full h-full object-contain p-1">
+                            <img id="headerSchoolLogo" src="" alt="THE EDUCATORS SCHOOL Logo" class="w-full h-full object-contain p-1">
                         </div>
                         <div>
-                            <h1 class="font-bold text-lg">The Educator's School</h1>
-                            <p class="text-xs text-blue-200 hidden sm:block uppercase">AHMAD HASEEB CAMPUS MORE KHUNDA</p>
+                            <h1 class="font-bold text-lg">THE EDUCATORS SCHOOL</h1>
+                            <p class="text-xs text-blue-200 hidden sm:block uppercase">Ahmd Haseeb Campus</p>
                             <p class="text-[9px] text-blue-200 hidden sm:block uppercase opacity-90">A PROJECT OF BEACONHOUSE</p>
                         </div>
                     </div>
@@ -1316,6 +1316,12 @@ img, canvas, svg { max-width: 100%; height: auto; }
                             <div class="flex flex-wrap gap-2">
                                 <button onclick="openSectionReportSelection_('student-fee')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-3 py-2 rounded-xl transition flex items-center gap-1 admin-only"><i class="fa-solid fa-file-lines"></i> Class Report</button>
                                 <button onclick="openSectionReportSelection_('student-fee')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-3 py-2 rounded-xl transition flex items-center gap-1 admin-only"><i class="fa-solid fa-print"></i> Print Report</button>
+                                <select id="feeStudentPrintStatus" class="bg-white border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold focus:border-indigo-500 focus:outline-none admin-only">
+                                    <option value="Paid">Paid Students</option>
+                                    <option value="Unpaid">Unpaid Students</option>
+                                    <option value="Pending">Pending Students</option>
+                                </select>
+                                <button onclick="printFeeStudentsByStatus()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3 py-2 rounded-xl transition flex items-center gap-1 admin-only"><i class="fa-solid fa-print"></i> Print Status Students</button>
                                 <button onclick="addTuitionFee()" class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition admin-only"><i class="fa-solid fa-plus"></i> Add Fee Record</button>
                             </div>
                         </div>
@@ -1396,8 +1402,6 @@ img, canvas, svg { max-width: 100%; height: auto; }
                                 <div class="space-y-3">
                                     <button onclick="exportData()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2 admin-only"><i class="fa-solid fa-download"></i> Export All Data</button>
                                     <button onclick="importData()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2 admin-only"><i class="fa-solid fa-upload"></i> Import Data</button>
-                                    <button onclick="openSelectiveReset()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2 admin-only"><i class="fa-solid fa-triangle-exclamation"></i> ⚠️ Selective Data Reset</button>
-                                    <button onclick="openAcademicCleanup()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2 admin-only"><i class="fa-solid fa-calendar-xmark"></i> Academic Data Cleanup</button>
                                     <button onclick="openBackupRestore()" class="w-full backup-green-btn bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2 admin-only"><i class="fa-solid fa-clock-rotate-left"></i> Backup History & Restore</button>
                                     <button onclick="openArchiveCenter()" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2 admin-only"><i class="fa-solid fa-box-archive"></i> Archive Center (Attendance / Exams / Fees)</button>
                                 </div>
@@ -1406,7 +1410,7 @@ img, canvas, svg { max-width: 100%; height: auto; }
                                 <h4 class="font-bold text-gray-800 mb-3"><i class="fa-solid fa-sliders mr-2"></i> System Settings</h4>
                                 <div class="space-y-3">
                                     <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">School Name</label>
-                                        <input type="text" id="schoolName" value="The Educator's School" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+                                        <input type="text" id="schoolName" value="THE EDUCATORS SCHOOL" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
                                     </div>
                                     <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Academic Year</label>
                                         <input type="text" id="academicYear" value="2025-2026" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
@@ -1474,7 +1478,7 @@ img, canvas, svg { max-width: 100%; height: auto; }
                 <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 text-3xl leading-none transition">×</button>
             </div>
             <div class="border-b-2 border-blue-900 pb-4 mb-6 text-center print-only hidden">
-                <h1 class="text-3xl font-black text-blue-900">The Educator's School</h1>
+                <h1 class="text-3xl font-black text-blue-900">THE EDUCATORS SCHOOL</h1>
                 <h2 class="text-lg font-bold text-gray-700 uppercase"></h2>
                 <h3 class="text-xs font-semibold text-gray-500 uppercase">A PROJECT OF BEACONHOUSE</h3>
                 <h3 class="text-md font-bold mt-2" id="printMonthYear">Student Report</h3>
@@ -1495,6 +1499,43 @@ img, canvas, svg { max-width: 100%; height: auto; }
                 <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Leaving Date</label><input type="date" id="modalLeavingDate" class="w-full border-b-2 border-gray-200 py-2 focus:border-blue-600 focus:outline-none font-bold text-gray-800"></div>
                 <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Tuition Fee Status</label><select id="modalFeeStatus" class="w-full border-b-2 border-gray-200 py-2 focus:border-blue-600 focus:outline-none font-bold text-gray-800 bg-transparent"><option value="Paid">✅ Paid</option><option value="Pending">⏳ Pending</option><option value="Partial">🔄 Partial</option></select></div>
             </div>
+            <details class="border border-blue-100 rounded-2xl overflow-hidden mb-5">
+                <summary class="cursor-pointer bg-blue-50 px-4 py-3 font-bold text-blue-900">🧩 Advanced Information <span class="text-xs font-normal text-blue-700">Editable later</span></summary>
+                <div class="px-4 pt-4 flex flex-wrap gap-2 no-print">
+                    <button type="button" onclick="printStudentInformation(currentEditingClass, currentEditingStudentId, false)" class="px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white text-sm font-bold rounded-xl transition flex items-center gap-2"><i class="fa-solid fa-print"></i> Simple Print</button>
+                    <button type="button" onclick="printStudentInformation(currentEditingClass, currentEditingStudentId, true)" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition flex items-center gap-2"><i class="fa-solid fa-file-lines"></i> Advanced Print</button>
+                </div>
+                <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Admission Number</label><input id="modalAdmissionNumber" readonly class="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">B-Form / Registration No.</label><input id="modalBForm" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Student Photo (URL/reference)</label><input id="modalStudentPhoto" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Father / Guardian CNIC</label><input id="modalFatherCnic" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Father Occupation</label><input id="modalFatherOccupation" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Mother Name</label><input id="modalMotherName" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Mother Contact</label><input id="modalMotherContact" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Guardian Relation</label><input id="modalGuardianRelation" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Emergency Contact</label><input id="modalEmergencyContact" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div class="md:col-span-2"><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Permanent Address</label><input id="modalPermanentAddress" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">City</label><input id="modalCity" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Area / Village</label><input id="modalArea" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Previous School</label><input id="modalPreviousSchool" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Previous Class</label><input id="modalPreviousClass" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Previous Result / Percentage</label><input id="modalPreviousResult" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">House / Group</label><input id="modalHouseGroup" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Allergies</label><input id="modalAllergies" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Medical Condition</label><input id="modalMedicalCondition" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div class="md:col-span-2"><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Emergency Medical Notes</label><textarea id="modalEmergencyMedicalNotes" rows="2" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></textarea></div>
+                    <div class="md:col-span-2"><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Special Health Requirements</label><textarea id="modalSpecialHealth" rows="2" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></textarea></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Transport Required</label><select id="modalTransport" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"><option value="No">No</option><option value="Yes">Yes</option></select></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Route</label><input id="modalTransportRoute" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Pickup Point</label><input id="modalPickupPoint" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Drop-off Point</label><input id="modalDropoffPoint" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Vehicle / Bus</label><input id="modalVehicle" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Sibling</label><input id="modalSibling" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div class="md:col-span-2"><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Documents</label><textarea id="modalDocuments" rows="2" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></textarea></div>
+                    <div class="md:col-span-2"><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Notes</label><textarea id="modalNotes" rows="3" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></textarea></div>
+                </div>
+            </details>
             <h3 class="font-bold text-blue-900 border-b pb-2 mb-3 text-lg"><i class="fa-regular fa-star mr-2"></i> Subject Wise Marks <span class="text-xs font-normal text-gray-500 ml-2">(Edit any number, auto-calculates percentage)</span></h3>
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse mb-4">
@@ -1523,6 +1564,67 @@ img, canvas, svg { max-width: 100%; height: auto; }
         </div>
     </div>
 
+    <!-- Student Add Modal -->
+    <div id="studentAddModal" class="fixed inset-0 bg-black bg-opacity-60 hidden z-50 items-center justify-center p-4">
+        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl p-6 max-h-[95vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-5">
+                <h2 class="text-2xl font-bold text-gray-800"><i class="fa-solid fa-user-plus mr-2 text-emerald-600"></i> Add New Student</h2>
+                <button type="button" onclick="closeStudentAddModal()" class="text-gray-400 hover:text-gray-600 text-3xl">×</button>
+            </div>
+            <div class="mb-5 p-4 rounded-2xl border border-emerald-100 bg-emerald-50">
+                <h3 class="font-bold text-emerald-900 mb-3">Admission Essentials <span class="text-xs font-normal text-emerald-700">Required fields</span></h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Student Name *</label><input id="addStudentName" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5" autocomplete="off"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Father / Guardian Name *</label><input id="addStudentFather" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5" autocomplete="off"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Gender *</label><select id="addStudentGender" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Class *</label><select id="addStudentClass" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"><option value="PG">PG</option><option value="Nursery">Nursery</option><option value="KG">KG</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Admission Date *</label><input id="addStudentJoiningDate" type="date" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Parent / Guardian Contact *</label><input id="addStudentContact" type="tel" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5" autocomplete="tel"></div>
+                </div>
+                <div class="mt-3 text-xs text-gray-600">System automatically generates Student ID, Admission Number, timestamps and initial status.</div>
+            </div>
+            <details class="border border-blue-100 rounded-2xl overflow-hidden" open>
+                <summary class="cursor-pointer bg-blue-50 px-4 py-3 font-bold text-blue-900">🧩 Advanced Information <span class="text-xs font-normal text-blue-700">Optional — can be completed or edited later</span></summary>
+                <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Date of Birth</label><input id="addStudentDOB" type="date" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">B-Form / Registration No.</label><input id="addStudentBForm" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Student Photo (optional URL/reference)</label><input id="addStudentPhoto" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5" placeholder="Photo URL or reference"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Blood Group</label><select id="addStudentBloodGroup" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"><option value="">Select</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Father / Guardian CNIC</label><input id="addStudentFatherCnic" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Father Occupation</label><input id="addStudentFatherOccupation" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Mother Name</label><input id="addStudentMotherName" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Mother Contact</label><input id="addStudentMotherContact" type="tel" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Guardian Relation</label><input id="addStudentGuardianRelation" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5" placeholder="Father, Mother, Uncle, etc."></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Emergency Contact</label><input id="addStudentEmergencyContact" type="tel" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div class="md:col-span-2"><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Current Address</label><input id="addStudentCurrentAddress" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div class="md:col-span-2"><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Permanent Address</label><input id="addStudentPermanentAddress" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">City</label><input id="addStudentCity" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Area / Village</label><input id="addStudentArea" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Previous School</label><input id="addStudentPreviousSchool" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Previous Class</label><input id="addStudentPreviousClass" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Previous Result / Percentage</label><input id="addStudentPreviousResult" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">House / Group</label><input id="addStudentHouseGroup" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Blood/Medical Allergies</label><input id="addStudentAllergies" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Medical Condition</label><input id="addStudentMedicalCondition" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div class="md:col-span-2"><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Emergency Medical Notes</label><textarea id="addStudentEmergencyMedicalNotes" rows="2" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></textarea></div>
+                    <div class="md:col-span-2"><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Special Health Requirements</label><textarea id="addStudentSpecialHealth" rows="2" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></textarea></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Transport Required</label><select id="addStudentTransport" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"><option value="No">No</option><option value="Yes">Yes</option></select></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Route</label><input id="addStudentTransportRoute" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Pickup Point</label><input id="addStudentPickupPoint" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Drop-off Point</label><input id="addStudentDropoffPoint" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Vehicle / Bus</label><input id="addStudentVehicle" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Sibling (name / student reference)</label><input id="addStudentSibling" type="text" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div class="md:col-span-2"><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Documents (names / references)</label><textarea id="addStudentDocuments" rows="2" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5" placeholder="e.g. B-Form, Birth Certificate, Previous Certificate"></textarea></div>
+                    <div class="md:col-span-2"><label class="text-xs text-gray-600 font-bold uppercase block mb-1">Student / Admission Notes</label><textarea id="addStudentNotes" rows="3" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></textarea></div>
+                </div>
+            </details>
+            <div class="flex justify-end gap-3 mt-5 pt-4 border-t">
+                <button type="button" onclick="closeStudentAddModal()" class="px-6 py-2.5 bg-gray-200 text-gray-800 font-bold rounded-xl hover:bg-gray-300">Cancel</button>
+                <button type="button" onclick="saveNewStudentFromModal()" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg"><i class="fa-solid fa-user-plus mr-2"></i> Add Student</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Teacher Modal -->
     <div id="teacherModal" class="fixed inset-0 bg-black bg-opacity-60 hidden z-50 flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl p-6 max-h-[90vh] overflow-y-auto">
@@ -1543,6 +1645,32 @@ img, canvas, svg { max-width: 100%; height: auto; }
                 <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Replacement Teacher</label><select id="teacherReplacement" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"><option value="">No replacement</option></select></div>
                 <div class="md:col-span-2"><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Address</label><input type="text" id="teacherAddress" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5 focus:border-blue-500 focus:outline-none"></div>
             </div>
+            <details class="border border-purple-100 rounded-2xl overflow-hidden mt-5">
+                <summary class="cursor-pointer bg-purple-50 px-4 py-3 font-bold text-purple-900">🧩 Advanced Information <span class="text-xs font-normal text-purple-700">Optional — can be completed or edited later</span></summary>
+                <div id="teacherAdvancedPrintActions" class="px-4 pt-4 flex flex-wrap gap-2 no-print" style="display:none;">
+                    <button type="button" onclick="printTeacher(currentEditingTeacherId)" class="px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white text-sm font-bold rounded-xl transition flex items-center gap-2"><i class="fa-solid fa-print"></i> Simple Print</button>
+                    <button type="button" onclick="printTeacherInformation(currentEditingTeacherId, true)" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition flex items-center gap-2 admin-only"><i class="fa-solid fa-file-lines"></i> Advanced Print</button>
+                </div>
+                <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Date of Birth</label><input type="date" id="teacherDOB" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Gender</label><select id="teacherGender" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">CNIC / National ID</label><input id="teacherCnic" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Email</label><input type="email" id="teacherEmail" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">WhatsApp Number</label><input id="teacherWhatsapp" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Blood Group</label><select id="teacherBloodGroup" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"><option value="">Select</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Marital Status</label><select id="teacherMaritalStatus" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"><option value="">Select</option><option>Single</option><option>Married</option><option>Other</option></select></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Father / Husband Name</label><input id="teacherParentName" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Emergency Contact</label><input id="teacherEmergencyContact" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">City</label><input id="teacherCity" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Area / Village</label><input id="teacherArea" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div class="md:col-span-2"><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Permanent Address</label><input id="teacherPermanentAddress" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Previous Institution</label><input id="teacherPreviousInstitution" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Specialization</label><input id="teacherSpecialization" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Teacher Photo (URL/reference)</label><input id="teacherPhoto" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Documents (names / references)</label><input id="teacherDocuments" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></div>
+                    <div class="md:col-span-2"><label class="text-xs text-gray-500 font-bold uppercase block mb-1">Notes</label><textarea id="teacherNotes" rows="3" class="w-full border-2 border-gray-200 rounded-xl px-3 py-2.5"></textarea></div>
+                </div>
+            </details>
             <div class="flex gap-3 mt-4">
                 <button onclick="saveTeacher()" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2"><i class="fa-solid fa-save"></i> Save Teacher</button>
                 <button onclick="closeTeacherModal()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 rounded-xl transition">Cancel</button>
@@ -2058,9 +2186,9 @@ img, canvas, svg { max-width: 100%; height: auto; }
             joining_date: safeDate_(student.joiningDate), status: student.studentStatus || 'Present',
             leaving_date: safeDate_(student.leavingDate), present: Number(student.present || 0),
             absences: Number(student.absences || 0),
-            extra_data: { attendanceLog: student.attendanceLog || {}, uniform: student.uniform || 'Good',
+            extra_data: Object.assign({}, student.extraData || {}, { createdAt: student.createdAt || student.extraData?.createdAt || null, updatedAt: student.updatedAt || new Date().toISOString(), attendanceLog: student.attendanceLog || {}, uniform: student.uniform || 'Good',
                 syllabus: student.syllabus || 'In Progress', feeStatus: student.feeStatus || 'Pending',
-                marks: student.marks || {} }
+                marks: student.marks || {} })
         };
     }
     function supabaseRowToStudent(row) {
@@ -2071,7 +2199,7 @@ img, canvas, svg { max-width: 100%; height: auto; }
             studentStatus:row.status || 'Present', leavingDate:row.leaving_date || '', present:Number(row.present || 0),
             absences:Number(row.absences || 0), attendanceLog:extra.attendanceLog || {}, uniform:extra.uniform || 'Good',
             syllabus:extra.syllabus || 'In Progress', feeStatus:extra.feeStatus || 'Pending', marks:extra.marks || {},
-            _supabase:true };
+            admissionNumber:extra.admissionNumber || '', createdAt:extra.createdAt || '', updatedAt:extra.updatedAt || '', extraData:extra, _supabase:true };
     }
 
     function teacherToRow(t) {
@@ -2080,13 +2208,16 @@ img, canvas, svg { max-width: 100%; height: auto; }
             class_name:t.className || t.class || null, experience:t.experience == null ? null : Number(t.experience),
             contact:t.contact || null, address:t.address || null, joining_date:safeDate_(t.joiningDate),
             status:t.status || 'Active', leaving_date:safeDate_(t.leavingDate),
-            replacement_teacher_id:isUuid_(t.replacementTeacherId) ? t.replacementTeacherId : null };
+            replacement_teacher_id:isUuid_(t.replacementTeacherId) ? t.replacementTeacherId : null,
+            extra_data: t.extraData && typeof t.extraData === 'object' ? t.extraData : {} };
     }
     function rowToTeacher(r) {
+        const extra = r.extra_data && typeof r.extra_data === 'object' ? r.extra_data : {};
         return { id:String(r.id), name:r.name || '', qualification:r.qualification || '', subject:r.subject || '',
             className:r.class_name || '', class:r.class_name || '', experience:Number(r.experience || 0),
             contact:r.contact || '', address:r.address || '', joiningDate:r.joining_date || '', status:r.status || 'Active',
-            leavingDate:r.leaving_date || '', replacementTeacherId:r.replacement_teacher_id || '' , _supabase:true };
+            teacherStatus:r.status === 'Left' ? 'Left' : 'Present', leavingDate:r.leaving_date || '', replacementTeacherId:r.replacement_teacher_id || '',
+            extraData:extra, _supabase:true };
     }
     function subjectToRow(className, subject) {
         const name = typeof subject === 'string' ? subject : (subject?.name || '');
@@ -2612,7 +2743,7 @@ async function saveArchiveFast_(items, label='archive') {
             // the login path stays focused on the active operational school data.
             const [studentRows,teacherRows,subjectRows,examRows,noticeRows] = await Promise.all([
                 fetchAllTableFiltered_('students','status=neq.Archived','id,school_id,class_name,roll_no,name,gender,dob,father,contact,whatsapp,blood_group,address,joining_date,status,leaving_date,present,absences,extra_data'),
-                fetchAllTable_('teachers','id,school_id,name,qualification,subject,class_name,experience,contact,address,joining_date,status,leaving_date,replacement_teacher_id'),
+                fetchAllTable_('teachers','id,school_id,name,qualification,subject,class_name,experience,contact,address,joining_date,status,leaving_date,replacement_teacher_id,extra_data'),
                 fetchAllTable_('subjects','id,school_id,class_name,name,total_marks'),
                 fetchAllTable_('exams','id,school_id,name,class_name,subject,exam_date,total_marks,passing,academic_year'),
                 fetchAllTable_('notices','id,school_id,title,message,notice_date,audience')
@@ -3388,7 +3519,7 @@ async function saveArchiveFast_(items, label='archive') {
             const resultRows=h.exams.map(e=>`<tr><td>${esc(e.name)}</td><td>${esc(e.class_name)}</td><td>${esc(e.subject)}</td><td>${esc(e.exam_date)}</td><td>${esc(h.results[String(e.id)]??'—')} / ${esc(e.total_marks||100)}</td></tr>`).join('')||'<tr><td colspan="5">No exam results.</td></tr>';
             const feeRows=h.fees.map(f=>`<tr><td>${esc(f.month||f.payment_date||'')}</td><td>${esc(f.class_name||'')}</td><td>${esc(f.fee_amount||0)}</td><td>${esc(f.paid_amount||0)}</td><td>${esc(f.status||'')}</td></tr>`).join('')||'<tr><td colspan="5">No fee records.</td></tr>';
             const promotionRows=h.promotions.map(p=>`<tr><td>${esc(p.from_class)}</td><td>${esc(p.to_class)}</td><td>${esc(p.academic_year||'')}</td><td>${p.promoted_at?esc(new Date(p.promoted_at).toLocaleDateString()):''}</td></tr>`).join('')||'<tr><td colspan="4">No promotion history.</td></tr>';
-            const page=`<div class="report-page">${reportPrintHeader('Archived Student Complete History')}<div class="custom-report-meta"><span><b>Name:</b> ${esc(h.student?.name||item.name)}</span><span><b>Father:</b> ${esc(h.student?.father||item.father)}</span><span><b>Last Class:</b> ${esc(h.student?.class_name||item.className)}</span><span><b>Roll:</b> ${esc(h.student?.roll_no||item.rollNo)}</span><span><b>Leaving Date:</b> ${esc(h.student?.leaving_date||item.leavingDate)}</span></div><h3>Fees</h3><table class="custom-report-table"><thead><tr><th>Month/Date</th><th>Class</th><th>Amount</th><th>Paid</th><th>Status</th></tr></thead><tbody>${feeRows}</tbody></table><p><b>Total:</b> ${feeTotal} &nbsp; <b>Paid:</b> ${feePaid} &nbsp; <b>Balance:</b> ${feeTotal-feePaid}</p><h3>Exam Results</h3><table class="custom-report-table"><thead><tr><th>Exam</th><th>Class</th><th>Subject</th><th>Date</th><th>Result</th></tr></thead><tbody>${resultRows}</tbody></table><h3>Attendance</h3><p>Total attendance records: ${h.attendance.length}</p><h3>Promotion History</h3><table class="custom-report-table"><thead><tr><th>From</th><th>To</th><th>Academic Year</th><th>Date</th></tr></thead><tbody>${promotionRows}</tbody></table><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`;
+            const page=`<div class="report-page">${reportPrintHeader('Archived Student Complete History')}<div class="custom-report-meta"><span><b>Name:</b> ${esc(h.student?.name||item.name)}</span><span><b>Father:</b> ${esc(h.student?.father||item.father)}</span><span><b>Last Class:</b> ${esc(h.student?.class_name||item.className)}</span><span><b>Roll:</b> ${esc(h.student?.roll_no||item.rollNo)}</span><span><b>Leaving Date:</b> ${esc(h.student?.leaving_date||item.leavingDate)}</span></div><h3>Fees</h3><table class="custom-report-table"><thead><tr><th>Month/Date</th><th>Class</th><th>Amount</th><th>Paid</th><th>Status</th></tr></thead><tbody>${feeRows}</tbody></table><p><b>Total:</b> ${feeTotal} &nbsp; <b>Paid:</b> ${feePaid} &nbsp; <b>Balance:</b> ${feeTotal-feePaid}</p><h3>Exam Results</h3><table class="custom-report-table"><thead><tr><th>Exam</th><th>Class</th><th>Subject</th><th>Date</th><th>Result</th></tr></thead><tbody>${resultRows}</tbody></table><h3>Attendance</h3><p>Total attendance records: ${h.attendance.length}</p><h3>Promotion History</h3><table class="custom-report-table"><thead><tr><th>From</th><th>To</th><th>Academic Year</th><th>Date</th></tr></thead><tbody>${promotionRows}</tbody></table><div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div></div>`;
             printHTML(page);
         } catch(e) { showToast('❌ History load failed: '+(e.message||e),'error'); }
     }
@@ -3429,7 +3560,7 @@ async function saveArchiveFast_(items, label='archive') {
         const cls=document.getElementById('archiveManagerClass')?.value||'All';
         let rows=studentArchiveCache_.slice(); if(cls!=='All') rows=rows.filter(x=>String(x.archivedFromClass||x.className||'')===String(cls));
         const tr=rows.map(x=>`<tr><td>${escapeHtmlBackup_(x.name)}</td><td>${escapeHtmlBackup_(x.father)}</td><td>${escapeHtmlBackup_(x.archivedFromClass||x.className)}</td><td>${escapeHtmlBackup_(x.rollNo)}</td><td>${escapeHtmlBackup_(x.leavingDate)}</td><td>${x.archivedAt?new Date(x.archivedAt).toLocaleDateString():''}</td></tr>`).join('')||'<tr><td colspan="6">No archived students.</td></tr>';
-        printHTML(`<div class="report-page">${reportPrintHeader(`Student Archive — ${cls==='All'?'All Classes':'Class '+cls}`)}<table class="custom-report-table"><thead><tr><th>Student</th><th>Father</th><th>Last Class</th><th>Roll</th><th>Leaving Date</th><th>Archived On</th></tr></thead><tbody>${tr}</tbody></table><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`);
+        printHTML(`<div class="report-page">${reportPrintHeader(`Student Archive — ${cls==='All'?'All Classes':'Class '+cls}`)}<table class="custom-report-table"><thead><tr><th>Student</th><th>Father</th><th>Last Class</th><th>Roll</th><th>Leaving Date</th><th>Archived On</th></tr></thead><tbody>${tr}</tbody></table><div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div></div>`);
     }
 
     // ==================== STUDENT CLASS PROMOTION ====================
@@ -3795,7 +3926,7 @@ async function saveArchiveFast_(items, label='archive') {
         if (!rows.length) { showToast('No archived promotion records to print.', 'warning'); return; }
         const esc = escapeHtmlBackup_;
         const tr = rows.map(x => `<tr><td>${esc(x.studentName||'N/A')}</td><td>${esc(x.fromClass||'N/A')}</td><td>${esc(x.toClass||'N/A')}</td><td>${esc(x.oldRoll||'N/A')} → ${esc(x.newRoll||'N/A')}</td><td>${x.promotedAt?new Date(x.promotedAt).toLocaleDateString():'N/A'}</td><td>${x.archivedAt?new Date(x.archivedAt).toLocaleDateString():'N/A'}</td></tr>`).join('');
-        printHTML(`<div class="report-page">${reportPrintHeader(`Promotion History Archive — ${scope==='selected'?'Selected':'All'} (${rows.length})`)}<table class="custom-report-table"><thead><tr><th>Student</th><th>From</th><th>To</th><th>Roll</th><th>Promotion Date</th><th>Archived On</th></tr></thead><tbody>${tr}</tbody></table><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`);
+        printHTML(`<div class="report-page">${reportPrintHeader(`Promotion History Archive — ${scope==='selected'?'Selected':'All'} (${rows.length})`)}<table class="custom-report-table"><thead><tr><th>Student</th><th>From</th><th>To</th><th>Roll</th><th>Promotion Date</th><th>Archived On</th></tr></thead><tbody>${tr}</tbody></table><div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div></div>`);
     }
 
     async function viewArchivedPromotionHistory(archiveId) {
@@ -3807,7 +3938,7 @@ async function saveArchiveFast_(items, label='archive') {
             const feeRows = h.fees.map(f => `<tr><td>${esc(f.month||f.payment_date||'')}</td><td>${esc(f.class_name||'')}</td><td>${esc(f.fee_amount||0)}</td><td>${esc(f.paid_amount||0)}</td><td>${esc(f.status||'')}</td></tr>`).join('') || '<tr><td colspan="5">No fee records.</td></tr>';
             const resultRows = h.exams.map(e => `<tr><td>${esc(e.name||'')}</td><td>${esc(e.class_name||'')}</td><td>${esc(e.subject||'')}</td><td>${esc(e.exam_date||'')}</td><td>${esc(h.results[String(e.id)] ?? '—')} / ${esc(e.total_marks||100)}</td></tr>`).join('') || '<tr><td colspan="5">No exam results.</td></tr>';
             const attendanceRows = h.attendance.map(a => `<tr><td>${esc(a.attendance_date||'')}</td><td>${esc(a.status||'')}</td></tr>`).join('') || '<tr><td colspan="2">No attendance records.</td></tr>';
-            const page = `<div class="report-page">${reportPrintHeader('Archived Promotion History — Student Complete History')}<div class="custom-report-meta"><span><b>Name:</b> ${esc(item.studentName||h.student?.name)}</span><span><b>Previous Class:</b> ${esc(item.fromClass||item.previousClassData?.className)}</span><span><b>Promoted To:</b> ${esc(item.toClass)}</span><span><b>Promotion Date:</b> ${esc(item.promotedAt||'')}</span></div><h3>Fees</h3><table class="custom-report-table"><thead><tr><th>Month/Date</th><th>Class</th><th>Amount</th><th>Paid</th><th>Status</th></tr></thead><tbody>${feeRows}</tbody></table><h3>Exam Results</h3><table class="custom-report-table"><thead><tr><th>Exam</th><th>Class</th><th>Subject</th><th>Date</th><th>Result</th></tr></thead><tbody>${resultRows}</tbody></table><h3>Attendance</h3><table class="custom-report-table"><thead><tr><th>Date</th><th>Status</th></tr></thead><tbody>${attendanceRows}</tbody></table><h3>Promotion</h3><p>Previous class: ${esc(item.fromClass||'')} → ${esc(item.toClass||'')}</p><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`;
+            const page = `<div class="report-page">${reportPrintHeader('Archived Promotion History — Student Complete History')}<div class="custom-report-meta"><span><b>Name:</b> ${esc(item.studentName||h.student?.name)}</span><span><b>Previous Class:</b> ${esc(item.fromClass||item.previousClassData?.className)}</span><span><b>Promoted To:</b> ${esc(item.toClass)}</span><span><b>Promotion Date:</b> ${esc(item.promotedAt||'')}</span></div><h3>Fees</h3><table class="custom-report-table"><thead><tr><th>Month/Date</th><th>Class</th><th>Amount</th><th>Paid</th><th>Status</th></tr></thead><tbody>${feeRows}</tbody></table><h3>Exam Results</h3><table class="custom-report-table"><thead><tr><th>Exam</th><th>Class</th><th>Subject</th><th>Date</th><th>Result</th></tr></thead><tbody>${resultRows}</tbody></table><h3>Attendance</h3><table class="custom-report-table"><thead><tr><th>Date</th><th>Status</th></tr></thead><tbody>${attendanceRows}</tbody></table><h3>Promotion</h3><p>Previous class: ${esc(item.fromClass||'')} → ${esc(item.toClass||'')}</p><div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div></div>`;
             printHTML(page);
         } catch (e) { showToast('❌ Archived promotion history load failed: ' + (e.message || e), 'error'); }
     }
@@ -4023,7 +4154,7 @@ async function saveArchiveFast_(items, label='archive') {
                 <thead><tr><th>Student</th><th>From</th><th>To</th><th>Roll (Old → New)</th><th>Promotion Date</th><th>Status</th></tr></thead>
                 <tbody>${tr}</tbody>
             </table>
-            <div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div>
+            <div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div>
         </div>`;
         printHTML(page);
     }
@@ -4083,7 +4214,7 @@ async function saveArchiveFast_(items, label='archive') {
 
         if (item.oldMarks === undefined) {
             try {
-                const rows = await supabaseTableRequest('promotion_history', { query: `?id=eq.${encodeURIComponent(item.id)}&select=oldMarks:extra_data->oldMarks` });
+                const rows = await supabaseTableRequest('promotion_history', { query: `?id=eq.${encodeURIComponent(item.id)}&school_id=eq.${encodeURIComponent(SUPABASE_SCHOOL_ID)}&select=oldMarks:extra_data->oldMarks` });
                 item.oldMarks = (Array.isArray(rows) && rows[0]) ? rows[0].oldMarks : null;
             } catch (error) { console.error('Could not load saved marks for undo:', error); item.oldMarks = null; }
         }
@@ -4111,32 +4242,105 @@ async function saveArchiveFast_(items, label='archive') {
     }
 
 
-    function addNewStudent() {
-        const name = prompt('Enter student full name:');
-        if (name && name.trim() !== '') {
-            const className = document.getElementById('classSelect').value;
-            const existing = db.students[className] || [];
-            const nextRoll = existing.reduce((max, s) => Math.max(max, s.rollNo || 0), 0) + 1;
-            const newStudent = { id: 's_' + Math.random().toString(36).substr(2,8), rollNo: nextRoll, name: name.trim(), gender: 'Male', dob: '', father: '', contact: '', whatsapp: '', bloodGroup: '', address: '', joiningDate: '', studentStatus: 'Present', leavingDate: '', absences: 0, present: 0, attendanceLog: {}, uniform: 'Good', syllabus: 'In Progress', feeStatus: 'Pending', marks: {} };
-            const subjects = db.subjects[className] || (databaseLoadedFromSupabase ? [] : defaultSubjectObjects(className));
-            subjects.forEach(sub => { newStudent.marks[sub.name] = 0; });
-            if (!db.students[className]) db.students[className] = [];
-            db.students[className].push(newStudent);
-            refreshStudentsAfterChange_();
-            updateStats();
-            showToast(`Student "${name}" added successfully to Class ${className}! 🎉`, 'success');
-            queueFastSave_(() => saveStudentFast_(className, newStudent, 'add student')).then(ok => {
-                if (!ok) {
-                    // Remove the unsaved local copy so the UI cannot show data
-                    // that is not actually present in Supabase.
-                    db.students[className] = (db.students[className] || []).filter(s => s.id !== newStudent.id);
-                    refreshStudentsAfterChange_();
-                    updateStats();
-                    showToast(`❌ "${name}" was NOT saved online. Please check your connection and try again.`, 'error');
-                }
-            });
+    function openStudentAddModal() {
+        if (currentUser?.role === 'Teacher') { showToast('Only admin can add students', 'error'); return; }
+        const cls = document.getElementById('classSelect')?.value || 'PG';
+        const modal = document.getElementById('studentAddModal');
+        if (!modal) return;
+        document.getElementById('addStudentName').value = '';
+        document.getElementById('addStudentFather').value = '';
+        document.getElementById('addStudentGender').value = 'Male';
+        document.getElementById('addStudentClass').value = cls;
+        document.getElementById('addStudentJoiningDate').value = new Date().toISOString().slice(0,10);
+        document.getElementById('addStudentContact').value = '';
+        const ids = ['addStudentDOB','addStudentBForm','addStudentPhoto','addStudentFatherCnic','addStudentFatherOccupation','addStudentMotherName','addStudentMotherContact','addStudentGuardianRelation','addStudentEmergencyContact','addStudentCurrentAddress','addStudentPermanentAddress','addStudentCity','addStudentArea','addStudentPreviousSchool','addStudentPreviousClass','addStudentPreviousResult','addStudentHouseGroup','addStudentAllergies','addStudentMedicalCondition','addStudentEmergencyMedicalNotes','addStudentSpecialHealth','addStudentTransportRoute','addStudentPickupPoint','addStudentDropoffPoint','addStudentVehicle','addStudentSibling','addStudentDocuments','addStudentNotes'];
+        ids.forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+        document.getElementById('addStudentTransport').value='No';
+        modal.classList.remove('hidden'); modal.classList.add('flex');
+        document.body.style.overflow='hidden';
+    }
+
+    function closeStudentAddModal() {
+        const modal=document.getElementById('studentAddModal');
+        if(modal) { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+        document.body.style.overflow='auto';
+    }
+
+    function generateStudentAdmissionNumber_(existingStudents) {
+        const year = new Date().getFullYear();
+        const used = new Set((existingStudents || []).map(s => String(s?.admissionNumber || s?.extraData?.admissionNumber || '')).filter(Boolean));
+        let n = 1;
+        while (used.has(`ADM-${year}-${String(n).padStart(4,'0')}`)) n++;
+        return `ADM-${year}-${String(n).padStart(4,'0')}`;
+    }
+
+    async function saveNewStudentFromModal() {
+        if (currentUser?.role === 'Teacher') { showToast('Only admin can add students', 'error'); return; }
+        const nameEl=document.getElementById('addStudentName');
+        const fatherEl=document.getElementById('addStudentFather');
+        const genderEl=document.getElementById('addStudentGender');
+        const classEl=document.getElementById('addStudentClass');
+        const dateEl=document.getElementById('addStudentJoiningDate');
+        const contactEl=document.getElementById('addStudentContact');
+        const name=String(nameEl?.value||'').trim(), father=String(fatherEl?.value||'').trim(), contact=String(contactEl?.value||'').trim();
+        if(!name){ showToast('Student Name is required.', 'warning'); nameEl?.focus(); return; }
+        if(!father){ showToast('Father/Guardian Name is required.', 'warning'); fatherEl?.focus(); return; }
+        if(!genderEl?.value){ showToast('Gender is required.', 'warning'); genderEl?.focus(); return; }
+        if(!classEl?.value){ showToast('Class is required.', 'warning'); classEl?.focus(); return; }
+        if(!dateEl?.value){ showToast('Admission Date is required.', 'warning'); dateEl?.focus(); return; }
+        if(!contact){ showToast('Parent/Guardian Contact is required.', 'warning'); contactEl?.focus(); return; }
+
+        const className=classEl.value;
+        const existing=db.students[className] || [];
+        const nextRoll=existing.reduce((max,s)=>Math.max(max,Number(s.rollNo)||0),0)+1;
+        const allStudents=Object.values(db.students||{}).flat();
+        const admissionNumber=generateStudentAdmissionNumber_(allStudents);
+        const nowIso=new Date().toISOString();
+        const id='s_' + Math.random().toString(36).substr(2,8);
+        const newStudent={
+            id, rollNo:nextRoll, admissionNumber, createdAt:nowIso, updatedAt:nowIso, name, gender:genderEl.value,
+            dob:document.getElementById('addStudentDOB').value || '', father, contact,
+            whatsapp:'', bloodGroup:document.getElementById('addStudentBloodGroup').value || '',
+            address:document.getElementById('addStudentCurrentAddress').value || '',
+            joiningDate:dateEl.value, studentStatus:'Present', leavingDate:'',
+            absences:0, present:0, attendanceLog:{}, uniform:'Good', syllabus:'In Progress',
+            feeStatus:'Pending', marks:{}, extraData:{
+                admissionNumber, bForm:document.getElementById('addStudentBForm').value || '',
+                fatherCnic:document.getElementById('addStudentFatherCnic').value || '',
+                fatherOccupation:document.getElementById('addStudentFatherOccupation').value || '',
+                motherName:document.getElementById('addStudentMotherName').value || '',
+                motherContact:document.getElementById('addStudentMotherContact').value || '',
+                guardianRelation:document.getElementById('addStudentGuardianRelation').value || '',
+                emergencyContact:document.getElementById('addStudentEmergencyContact').value || '',
+                currentAddress:document.getElementById('addStudentCurrentAddress').value || '',
+                permanentAddress:document.getElementById('addStudentPermanentAddress').value || '',
+                city:document.getElementById('addStudentCity').value || '', area:document.getElementById('addStudentArea').value || '',
+                admissionClass:className, previousSchool:document.getElementById('addStudentPreviousSchool').value || '',
+                previousClass:document.getElementById('addStudentPreviousClass').value || '', previousResult:document.getElementById('addStudentPreviousResult').value || '',
+                houseGroup:document.getElementById('addStudentHouseGroup').value || '', allergies:document.getElementById('addStudentAllergies').value || '',
+                medicalCondition:document.getElementById('addStudentMedicalCondition').value || '', emergencyMedicalNotes:document.getElementById('addStudentEmergencyMedicalNotes').value || '',
+                specialHealthRequirements:document.getElementById('addStudentSpecialHealth').value || '', transportRequired:document.getElementById('addStudentTransport').value || 'No',
+                transportRoute:document.getElementById('addStudentTransportRoute').value || '', pickupPoint:document.getElementById('addStudentPickupPoint').value || '',
+                dropoffPoint:document.getElementById('addStudentDropoffPoint').value || '', vehicleBus:document.getElementById('addStudentVehicle').value || '',
+                sibling:document.getElementById('addStudentSibling').value || '', studentPhoto:document.getElementById('addStudentPhoto').value || '',
+                documents:document.getElementById('addStudentDocuments').value || '', notes:document.getElementById('addStudentNotes').value || ''
+            }
+        };
+        const subjects=db.subjects[className] || (databaseLoadedFromSupabase ? [] : defaultSubjectObjects(className));
+        subjects.forEach(sub=>{ newStudent.marks[sub.name]=0; });
+        if(!db.students[className]) db.students[className]=[];
+        db.students[className].push(newStudent);
+        refreshStudentsAfterChange_(); updateStats(); closeStudentAddModal();
+        showToast(`Student "${name}" added successfully to Class ${className}! 🎉`, 'success');
+        const ok=await queueFastSave_(()=>saveStudentFast_(className,newStudent,'add student'));
+        if(!ok){
+            db.students[className]=(db.students[className]||[]).filter(s=>s.id!==newStudent.id);
+            refreshStudentsAfterChange_(); updateStats();
+            showToast(`❌ "${name}" was NOT saved online. Please check your connection and try again.`, 'error');
         }
     }
+
+    function addNewStudent() { openStudentAddModal(); }
 
     async function deleteStudent(className, studentId) {
         if (currentUser && currentUser.role === 'Teacher') { showToast('Only admin can delete students', 'error'); return; }
@@ -4184,6 +4388,16 @@ async function saveArchiveFast_(items, label='archive') {
         document.getElementById('modalStudentStatus').value = student.studentStatus || 'Present';
         document.getElementById('modalLeavingDate').value = student.leavingDate || '';
         document.getElementById('modalFeeStatus').value = student.feeStatus || 'Pending';
+        const ax=student.extraData || {};
+        document.getElementById('modalAdmissionNumber').value=student.admissionNumber || ax.admissionNumber || '';
+        document.getElementById('modalBForm').value=ax.bForm || ''; document.getElementById('modalStudentPhoto').value=ax.studentPhoto || '';
+        document.getElementById('modalFatherCnic').value=ax.fatherCnic || ''; document.getElementById('modalFatherOccupation').value=ax.fatherOccupation || '';
+        document.getElementById('modalMotherName').value=ax.motherName || ''; document.getElementById('modalMotherContact').value=ax.motherContact || '';
+        document.getElementById('modalGuardianRelation').value=ax.guardianRelation || ''; document.getElementById('modalEmergencyContact').value=ax.emergencyContact || '';
+        document.getElementById('modalPermanentAddress').value=ax.permanentAddress || ''; document.getElementById('modalCity').value=ax.city || ''; document.getElementById('modalArea').value=ax.area || '';
+        document.getElementById('modalPreviousSchool').value=ax.previousSchool || ''; document.getElementById('modalPreviousClass').value=ax.previousClass || ''; document.getElementById('modalPreviousResult').value=ax.previousResult || ''; document.getElementById('modalHouseGroup').value=ax.houseGroup || '';
+        document.getElementById('modalAllergies').value=ax.allergies || ''; document.getElementById('modalMedicalCondition').value=ax.medicalCondition || ''; document.getElementById('modalEmergencyMedicalNotes').value=ax.emergencyMedicalNotes || ''; document.getElementById('modalSpecialHealth').value=ax.specialHealthRequirements || '';
+        document.getElementById('modalTransport').value=ax.transportRequired || 'No'; document.getElementById('modalTransportRoute').value=ax.transportRoute || ''; document.getElementById('modalPickupPoint').value=ax.pickupPoint || ''; document.getElementById('modalDropoffPoint').value=ax.dropoffPoint || ''; document.getElementById('modalVehicle').value=ax.vehicleBus || ''; document.getElementById('modalSibling').value=ax.sibling || ''; document.getElementById('modalDocuments').value=ax.documents || ''; document.getElementById('modalNotes').value=ax.notes || '';
         document.getElementById('printMonthYear').textContent = `Student Report - ${className}`;
         renderSubjectMarks(student, className);
         document.getElementById('studentModal').classList.remove('hidden');
@@ -4282,6 +4496,21 @@ async function saveArchiveFast_(items, label='archive') {
         student.leavingDate = document.getElementById('modalLeavingDate').value;
         if (student.studentStatus === 'Present') student.leavingDate = '';
         student.feeStatus = document.getElementById('modalFeeStatus').value;
+        student.admissionNumber = student.admissionNumber || document.getElementById('modalAdmissionNumber').value || '';
+        student.extraData = Object.assign({}, student.extraData || {}, {
+            admissionNumber: student.admissionNumber, bForm:document.getElementById('modalBForm').value, studentPhoto:document.getElementById('modalStudentPhoto').value,
+            fatherCnic:document.getElementById('modalFatherCnic').value, fatherOccupation:document.getElementById('modalFatherOccupation').value,
+            motherName:document.getElementById('modalMotherName').value, motherContact:document.getElementById('modalMotherContact').value,
+            guardianRelation:document.getElementById('modalGuardianRelation').value, emergencyContact:document.getElementById('modalEmergencyContact').value,
+            currentAddress:document.getElementById('modalAddress').value, permanentAddress:document.getElementById('modalPermanentAddress').value,
+            city:document.getElementById('modalCity').value, area:document.getElementById('modalArea').value, admissionClass:student.extraData?.admissionClass || currentEditingClass,
+            previousSchool:document.getElementById('modalPreviousSchool').value, previousClass:document.getElementById('modalPreviousClass').value, previousResult:document.getElementById('modalPreviousResult').value,
+            houseGroup:document.getElementById('modalHouseGroup').value, allergies:document.getElementById('modalAllergies').value, medicalCondition:document.getElementById('modalMedicalCondition').value,
+            emergencyMedicalNotes:document.getElementById('modalEmergencyMedicalNotes').value, specialHealthRequirements:document.getElementById('modalSpecialHealth').value,
+            transportRequired:document.getElementById('modalTransport').value, transportRoute:document.getElementById('modalTransportRoute').value, pickupPoint:document.getElementById('modalPickupPoint').value,
+            dropoffPoint:document.getElementById('modalDropoffPoint').value, vehicleBus:document.getElementById('modalVehicle').value, sibling:document.getElementById('modalSibling').value,
+            documents:document.getElementById('modalDocuments').value, notes:document.getElementById('modalNotes').value
+        });
         const rows = document.querySelectorAll('#subjectsTableBody tr');
         rows.forEach(row => {
             const cells = row.querySelectorAll('td');
@@ -4295,6 +4524,7 @@ async function saveArchiveFast_(items, label='archive') {
                 }
             }
         });
+        student.updatedAt = new Date().toISOString();
         const ok = await queueFastSave_(() => saveStudentFast_(currentEditingClass, student, 'edit student'));
         refreshStudentsAfterChange_();
         document.getElementById('studentModal').classList.add('hidden');
@@ -4356,7 +4586,7 @@ async function saveArchiveFast_(items, label='archive') {
         const teacher = (db.teachers || []).find(t => String(t.id) === String(teacherId));
         if (!teacher) { panel.classList.add('hidden'); panel.innerHTML=''; return; }
         panel.classList.remove('hidden');
-        panel.innerHTML = `<div class="flex flex-wrap items-center justify-between gap-3 mb-4"><div><h4 class="text-lg font-black text-gray-800">${escFee(teacher.name || 'Unnamed')}</h4><p class="text-xs text-gray-500">${escFee(teacher.class || 'N/A')} • ${escFee(teacher.subject || 'N/A')}</p></div><div class="flex gap-2"><button onclick="editTeacher('${escFee(teacher.id)}')" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-2 rounded-xl"><i class="fa-regular fa-pen-to-square"></i> Edit</button><button onclick="printTeacher('${escFee(teacher.id)}')" class="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-2 rounded-xl admin-only"><i class="fa-solid fa-print"></i> Print</button><button onclick="deleteTeacher('${escFee(teacher.id)}')" class="bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-2 rounded-xl admin-only"><i class="fa-regular fa-trash-can"></i> Delete Teacher</button></div></div><div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm"><div><b>Qualification</b><div class="text-gray-600">${escFee(teacher.qualification || 'N/A')}</div></div><div><b>Experience</b><div class="text-gray-600">${escFee(teacher.experience || 0)} yrs</div></div><div><b>Contact</b><div class="text-gray-600">${escFee(teacher.contact || 'N/A')}</div></div><div><b>Status</b><div class="text-gray-600">${escFee(teacher.teacherStatus || 'Present')}</div></div><div class="md:col-span-2"><b>Address</b><div class="text-gray-600">${escFee(teacher.address || 'N/A')}</div></div><div><b>Joining Date</b><div class="text-gray-600">${escFee(teacher.joiningDate || 'N/A')}</div></div></div>`;
+        panel.innerHTML = `<div class="flex flex-wrap items-center justify-between gap-3 mb-4"><div><h4 class="text-lg font-black text-gray-800">${escFee(teacher.name || 'Unnamed')}</h4><p class="text-xs text-gray-500">${escFee(teacher.class || 'N/A')} • ${escFee(teacher.subject || 'N/A')}</p></div><div class="flex gap-2"><button onclick="editTeacher('${escFee(teacher.id)}')" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-2 rounded-xl"><i class="fa-regular fa-pen-to-square"></i> Edit</button><button onclick="printTeacher('${escFee(teacher.id)}')" class="bg-gray-700 hover:bg-gray-800 text-white text-xs px-3 py-2 rounded-xl admin-only"><i class="fa-solid fa-print"></i> Simple Print</button><button onclick="printTeacherInformation('${escFee(teacher.id)}', true)" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-2 rounded-xl admin-only"><i class="fa-solid fa-file-lines"></i> Advanced Print</button><button onclick="deleteTeacher('${escFee(teacher.id)}')" class="bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-2 rounded-xl admin-only"><i class="fa-regular fa-trash-can"></i> Delete Teacher</button></div></div><div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm"><div><b>Qualification</b><div class="text-gray-600">${escFee(teacher.qualification || 'N/A')}</div></div><div><b>Experience</b><div class="text-gray-600">${escFee(teacher.experience || 0)} yrs</div></div><div><b>Contact</b><div class="text-gray-600">${escFee(teacher.contact || 'N/A')}</div></div><div><b>Status</b><div class="text-gray-600">${escFee(teacher.teacherStatus || 'Present')}</div></div><div class="md:col-span-2"><b>Address</b><div class="text-gray-600">${escFee(teacher.address || 'N/A')}</div></div><div><b>Joining Date</b><div class="text-gray-600">${escFee(teacher.joiningDate || 'N/A')}</div></div></div>`;
     }
 
     let currentEditingTeacherId = null;
@@ -4373,6 +4603,7 @@ async function saveArchiveFast_(items, label='archive') {
     }
     function addNewTeacher() {
         currentEditingTeacherId = null;
+        document.getElementById('teacherAdvancedPrintActions').style.display = 'none';
         document.getElementById('teacherModalTitle').innerHTML = '<i class="fa-solid fa-chalkboard-user mr-2"></i> Teacher Details';
         document.getElementById('teacherName').value = '';
         document.getElementById('teacherQualification').value = '';
@@ -4384,6 +4615,10 @@ async function saveArchiveFast_(items, label='archive') {
         document.getElementById('teacherJoiningDate').value = '';
         document.getElementById('teacherStatus').value = 'Present';
         document.getElementById('teacherLeavingDate').value = '';
+        ['teacherDOB','teacherCnic','teacherEmail','teacherWhatsapp','teacherParentName','teacherEmergencyContact','teacherCity','teacherArea','teacherPermanentAddress','teacherPreviousInstitution','teacherSpecialization','teacherPhoto','teacherDocuments','teacherNotes'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+        document.getElementById('teacherGender').value = 'Male';
+        document.getElementById('teacherBloodGroup').value = '';
+        document.getElementById('teacherMaritalStatus').value = '';
         populateTeacherReplacementSelect('');
         document.getElementById('teacherReplacement').value = '';
         document.getElementById('teacherModal').classList.remove('hidden');
@@ -4393,6 +4628,7 @@ async function saveArchiveFast_(items, label='archive') {
         const teacher = db.teachers.find(t => t.id === teacherId);
         if (!teacher) { showToast('Teacher not found!', 'error'); return; }
         currentEditingTeacherId = teacherId;
+        document.getElementById('teacherAdvancedPrintActions').style.display = 'flex';
         document.getElementById('teacherModalTitle').innerHTML = '<i class="fa-solid fa-chalkboard-user mr-2"></i> Edit Teacher Details';
         document.getElementById('teacherName').value = teacher.name || '';
         document.getElementById('teacherQualification').value = teacher.qualification || '';
@@ -4402,8 +4638,26 @@ async function saveArchiveFast_(items, label='archive') {
         document.getElementById('teacherContact').value = teacher.contact || '';
         document.getElementById('teacherAddress').value = teacher.address || '';
         document.getElementById('teacherJoiningDate').value = teacher.joiningDate || '';
-        document.getElementById('teacherStatus').value = teacher.teacherStatus || 'Present';
+        document.getElementById('teacherStatus').value = teacher.teacherStatus || (teacher.status === 'Left' ? 'Left' : 'Present');
         document.getElementById('teacherLeavingDate').value = teacher.leavingDate || '';
+        const ax = teacher.extraData || {};
+        document.getElementById('teacherDOB').value = ax.dob || '';
+        document.getElementById('teacherGender').value = ax.gender || 'Male';
+        document.getElementById('teacherCnic').value = ax.cnic || '';
+        document.getElementById('teacherEmail').value = ax.email || '';
+        document.getElementById('teacherWhatsapp').value = ax.whatsapp || '';
+        document.getElementById('teacherBloodGroup').value = ax.bloodGroup || '';
+        document.getElementById('teacherMaritalStatus').value = ax.maritalStatus || '';
+        document.getElementById('teacherParentName').value = ax.parentName || '';
+        document.getElementById('teacherEmergencyContact').value = ax.emergencyContact || '';
+        document.getElementById('teacherCity').value = ax.city || '';
+        document.getElementById('teacherArea').value = ax.area || '';
+        document.getElementById('teacherPermanentAddress').value = ax.permanentAddress || '';
+        document.getElementById('teacherPreviousInstitution').value = ax.previousInstitution || '';
+        document.getElementById('teacherSpecialization').value = ax.specialization || '';
+        document.getElementById('teacherPhoto').value = ax.teacherPhoto || '';
+        document.getElementById('teacherDocuments').value = ax.documents || '';
+        document.getElementById('teacherNotes').value = ax.notes || '';
         populateTeacherReplacementSelect(teacherId);
         document.getElementById('teacherReplacement').value = teacher.replacementTeacherId || '';
         document.getElementById('teacherModal').classList.remove('hidden');
@@ -4435,6 +4689,17 @@ async function saveArchiveFast_(items, label='archive') {
             teacher.status = teacherStatus === 'Left' ? 'Left' : 'Active';
             teacher.leavingDate = teacherStatus === 'Present' ? '' : leavingDate;
             teacher.replacementTeacherId = teacherStatus === 'Left' ? replacementTeacherId : '';
+            teacher.extraData = Object.assign({}, teacher.extraData || {}, {
+                dob:document.getElementById('teacherDOB').value || '', gender:document.getElementById('teacherGender').value || '',
+                cnic:document.getElementById('teacherCnic').value || '', email:document.getElementById('teacherEmail').value || '',
+                whatsapp:document.getElementById('teacherWhatsapp').value || '', bloodGroup:document.getElementById('teacherBloodGroup').value || '',
+                maritalStatus:document.getElementById('teacherMaritalStatus').value || '', parentName:document.getElementById('teacherParentName').value || '',
+                emergencyContact:document.getElementById('teacherEmergencyContact').value || '', city:document.getElementById('teacherCity').value || '',
+                area:document.getElementById('teacherArea').value || '', permanentAddress:document.getElementById('teacherPermanentAddress').value || '',
+                previousInstitution:document.getElementById('teacherPreviousInstitution').value || '', specialization:document.getElementById('teacherSpecialization').value || '',
+                teacherPhoto:document.getElementById('teacherPhoto').value || '', documents:document.getElementById('teacherDocuments').value || '',
+                notes:document.getElementById('teacherNotes').value || ''
+            });
             loadTeachers(); populateReportTeacherFilter(); closeTeacherModal();
             const online = await queueFastSave_(() => saveTeacherFast_(teacher, 'update teacher'));
             showToast(online ? `Teacher "${name}" updated successfully and saved online! ✅` : `Teacher "${name}" saved on this device; online sync will retry.`, online ? 'success' : 'warning');
@@ -4447,7 +4712,18 @@ async function saveArchiveFast_(items, label='archive') {
             experience, contact: contact || 'N/A', address: address || 'N/A', joiningDate,
             teacherStatus, status: teacherStatus === 'Left' ? 'Left' : 'Active',
             leavingDate: teacherStatus === 'Present' ? '' : leavingDate,
-            replacementTeacherId: teacherStatus === 'Left' ? replacementTeacherId : ''
+            replacementTeacherId: teacherStatus === 'Left' ? replacementTeacherId : '',
+            extraData: {
+                dob:document.getElementById('teacherDOB').value || '', gender:document.getElementById('teacherGender').value || '',
+                cnic:document.getElementById('teacherCnic').value || '', email:document.getElementById('teacherEmail').value || '',
+                whatsapp:document.getElementById('teacherWhatsapp').value || '', bloodGroup:document.getElementById('teacherBloodGroup').value || '',
+                maritalStatus:document.getElementById('teacherMaritalStatus').value || '', parentName:document.getElementById('teacherParentName').value || '',
+                emergencyContact:document.getElementById('teacherEmergencyContact').value || '', city:document.getElementById('teacherCity').value || '',
+                area:document.getElementById('teacherArea').value || '', permanentAddress:document.getElementById('teacherPermanentAddress').value || '',
+                previousInstitution:document.getElementById('teacherPreviousInstitution').value || '', specialization:document.getElementById('teacherSpecialization').value || '',
+                teacherPhoto:document.getElementById('teacherPhoto').value || '', documents:document.getElementById('teacherDocuments').value || '',
+                notes:document.getElementById('teacherNotes').value || ''
+            }
         };
         db.teachers.push(teacher);
         loadTeachers(); populateReportTeacherFilter(); closeTeacherModal();
@@ -4874,8 +5150,8 @@ async function saveArchiveFast_(items, label='archive') {
 
         return `<div class="report-page">
             <div class="report-header">
-                <h1>🏫 The Educator's School</h1>
-                <h2>AHMAD HASEEB CAMPUS MORE KHUNDA</h2>
+                <h1>🏫 THE EDUCATORS SCHOOL</h1>
+                <h2>Ahmd Haseeb Campus</h2>
                 <h3>Monthly Attendance Report — ${monthInfo.monthLabel}</h3>
             </div>
             <div class="report-info-grid">
@@ -4899,7 +5175,7 @@ async function saveArchiveFast_(items, label='archive') {
                 <div class="sig"><div class="sig-line">Class Teacher</div></div>
                 <div class="sig"><div class="sig-line">Principal</div></div>
             </div>
-            <div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div>
+            <div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div>
         </div>`;
     }
 
@@ -4928,8 +5204,8 @@ async function saveArchiveFast_(items, label='archive') {
 
         return `<div class="report-page">
             <div class="report-header">
-                <h1>🏫 The Educator's School</h1>
-                <h2>AHMAD HASEEB CAMPUS MORE KHUNDA</h2>
+                <h1>🏫 THE EDUCATORS SCHOOL</h1>
+                <h2>Ahmd Haseeb Campus</h2>
                 <h3>Class Attendance Report — ${className}</h3>
             </div>
             <div class="report-info-grid">
@@ -4952,7 +5228,7 @@ async function saveArchiveFast_(items, label='archive') {
                 <div class="sig"><div class="sig-line">Class Teacher</div></div>
                 <div class="sig"><div class="sig-line">Principal</div></div>
             </div>
-            <div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div>
+            <div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div>
         </div>`;
     }
 
@@ -5200,7 +5476,7 @@ async function saveArchiveFast_(items, label='archive') {
             rows += `<tr><td>${student.rollNo || 'N/A'}</td><td style="text-align:left;">${student.name}</td><td>${obtained}</td><td>${pct}%</td><td style="font-weight:bold;">${grade.label}</td></tr>`;
         });
         const avg = students.length ? ((sumObtained / students.length / total) * 100).toFixed(1) : 0;
-        return `<div class="report-page"><div class="report-header"><h1>🏫 The Educator's School</h1><h2>AHMAD HASEEB CAMPUS MORE KHUNDA</h2><h3>Exam Result — ${exam.name}</h3></div><div class="report-info-grid"><div><b>Class:</b> ${exam.class}</div><div><b>Subject:</b> ${exam.subject}</div><div><b>Exam Date:</b> ${exam.date || 'N/A'}</div><div><b>Class Teacher:</b> ${getClassTeacherName(exam.class)}</div><div><b>Academic Year:</b> ${getAcademicYear()}</div><div><b>Total Marks:</b> ${total}</div><div><b>Class Average:</b> ${avg}%</div></div><table class="report-table"><thead><tr><th>Roll #</th><th style="text-align:left;">Name</th><th>Obtained</th><th>%</th><th>Grade</th></tr></thead><tbody>${rows}</tbody></table><div class="signatures"><div class="sig"><div class="sig-line">Class Teacher</div></div><div class="sig"><div class="sig-line">Principal</div></div></div><div class="footer">Academic Year: ${getAcademicYear()} | Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`;
+        return `<div class="report-page"><div class="report-header"><h1>🏫 THE EDUCATORS SCHOOL</h1><h2>Ahmd Haseeb Campus</h2><h3>Exam Result — ${exam.name}</h3></div><div class="report-info-grid"><div><b>Class:</b> ${exam.class}</div><div><b>Subject:</b> ${exam.subject}</div><div><b>Exam Date:</b> ${exam.date || 'N/A'}</div><div><b>Class Teacher:</b> ${getClassTeacherName(exam.class)}</div><div><b>Academic Year:</b> ${getAcademicYear()}</div><div><b>Total Marks:</b> ${total}</div><div><b>Class Average:</b> ${avg}%</div></div><table class="report-table"><thead><tr><th>Roll #</th><th style="text-align:left;">Name</th><th>Obtained</th><th>%</th><th>Grade</th></tr></thead><tbody>${rows}</tbody></table><div class="signatures"><div class="sig"><div class="sig-line">Class Teacher</div></div><div class="sig"><div class="sig-line">Principal</div></div></div></div>`;
     }
 
     function addNewExam() { document.getElementById('examModal').classList.remove('hidden'); document.body.style.overflow = 'hidden'; document.getElementById('examName').value = ''; document.getElementById('examSubject').value = ''; document.getElementById('examTotalMarks').value = 100; document.getElementById('examPassing').value = 40; document.getElementById('examDate').value = new Date().toISOString().split('T')[0]; }
@@ -5647,7 +5923,7 @@ async function saveArchiveFast_(items, label='archive') {
         const overallGrade = getGrade(overallPct);
 
         const message =
-`🏫 *The Educator's School*
+`🏫 *THE EDUCATORS SCHOOL*
 
 *${student.name}* — Roll #${student.rollNo || 'N/A'}
 Class: ${sorState.className}
@@ -5688,7 +5964,7 @@ ${lines}
                 });
                 const overallPct = sumTotal > 0 ? ((sumObtained / sumTotal) * 100).toFixed(1) : 0;
                 const overallGrade = getGrade(overallPct);
-                pages += `<div class="report-page"><div class="report-header"><h1>🏫 The Educator's School</h1><h2>AHMAD HASEEB CAMPUS MORE KHUNDA</h2><h3>Overall Result Card</h3></div><div class="report-info-grid"><div><b>Name:</b> ${student.name}</div><div><b>Roll Number:</b> ${student.rollNo || 'N/A'}</div><div><b>Class:</b> ${className}</div><div><b>Class Teacher:</b> ${getClassTeacherName(className)}</div><div><b>Academic Year:</b> ${getAcademicYear()}</div><div><b>Tests Included:</b> ${selected.length}</div></div><table class="report-table"><thead><tr><th style="text-align:left;">Subject</th><th style="text-align:left;">Exam</th><th>Date</th><th>Obtained</th><th>Total</th><th>%</th><th>Grade</th></tr></thead><tbody>${rows}</tbody></table><p><b>Overall Result:</b> ${overallPct}% &nbsp; <b>Grade:</b> ${overallGrade.label}</p></div>`;
+                pages += `<div class="report-page"><div class="report-header"><h1>🏫 THE EDUCATORS SCHOOL</h1><h2>Ahmd Haseeb Campus</h2><h3>Overall Result Card</h3></div><div class="report-info-grid"><div><b>Name:</b> ${student.name}</div><div><b>Roll Number:</b> ${student.rollNo || 'N/A'}</div><div><b>Class:</b> ${className}</div><div><b>Class Teacher:</b> ${getClassTeacherName(className)}</div><div><b>Academic Year:</b> ${getAcademicYear()}</div><div><b>Tests Included:</b> ${selected.length}</div></div><table class="report-table"><thead><tr><th style="text-align:left;">Subject</th><th style="text-align:left;">Exam</th><th>Date</th><th>Obtained</th><th>Total</th><th>%</th><th>Grade</th></tr></thead><tbody>${rows}</tbody></table><p><b>Overall Result:</b> ${overallPct}% &nbsp; <b>Grade:</b> ${overallGrade.label}</p></div>`;
             });
             printHTML(pages);
             return;
@@ -5701,12 +5977,12 @@ ${lines}
         const overallGrade = getGrade(overallPct);
         const page = `
             <div class="report-page">
-                <div class="report-header"><h1>🏫 The Educator's School</h1><h2>AHMAD HASEEB CAMPUS MORE KHUNDA</h2><h3>Overall Result Card</h3></div>
+                <div class="report-header"><h1>🏫 THE EDUCATORS SCHOOL</h1><h2>Ahmd Haseeb Campus</h2><h3>Overall Result Card</h3></div>
                 <div class="report-info-grid"><div><b>Name:</b> ${student.name}</div><div><b>Roll Number:</b> ${student.rollNo || 'N/A'}</div><div><b>Class:</b> ${className}</div><div><b>Class Teacher:</b> ${getClassTeacherName(className)}</div><div><b>Academic Year:</b> ${getAcademicYear()}</div><div><b>Tests Included:</b> ${selected.length}</div></div>
                 <table class="report-table"><thead><tr><th style="text-align:left;">Subject</th><th style="text-align:left;">Exam</th><th>Date</th><th>Obtained</th><th>Total</th><th>%</th><th>Grade</th></tr></thead><tbody>${rows}</tbody></table>
                 <div class="report-info-grid" style="margin-top:14px;"><div><b>Total Obtained:</b> ${sumObtained} / ${sumTotal}</div><div><b>Overall Percentage:</b> ${overallPct}%</div><div><b>Overall Grade:</b> <span style="color:${overallGrade.color.replace('text-', '')};font-weight:bold;">${overallGrade.label}</span></div></div>
                 <div style="margin:12px 0;font-weight:bold;">Class Teacher: ${getClassTeacherName(className)}</div><div class="signatures"><div class="sig"><div class="sig-line">Class Teacher</div></div><div class="sig"><div class="sig-line">Principal</div></div></div>
-                <div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div>
+                </div>
             </div>
         `;
         printHTML(page);
@@ -5813,6 +6089,84 @@ ${lines}
         return (db.fees || []).filter(f => selectedFeeIds.has(String(f.id)));
     }
 
+    function getFeeStudentPrintStatus_(student, className) {
+        const currentMonth = FEE_MONTHS[new Date().getMonth()];
+        const currentYear = getCurrentAcademicYear();
+        const record = getStudentMonthFeeRecord_(className, student.id, currentMonth, currentYear);
+        if (record) {
+            const amount = feeAmountValue(record);
+            const paid = feePaidValue(record);
+            const status = normalizeFeeStatus(record.status, amount, paid);
+            if (status === 'Paid') return 'Paid';
+            return 'Unpaid';
+        }
+        const studentStatus = String(student.feeStatus || '').toLowerCase();
+        if (studentStatus === 'paid') return 'Paid';
+        if (studentStatus === 'unpaid' || studentStatus === 'partial') return 'Unpaid';
+        return 'Pending';
+    }
+
+    function printFeeStudentsByStatus() {
+        if (currentUser?.role === 'Teacher') {
+            showToast('Only admin can print fee records', 'error');
+            return;
+        }
+        const selectedStatus = document.getElementById('feeStudentPrintStatus')?.value || 'Paid';
+        const currentMonth = FEE_MONTHS[new Date().getMonth()];
+        const currentYear = getCurrentAcademicYear();
+        const students = [];
+        Object.entries(db.students || {}).forEach(([className, list]) => {
+            (list || []).forEach(student => {
+                if (getFeeStudentPrintStatus_(student, className) === selectedStatus) {
+                    const record = getStudentMonthFeeRecord_(className, student.id, currentMonth, currentYear);
+                    const amount = record ? feeAmountValue(record) : 0;
+                    const paid = record ? feePaidValue(record) : 0;
+                    const due = record ? feeDueValue(record) : 0;
+                    students.push({ student, className, record, amount, paid, due });
+                }
+            });
+        });
+        if (!students.length) {
+            showToast(`No ${selectedStatus.toLowerCase()} students found`, 'warning');
+            return;
+        }
+        const rows = students.map(({student, className, record, amount, paid, due}) => `<tr>
+            <td>${escFee(student.name || '')}</td>
+            <td>${escFee(student.rollNo || '')}</td>
+            <td>${escFee(className)}</td>
+            <td>${escFee(student.father || '')}</td>
+            <td>${escFee(currentMonth)}</td>
+            <td>₨ ${amount.toLocaleString()}</td>
+            <td>₨ ${paid.toLocaleString()}</td>
+            <td>₨ ${due.toLocaleString()}</td>
+            <td>${escFee(selectedStatus)}</td>
+        </tr>`).join('');
+        const totalFee = students.reduce((n, x) => n + x.amount, 0);
+        const totalPaid = students.reduce((n, x) => n + x.paid, 0);
+        const totalDue = students.reduce((n, x) => n + x.due, 0);
+        const page = `<div class="report-page">
+            <div class="report-header">
+                <h1>🏫 THE EDUCATORS SCHOOL</h1>
+                <h2>Ahmd Haseeb Campus</h2>
+                <h3>${escFee(selectedStatus)} Students Fee Report</h3>
+                <p>Generated: ${escFee(new Date().toLocaleString())}</p>
+            </div>
+            <div class="report-info-grid">
+                <div><b>Status:</b> ${escFee(selectedStatus)}</div>
+                <div><b>Month:</b> ${escFee(currentMonth)} ${escFee(currentYear)}</div>
+                <div><b>Total Students:</b> ${students.length}</div>
+                <div><b>Total Fee:</b> ₨ ${totalFee.toLocaleString()}</div>
+                <div><b>Total Paid:</b> ₨ ${totalPaid.toLocaleString()}</div>
+                <div><b>Total Due:</b> ₨ ${totalDue.toLocaleString()}</div>
+            </div>
+            <table class="report-table"><thead><tr>
+                <th>Student</th><th>Roll #</th><th>Class</th><th>Father / Guardian</th><th>Month</th><th>Fee</th><th>Paid</th><th>Due</th><th>Status</th>
+            </tr></thead><tbody>${rows}</tbody></table>
+            <div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div>
+        </div>`;
+        printHTML(page);
+    }
+
     function printSelectedFeeRecords() {
         if (currentUser?.role === 'Teacher') {
             showToast('Only admin can print fee records', 'error');
@@ -5867,8 +6221,8 @@ ${lines}
 
         const page = `<div class="report-page">
             <div class="report-header">
-                <h1>🏫 The Educator's School</h1>
-                <h2>AHMAD HASEEB CAMPUS MORE KHUNDA</h2>
+                <h1>🏫 THE EDUCATORS SCHOOL</h1>
+                <h2>Ahmd Haseeb Campus</h2>
                 <h3>${escFee(title)}</h3>
                 <p>Generated: ${escFee(new Date().toLocaleString())}</p>
             </div>
@@ -5884,7 +6238,7 @@ ${lines}
                 </tr></thead>
                 <tbody>${rows}</tbody>
             </table>
-            <div class="footer">The Educator's School</div>
+            <div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div>
         </div>`;
         printHTML(page);
     }
@@ -6160,7 +6514,7 @@ ${lines}
     }
 
     async function deleteFee(id){ if(currentUser?.role==='Teacher'){showToast('Only admin can delete fee records','error');return;} if(!confirm('Delete this fee record? It will move to trash and can be restored.'))return; const f=(db.fees||[]).find(x=>x.id===id); if(!f)return; db.deleted=db.deleted||[]; const trashItem={id:f.id,type:'fee',name:`${f.studentName} - ${f.month}`,details:`Class: ${f.class}, Fee: ₨ ${feeAmountValue(f)}, Paid: ₨ ${feePaidValue(f)}, Due: ₨ ${feeDueValue(f)}`,deletedDate:new Date().toLocaleString(),data:f,className:f.class}; db.deleted.push(trashItem); db.fees=db.fees.filter(x=>x.id!==id); loadFees();loadDeletedItems(); refreshFeeLookupIfShowing_(f.class,f.studentId); try{await queueFastSave_(()=>deleteFeeFast_(f,trashItem));showToast('Fee record moved to trash','warning');}catch(e){db.fees.push(f);db.deleted=db.deleted.filter(x=>x!==trashItem);loadFees();loadDeletedItems();refreshFeeLookupIfShowing_(f.class,f.studentId);showToast('❌ Fee delete failed: '+(e.message||e),'error');} }
-    function printFeeRecord(id){ if(currentUser?.role==='Teacher'){showToast('Only admin can print fee records','error');return;} const f=(db.fees||[]).find(x=>x.id===id); if(!f){showToast('Fee record not found','error');return;} const s=getFeeStudent(f); const amount=feeAmountValue(f),paid=feePaidValue(f),due=feeDueValue(f); const page=`<div class="report-page"><div class="report-header"><h1>🏫 The Educator's School</h1><h2>AHMAD HASEEB CAMPUS MORE KHUNDA</h2><h3>Fee Receipt</h3></div><div class="report-info-grid"><div><b>Receipt No:</b> ${escFee(f.receiptNumber||'N/A')}</div><div><b>Date:</b> ${escFee(f.paymentDate||f.date||'')}</div><div><b>Student:</b> ${escFee(f.studentName)}</div><div><b>Admission/Roll No:</b> ${escFee(f.rollNo||s?.rollNo||'')}</div><div><b>Father/Guardian:</b> ${escFee(f.fatherGuardianName||s?.father||'')}</div><div><b>Class:</b> ${escFee(f.class)}</div><div><b>Fee Month:</b> ${escFee(f.month)}</div><div><b>Fee Amount:</b> ₨ ${amount.toLocaleString()}</div><div><b>Paid:</b> ₨ ${paid.toLocaleString()}</div><div><b>Remaining:</b> ₨ ${due.toLocaleString()}</div><div><b>Status:</b> ${escFee(normalizeFeeStatus(f.status,amount,paid))}</div></div><div class="signatures"><div class="sig"><div class="sig-line">Received By</div></div><div class="sig"><div class="sig-line">Parent / Guardian</div></div></div><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`; printHTML(page); }
+    function printFeeRecord(id){ if(currentUser?.role==='Teacher'){showToast('Only admin can print fee records','error');return;} const f=(db.fees||[]).find(x=>x.id===id); if(!f){showToast('Fee record not found','error');return;} const s=getFeeStudent(f); const amount=feeAmountValue(f),paid=feePaidValue(f),due=feeDueValue(f); const page=`<div class="report-page"><div class="report-header"><h1>🏫 THE EDUCATORS SCHOOL</h1><h2>Ahmd Haseeb Campus</h2><h3>Fee Receipt</h3></div><div class="report-info-grid"><div><b>Receipt No:</b> ${escFee(f.receiptNumber||'N/A')}</div><div><b>Date:</b> ${escFee(f.paymentDate||f.date||'')}</div><div><b>Student:</b> ${escFee(f.studentName)}</div><div><b>Admission/Roll No:</b> ${escFee(f.rollNo||s?.rollNo||'')}</div><div><b>Father/Guardian:</b> ${escFee(f.fatherGuardianName||s?.father||'')}</div><div><b>Class:</b> ${escFee(f.class)}</div><div><b>Fee Month:</b> ${escFee(f.month)}</div><div><b>Fee Amount:</b> ₨ ${amount.toLocaleString()}</div><div><b>Paid:</b> ₨ ${paid.toLocaleString()}</div><div><b>Remaining:</b> ₨ ${due.toLocaleString()}</div><div><b>Status:</b> ${escFee(normalizeFeeStatus(f.status,amount,paid))}</div></div><div class="signatures"><div class="sig"><div class="sig-line">Received By</div></div><div class="sig"><div class="sig-line">Parent / Guardian</div></div></div><div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div></div>`; printHTML(page); }
 
     // ==================== DELETED ITEMS ====================
     function getHiddenDeletedItemIds_() {
@@ -6728,7 +7082,7 @@ ${lines}
         const overallGrade = getGrade(overallPct);
         const totalDays = (student.present || 0) + (student.absences || 0) || 1;
         const attendancePercent = Math.round(((student.present || 0) / totalDays) * 100);
-        return `<div class="report-page"><div class="report-header"><h1>🏫 The Educator's School</h1><h2>AHMAD HASEEB CAMPUS MORE KHUNDA</h2><h3>Student Academic Report</h3></div><div class="report-info-grid"><div><b>Name:</b> ${student.name}</div><div><b>Roll Number:</b> ${student.rollNo || 'N/A'}</div><div><b>Class:</b> ${className}</div><div><b>Class Teacher:</b> ${getClassTeacherName(className)}</div><div><b>Academic Year:</b> ${getAcademicYear()}</div><div><b>Gender:</b> ${student.gender || 'N/A'}</div><div><b>Date of Birth:</b> ${student.dob || 'N/A'}</div><div><b>Father's Name:</b> ${student.father || 'N/A'}</div><div><b>Contact:</b> ${student.contact || 'N/A'}</div><div><b>WhatsApp:</b> ${student.whatsapp || 'N/A'}</div><div><b>Blood Group:</b> ${student.bloodGroup || 'N/A'}</div><div><b>Address:</b> ${student.address || 'N/A'}</div><div><b>Attendance:</b> ${attendancePercent}% (${student.present || 0} present / ${student.absences || 0} absent)</div></div><table class="report-table"><thead><tr><th style="text-align:left;">Test / Exam</th><th style="text-align:left;">Subject</th><th>Test Date</th><th>Total Marks</th><th>Obtained Marks</th><th>Percentage</th><th>Grade</th></tr></thead><tbody>${marksHTML || '<tr><td colspan="7">No test results found.</td></tr>'}<tr style="background:#eff6ff;font-weight:bold;"><td colspan="3" style="text-align:right;">Grand Total:</td><td>${grandTotal}</td><td>${grandObtained}</td><td>${overallPct}%</td><td style="color:${overallGrade.color.replace('text-', '')}">${overallGrade.label}</td></tr></tbody></table><div style="margin-bottom:15px;"><span style="font-weight:bold;">Fee Status: </span><span class="fee-status ${student.feeStatus === 'Paid' ? 'fee-paid' : student.feeStatus === 'Partial' ? 'fee-partial' : 'fee-pending'}">${student.feeStatus || 'Pending'}</span></div><div class="signatures"><div class="sig"><div class="sig-line">Class Teacher</div></div><div class="sig"><div class="sig-line">Principal</div></div></div><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`;
+        return `<div class="report-page"><div class="report-header"><h1>🏫 THE EDUCATORS SCHOOL</h1><h2>Ahmd Haseeb Campus</h2><h3>Student Academic Report</h3></div><div class="report-info-grid"><div><b>Name:</b> ${student.name}</div><div><b>Roll Number:</b> ${student.rollNo || 'N/A'}</div><div><b>Class:</b> ${className}</div><div><b>Class Teacher:</b> ${getClassTeacherName(className)}</div><div><b>Academic Year:</b> ${getAcademicYear()}</div><div><b>Gender:</b> ${student.gender || 'N/A'}</div><div><b>Date of Birth:</b> ${student.dob || 'N/A'}</div><div><b>Father's Name:</b> ${student.father || 'N/A'}</div><div><b>Contact:</b> ${student.contact || 'N/A'}</div><div><b>WhatsApp:</b> ${student.whatsapp || 'N/A'}</div><div><b>Blood Group:</b> ${student.bloodGroup || 'N/A'}</div><div><b>Address:</b> ${student.address || 'N/A'}</div><div><b>Attendance:</b> ${attendancePercent}% (${student.present || 0} present / ${student.absences || 0} absent)</div></div><table class="report-table"><thead><tr><th style="text-align:left;">Test / Exam</th><th style="text-align:left;">Subject</th><th>Test Date</th><th>Total Marks</th><th>Obtained Marks</th><th>Percentage</th><th>Grade</th></tr></thead><tbody>${marksHTML || '<tr><td colspan="7">No test results found.</td></tr>'}<tr style="background:#eff6ff;font-weight:bold;"><td colspan="3" style="text-align:right;">Grand Total:</td><td>${grandTotal}</td><td>${grandObtained}</td><td>${overallPct}%</td><td style="color:${overallGrade.color.replace('text-', '')}">${overallGrade.label}</td></tr></tbody></table><div style="margin-bottom:15px;"><span style="font-weight:bold;">Fee Status: </span><span class="fee-status ${student.feeStatus === 'Paid' ? 'fee-paid' : student.feeStatus === 'Partial' ? 'fee-partial' : 'fee-pending'}">${student.feeStatus || 'Pending'}</span></div><div class="signatures"><div class="sig"><div class="sig-line">Class Teacher</div></div><div class="sig"><div class="sig-line">Principal</div></div></div></div></div>`;
     }
 
 function printLeavingCertificate(className, studentId) {
@@ -6736,7 +7090,7 @@ function printLeavingCertificate(className, studentId) {
         const student = db.students[className]?.find(s => s.id === studentId);
         if (!student) { showToast('Student not found!', 'error'); return; }
         const today = new Date().toLocaleDateString();
-        const page = `<div class="report-page"><div class="report-header"><h1>🏫 The Educator's School</h1><h2>AHMAD HASEEB CAMPUS MORE KHUNDA</h2><h3>School Leaving Certificate</h3></div>
+        const page = `<div class="report-page"><div class="report-header"><h1>🏫 THE EDUCATORS SCHOOL</h1><h2>Ahmd Haseeb Campus</h2><h3>School Leaving Certificate</h3></div>
             <p style="margin:18px 0;font-size:14px;line-height:1.9;">
                 This is to certify that <b>${student.name || 'N/A'}</b>, S/D/O <b>${student.father || 'N/A'}</b>,
                 bearing Roll Number <b>${student.rollNo || 'N/A'}</b>, was a bonafide student of Class
@@ -6752,7 +7106,7 @@ function printLeavingCertificate(className, studentId) {
             </div>
             <p style="margin:18px 0;font-size:14px;">His/her conduct during the stay at school remained satisfactory. This certificate is issued on his/her parent's/guardian's request for further educational purposes.</p>
             <div class="signatures"><div class="sig"><div class="sig-line">Class Teacher</div></div><div class="sig"><div class="sig-line">Principal</div></div></div>
-            <div class="footer">Issued on ${today} | The Educator's School</div></div>`;
+            <div class="footer">Issued on ${today} | THE EDUCATORS SCHOOL</div></div>`;
         printHTML(page);
     }
 
@@ -6814,6 +7168,68 @@ async function printPreviousPromotionData(index) {
         printHTML(page);
     }
 
+    function printStudentInformation(className, studentId, advanced = false) {
+        if (currentUser && currentUser.role === 'Teacher') { showToast('Only admin can print student information', 'error'); return; }
+        const student = db.students[className]?.find(s => s.id === studentId);
+        if (!student) { showToast('Student not found!', 'error'); return; }
+        const ax = student.extraData || {};
+        const esc = v => String(v ?? 'N/A').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+        const row = (label, value) => `<div><b>${esc(label)}:</b> ${esc(value || 'N/A')}</div>`;
+        let content = `
+            <div class="report-page">
+              <div class="report-header"><h1>🏫 THE EDUCATORS SCHOOL</h1><h2>Ahmd Haseeb Campus</h2><h3>${advanced ? 'Advanced Student Information' : 'Student Information'}</h3></div>
+              <div class="report-info-grid">
+                ${row('Student Name', student.name)}
+                ${row('Father / Guardian', student.father)}
+                ${row('Gender', student.gender)}
+                ${row('Class', className)}
+                ${row('Roll Number', student.rollNo)}
+                ${row('Admission Number', student.admissionNumber || ax.admissionNumber)}
+                ${row('Admission Date', student.joiningDate)}
+                ${row('Contact', student.contact)}
+                ${row('WhatsApp', student.whatsapp)}
+                ${row('Student Status', student.studentStatus)}
+              </div>`;
+        if (advanced) {
+            content += `
+              <h3 style="margin:18px 0 10px;border-bottom:1px solid #ccc;padding-bottom:6px;">Advanced Information</h3>
+              <div class="report-info-grid">
+                ${row('Date of Birth', student.dob)}
+                ${row('B-Form / Registration No.', ax.bForm)}
+                ${row('Blood Group', student.bloodGroup)}
+                ${row('Father / Guardian CNIC', ax.fatherCnic)}
+                ${row('Father Occupation', ax.fatherOccupation)}
+                ${row('Mother Name', ax.motherName)}
+                ${row('Mother Contact', ax.motherContact)}
+                ${row('Guardian Relation', ax.guardianRelation)}
+                ${row('Emergency Contact', ax.emergencyContact)}
+                ${row('Current Address', student.address || ax.currentAddress)}
+                ${row('Permanent Address', ax.permanentAddress)}
+                ${row('City', ax.city)}
+                ${row('Area / Village', ax.area)}
+                ${row('Previous School', ax.previousSchool)}
+                ${row('Previous Class', ax.previousClass)}
+                ${row('Previous Result / Percentage', ax.previousResult)}
+                ${row('House / Group', ax.houseGroup)}
+                ${row('Allergies', ax.allergies)}
+                ${row('Medical Condition', ax.medicalCondition)}
+                ${row('Emergency Medical Notes', ax.emergencyMedicalNotes)}
+                ${row('Special Health Requirements', ax.specialHealthRequirements)}
+                ${row('Transport Required', ax.transportRequired)}
+                ${row('Transport Route', ax.transportRoute)}
+                ${row('Pickup Point', ax.pickupPoint)}
+                ${row('Drop-off Point', ax.dropoffPoint)}
+                ${row('Vehicle / Bus', ax.vehicleBus)}
+                ${row('Sibling', ax.sibling)}
+                ${row('Student Photo Reference', ax.studentPhoto)}
+                ${row('Documents', ax.documents)}
+                ${row('Notes', ax.notes)}
+              </div>`;
+        }
+        content += `<div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div></div>`;
+        printHTML(content);
+    }
+
     function printSingleStudent(className, studentId) {
         if (currentUser && currentUser.role === 'Teacher') { showToast('Only admin can print student reports', 'error'); return; }
         const student = db.students[className]?.find(s => s.id === studentId);
@@ -6834,8 +7250,32 @@ async function printPreviousPromotionData(index) {
         if (currentUser && currentUser.role === 'Teacher') { showToast('Only admin can print teacher profiles', 'error'); return; }
         const teacher = db.teachers.find(t => t.id === teacherId);
         if (!teacher) { showToast('Teacher not found!', 'error'); return; }
-        const page = `<div class="report-page"><div class="report-header"><h1>🏫 The Educator's School</h1><h2>AHMAD HASEEB CAMPUS MORE KHUNDA</h2><h3>Teacher Profile</h3></div><div class="report-info-grid"><div><b>Name:</b> ${teacher.name}</div><div><b>Qualification:</b> ${teacher.qualification || 'N/A'}</div><div><b>Subject:</b> ${teacher.subject}</div><div><b>Class:</b> ${teacher.class}</div><div><b>Experience:</b> ${teacher.experience || 0} years</div><div><b>Contact:</b> ${teacher.contact || 'N/A'}</div><div style="grid-column: span 2;"><b>Address:</b> ${teacher.address || 'N/A'}</div></div><div class="signatures"><div class="sig"><div class="sig-line">Principal</div></div><div class="sig"><div class="sig-line">Admin</div></div></div><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`;
+        const page = `<div class="report-page"><div class="report-header"><h1>🏫 THE EDUCATORS SCHOOL</h1><h2>Ahmd Haseeb Campus</h2><h3>Teacher Profile</h3></div><div class="report-info-grid"><div><b>Name:</b> ${teacher.name}</div><div><b>Qualification:</b> ${teacher.qualification || 'N/A'}</div><div><b>Subject:</b> ${teacher.subject}</div><div><b>Class:</b> ${teacher.class}</div><div><b>Experience:</b> ${teacher.experience || 0} years</div><div><b>Contact:</b> ${teacher.contact || 'N/A'}</div><div><b>Joining Date:</b> ${teacher.joiningDate || 'N/A'}</div><div><b>Status:</b> ${teacher.teacherStatus || (teacher.status === 'Left' ? 'Left' : 'Present')}</div><div style="grid-column: span 2;"><b>Address:</b> ${teacher.address || 'N/A'}</div></div><div class="signatures"><div class="sig"><div class="sig-line">Principal</div></div><div class="sig"><div class="sig-line">Admin</div></div></div><div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div></div>`;
         printHTML(page);
+    }
+
+    function printTeacherInformation(teacherId, advanced = false) {
+        if (currentUser && currentUser.role === 'Teacher') { showToast('Only admin can print teacher information', 'error'); return; }
+        const teacher = db.teachers.find(t => t.id === teacherId);
+        if (!teacher) { showToast('Teacher not found!', 'error'); return; }
+        const ax = teacher.extraData || {};
+        const esc = v => String(v ?? 'N/A').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+        const row = (label, value) => `<div><b>${esc(label)}:</b> ${esc(value || 'N/A')}</div>`;
+        let content = `<div class="report-page"><div class="report-header"><h1>🏫 THE EDUCATORS SCHOOL</h1><h2>Ahmd Haseeb Campus</h2><h3>${advanced ? 'Advanced Teacher Information' : 'Teacher Information'}</h3></div><div class="report-info-grid">
+            ${row('Teacher Name', teacher.name)} ${row('Qualification', teacher.qualification)} ${row('Subject', teacher.subject)} ${row('Class', teacher.class)}
+            ${row('Experience', `${teacher.experience || 0} years`)} ${row('Contact', teacher.contact)} ${row('Joining Date', teacher.joiningDate)} ${row('Status', teacher.teacherStatus || (teacher.status === 'Left' ? 'Left' : 'Present'))}
+            ${row('Address', teacher.address)}
+        </div>`;
+        if (advanced) {
+            content += `<h3 style="margin:18px 0 10px;border-bottom:1px solid #ccc;padding-bottom:6px;">Advanced Information</h3><div class="report-info-grid">
+                ${row('Date of Birth', ax.dob)} ${row('Gender', ax.gender)} ${row('CNIC / National ID', ax.cnic)} ${row('Email', ax.email)}
+                ${row('WhatsApp Number', ax.whatsapp)} ${row('Blood Group', ax.bloodGroup)} ${row('Marital Status', ax.maritalStatus)} ${row('Father / Husband Name', ax.parentName)}
+                ${row('Emergency Contact', ax.emergencyContact)} ${row('City', ax.city)} ${row('Area / Village', ax.area)} ${row('Permanent Address', ax.permanentAddress)}
+                ${row('Previous Institution', ax.previousInstitution)} ${row('Specialization', ax.specialization)} ${row('Teacher Photo Reference', ax.teacherPhoto)} ${row('Documents', ax.documents)} ${row('Notes', ax.notes)}
+            </div>`;
+        }
+        content += `<div class="signatures"><div class="sig"><div class="sig-line">Principal</div></div><div class="sig"><div class="sig-line">Admin</div></div></div><div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div></div>`;
+        printHTML(content);
     }
 
     function printAttendanceReport(className, studentId) {
@@ -6864,13 +7304,13 @@ async function printPreviousPromotionData(index) {
             const obtained = results[studentId] || 0;
             const pct = total > 0 ? ((obtained / total) * 100).toFixed(1) : 0;
             const grade = getGrade(pct);
-            const page = `<div class="report-page"><div class="report-header"><h1>🏫 The Educator's School</h1><h2>AHMAD HASEEB CAMPUS MORE KHUNDA</h2><h3>Exam Result — ${exam.name}</h3></div><div class="report-info-grid"><div><b>Name:</b> ${student.name}</div><div><b>Roll Number:</b> ${student.rollNo || 'N/A'}</div><div><b>Class:</b> ${exam.class}</div><div><b>Subject:</b> ${exam.subject}</div><div><b>Exam Date:</b> ${exam.date || 'N/A'}</div><div><b>Class Teacher:</b> ${getClassTeacherName(exam.class)}</div><div><b>Academic Year:</b> ${getAcademicYear()}</div><div><b>Total Marks:</b> ${total}</div></div><table class="report-table"><thead><tr><th>Obtained Marks</th><th>Percentage</th><th>Grade</th></tr></thead><tbody><tr><td>${obtained}</td><td>${pct}%</td><td style="color:${grade.color.replace('text-', '')};font-weight:bold;">${grade.label}</td></tr></tbody></table><div class="signatures"><div class="sig"><div class="sig-line">Class Teacher</div></div><div class="sig"><div class="sig-line">Principal</div></div></div><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`;
+            const page = `<div class="report-page"><div class="report-header"><h1>🏫 THE EDUCATORS SCHOOL</h1><h2>Ahmd Haseeb Campus</h2><h3>Exam Result — ${exam.name}</h3></div><div class="report-info-grid"><div><b>Name:</b> ${student.name}</div><div><b>Roll Number:</b> ${student.rollNo || 'N/A'}</div><div><b>Class:</b> ${exam.class}</div><div><b>Subject:</b> ${exam.subject}</div><div><b>Exam Date:</b> ${exam.date || 'N/A'}</div><div><b>Class Teacher:</b> ${getClassTeacherName(exam.class)}</div><div><b>Academic Year:</b> ${getAcademicYear()}</div><div><b>Total Marks:</b> ${total}</div></div><table class="report-table"><thead><tr><th>Obtained Marks</th><th>Percentage</th><th>Grade</th></tr></thead><tbody><tr><td>${obtained}</td><td>${pct}%</td><td style="color:${grade.color.replace('text-', '')};font-weight:bold;">${grade.label}</td></tr></tbody></table><div class="signatures"><div class="sig"><div class="sig-line">Class Teacher</div></div><div class="sig"><div class="sig-line">Principal</div></div></div></div>`;
             printHTML(page); return;
         }
         let rows = '', sumObtained = 0;
         students.forEach(student => { const obtained = results[student.id] || 0; sumObtained += obtained; const pct = total > 0 ? ((obtained / total) * 100).toFixed(1) : 0; const grade = getGrade(pct); rows += `<tr><td>${student.rollNo || 'N/A'}</td><td style="text-align:left;">${student.name}</td><td>${obtained}</td><td>${pct}%</td><td style="color:${grade.color.replace('text-', '')};font-weight:bold;">${grade.label}</td></tr>`; });
         const classAvgPct = students.length > 0 ? ((sumObtained / students.length / total) * 100).toFixed(1) : 0;
-        const page = `<div class="report-page"><div class="report-header"><h1>🏫 The Educator's School</h1><h2>AHMAD HASEEB CAMPUS MORE KHUNDA</h2><h3>Exam Result — ${exam.name}</h3></div><div class="report-info-grid"><div><b>Class:</b> ${exam.class}</div><div><b>Subject:</b> ${exam.subject}</div><div><b>Exam Date:</b> ${exam.date || 'N/A'}</div><div><b>Class Teacher:</b> ${getClassTeacherName(exam.class)}</div><div><b>Academic Year:</b> ${getAcademicYear()}</div><div><b>Total Marks:</b> ${total}</div><div><b>Class Average:</b> ${classAvgPct}%</div></div><table class="report-table"><thead><tr><th>Roll #</th><th style="text-align:left;">Name</th><th>Obtained</th><th>%</th><th>Grade</th></tr></thead><tbody>${rows}</tbody></table><div class="signatures"><div class="sig"><div class="sig-line">Class Teacher</div></div><div class="sig"><div class="sig-line">Principal</div></div></div><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`;
+        const page = `<div class="report-page"><div class="report-header"><h1>🏫 THE EDUCATORS SCHOOL</h1><h2>Ahmd Haseeb Campus</h2><h3>Exam Result — ${exam.name}</h3></div><div class="report-info-grid"><div><b>Class:</b> ${exam.class}</div><div><b>Subject:</b> ${exam.subject}</div><div><b>Exam Date:</b> ${exam.date || 'N/A'}</div><div><b>Class Teacher:</b> ${getClassTeacherName(exam.class)}</div><div><b>Academic Year:</b> ${getAcademicYear()}</div><div><b>Total Marks:</b> ${total}</div><div><b>Class Average:</b> ${classAvgPct}%</div></div><table class="report-table"><thead><tr><th>Roll #</th><th style="text-align:left;">Name</th><th>Obtained</th><th>%</th><th>Grade</th></tr></thead><tbody>${rows}</tbody></table><div class="signatures"><div class="sig"><div class="sig-line">Class Teacher</div></div><div class="sig"><div class="sig-line">Principal</div></div></div></div>`;
         printHTML(page);
     }
 
@@ -6914,27 +7354,27 @@ async function printPreviousPromotionData(index) {
         return Object.values(subjectMap);
     }
     function getClassOverallPercentage(c){const a=getClassTestSubjectData(c).reduce((x,q)=>x+Number(q.obtained||0),0),t=getClassTestSubjectData(c).reduce((x,q)=>x+Number(q.total||0),0);return t>0?((a/t)*100).toFixed(1):'0.0';}
-    function reportPrintHeader(title){const schoolName=(document.getElementById('schoolName')?.value||AppStorage.get('school_name')||"The Educator's School");return `<div class="report-header"><h1>🏫 ${escFee(schoolName)}</h1><h2>AHMAD HASEEB CAMPUS MORE KHUNDA</h2><h3>${title}</h3></div>`;}
+    function reportPrintHeader(title){return `<div class="report-header"><h1>🏫 THE EDUCATORS SCHOOL</h1><h2>Ahmd Haseeb Campus</h2><h3>${title}</h3></div>`;}
     function reportPrintStyles(){return `<style>.custom-report-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:12px}.custom-report-table th,.custom-report-table td{border:1px solid #d1d5db;padding:7px 8px;text-align:left;vertical-align:top}.custom-report-table th{background:#f3f4f6;font-weight:700;text-align:center}.custom-report-table td.center{text-align:center}.custom-report-meta{display:flex;justify-content:space-between;margin:8px 0;font-size:11px;color:#4b5563}</style>`;}
-    function buildClassContactReport(c){let r=(db.students[c]||[]).map((s,i)=>`<tr><td class="center">${i+1}</td><td>${s.name||''}</td><td>${s.contact||''}</td></tr>`).join('');return `<div class="report-page">${reportPrintHeader(`Class Contact List — Class ${c}`)}<div class="custom-report-meta"><span><b>Class:</b> ${c}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Student Name</th><th>Contact / Phone Number</th></tr></thead><tbody>${r||'<tr><td colspan="3" class="center">No students found.</td></tr>'}</tbody></table><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`;}
+    function buildClassContactReport(c){let r=(db.students[c]||[]).map((s,i)=>`<tr><td class="center">${i+1}</td><td>${s.name||''}</td><td>${s.contact||''}</td></tr>`).join('');return `<div class="report-page">${reportPrintHeader(`Class Contact List — Class ${c}`)}<div class="custom-report-meta"><span><b>Class:</b> ${c}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Student Name</th><th>Contact / Phone Number</th></tr></thead><tbody>${r||'<tr><td colspan="3" class="center">No students found.</td></tr>'}</tbody></table><div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div></div>`;}
     function getStudentFeeTotal(s,c){let f=(db.fees||[]).filter(x=>String(x.studentId||x.student||'')===String(s.id||'')||(String(x.studentName||x.name||'')===String(s.name||'')&&String(x.class||x.className||'')===String(c)));return f.length?f.reduce((a,x)=>a+Number(x.amount||x.total||0),0):Number(s.totalFee||s.fee||0);}
-    function buildStudentFeeListReport(c){let r=(db.students[c]||[]).map((s,i)=>`<tr><td class="center">${i+1}</td><td>${s.name||''}</td><td class="center">${c}</td><td>${s.contact||''}</td><td class="center">${getStudentFeeTotal(s,c)||0}</td></tr>`).join('');return `<div class="report-page">${reportPrintHeader(`Student Fee List — Class ${c}`)}<div class="custom-report-meta"><span><b>Class:</b> ${c}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Student Name</th><th>Class</th><th>Phone Number</th><th>Total Fees</th></tr></thead><tbody>${r||'<tr><td colspan="5" class="center">No students found.</td></tr>'}</tbody></table><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`;}
-    function buildStudentBasicListReport(c){let r=(db.students[c]||[]).map((s,i)=>`<tr><td class="center">${i+1}</td><td>${s.name||''}</td><td class="center">${c}</td></tr>`).join('');return `<div class="report-page">${reportPrintHeader(`Student Basic List — Class ${c}`)}<div class="custom-report-meta"><span><b>Class:</b> ${c}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Student Name</th><th>Class</th></tr></thead><tbody>${r||'<tr><td colspan="3" class="center">No students found.</td></tr>'}</tbody></table><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`;}
-    function buildTeacherListReport(){let r=(db.teachers||[]).map((t,i)=>`<tr><td class="center">${i+1}</td><td>${t.name||''}</td><td>${t.contact||''}</td><td>${t.qualification||'N/A'}</td><td>${t.subject||''}</td><td>${t.class||''}</td><td class="center">${t.experience||0}</td><td>${t.address||''}</td></tr>`).join('');return `<div class="report-page">${reportPrintHeader('Teacher List')}<div class="custom-report-meta"><span><b>Total Teachers:</b> ${(db.teachers||[]).length}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Teacher Name</th><th>Contact / Phone</th><th>Qualification</th><th>Subject</th><th>Class</th><th>Experience (Years)</th><th>Address</th></tr></thead><tbody>${r||'<tr><td colspan="8" class="center">No teachers found.</td></tr>'}</tbody></table><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`;}
+    function buildStudentFeeListReport(c){let r=(db.students[c]||[]).map((s,i)=>`<tr><td class="center">${i+1}</td><td>${s.name||''}</td><td class="center">${c}</td><td>${s.contact||''}</td><td class="center">${getStudentFeeTotal(s,c)||0}</td></tr>`).join('');return `<div class="report-page">${reportPrintHeader(`Student Fee List — Class ${c}`)}<div class="custom-report-meta"><span><b>Class:</b> ${c}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Student Name</th><th>Class</th><th>Phone Number</th><th>Total Fees</th></tr></thead><tbody>${r||'<tr><td colspan="5" class="center">No students found.</td></tr>'}</tbody></table><div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div></div>`;}
+    function buildStudentBasicListReport(c){let r=(db.students[c]||[]).map((s,i)=>`<tr><td class="center">${i+1}</td><td>${s.name||''}</td><td class="center">${c}</td></tr>`).join('');return `<div class="report-page">${reportPrintHeader(`Student Basic List — Class ${c}`)}<div class="custom-report-meta"><span><b>Class:</b> ${c}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Student Name</th><th>Class</th></tr></thead><tbody>${r||'<tr><td colspan="3" class="center">No students found.</td></tr>'}</tbody></table><div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div></div>`;}
+    function buildTeacherListReport(){let r=(db.teachers||[]).map((t,i)=>`<tr><td class="center">${i+1}</td><td>${t.name||''}</td><td>${t.contact||''}</td><td>${t.qualification||'N/A'}</td><td>${t.subject||''}</td><td>${t.class||''}</td><td class="center">${t.experience||0}</td><td>${t.address||''}</td></tr>`).join('');return `<div class="report-page">${reportPrintHeader('Teacher List')}<div class="custom-report-meta"><span><b>Total Teachers:</b> ${(db.teachers||[]).length}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Teacher Name</th><th>Contact / Phone</th><th>Qualification</th><th>Subject</th><th>Class</th><th>Experience (Years)</th><th>Address</th></tr></thead><tbody>${r||'<tr><td colspan="8" class="center">No teachers found.</td></tr>'}</tbody></table><div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div></div>`;}
     function buildClassPercentageReport(){
         const cs=['PG','Nursery','KG','1','2','3','4','5','6','7','8','9','10'];
         const allSubjects=[]; cs.forEach(c=>getClassTestSubjectData(c).forEach(x=>{if(!allSubjects.some(q=>q.name===x.name))allSubjects.push({name:x.name});}));
         const heads=allSubjects.map(x=>`<th>${x.name} %</th>`).join('');
         const r=cs.map((c,i)=>{const actual=getClassTestSubjectData(c),map=Object.fromEntries(actual.map(x=>[x.name,x]));return `<tr><td class="center">${i+1}</td><td class="center">${c}</td>${allSubjects.map(x=>{const q=map[x.name];return `<td class="center">${q&&q.total?((q.obtained/q.total)*100).toFixed(1)+'%':'—'}</td>`}).join('')}<td class="center">${getClassOverallPercentage(c)}%</td></tr>`;}).join('');
-        return `<div class="report-page">${reportPrintHeader('Class Percentage Report')}<div class="custom-report-meta"><span><b>Classes:</b> All Classes</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Class Name</th>${heads}<th>Overall Percentage</th></tr></thead><tbody>${r}</tbody></table><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`;
+        return `<div class="report-page">${reportPrintHeader('Class Percentage Report')}<div class="custom-report-meta"><span><b>Classes:</b> All Classes</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Class Name</th>${heads}<th>Overall Percentage</th></tr></thead><tbody>${r}</tbody></table><div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div></div>`;
     }
     function buildStudentResultSummaryReport(c){
         const ss=db.students[c]||[], sub=getClassTestSubjectData(c).map(x=>({name:x.name,total:x.total}));
         const heads=sub.map(x=>`<th>${x.name} %</th>`).join('');
         const r=ss.map((s,i)=>{const x=getStudentResultSummaryData(s,c);return `<tr><td class="center">${i+1}</td><td>${s.name||''}</td><td class="center">${c}</td>${sub.map(q=>`<td class="center">${x.subjectResults[q.name]!==undefined?x.subjectResults[q.name]+'%':'—'}</td>`).join('')}<td class="center">${x.overall}%</td><td class="center"><b>${x.grade}</b></td></tr>`}).join('');
-        return `<div class="report-page">${reportPrintHeader(`Student Result Summary — Class ${c}`)}<div class="custom-report-meta"><span><b>Class:</b> ${c}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Student Name</th><th>Class</th>${heads}<th>Overall %</th><th>Grade</th></tr></thead><tbody>${r||'<tr><td colspan="20" class="center">No students found.</td></tr>'}</tbody></table><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`;
+        return `<div class="report-page">${reportPrintHeader(`Student Result Summary — Class ${c}`)}<div class="custom-report-meta"><span><b>Class:</b> ${c}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Student Name</th><th>Class</th>${heads}<th>Overall %</th><th>Grade</th></tr></thead><tbody>${r||'<tr><td colspan="20" class="center">No students found.</td></tr>'}</tbody></table><div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div></div>`;
     }
-    function buildCompleteStudentReport(c){let r=(db.students[c]||[]).map((s,i)=>{let x=getStudentResultSummaryData(s,c),subs=x.subjects.map(q=>`${q.name}: ${Number((s.marks||{})[q.name]||0)}/${q.total}`).join(', ');return `<tr><td class="center">${i+1}</td><td>${s.name||''}</td><td class="center">${c}</td><td>${subs||'N/A'}</td><td>${s.father||''}</td><td class="center">${x.overall}%</td></tr>`}).join('');return `<div class="report-page">${reportPrintHeader(`Complete Student Report — Class ${c}`)}<div class="custom-report-meta"><span><b>Class:</b> ${c}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Student Name</th><th>Class</th><th>Subjects</th><th>Father Name</th><th>Total / Overall %</th></tr></thead><tbody>${r||'<tr><td colspan="6" class="center">No students found.</td></tr>'}</tbody></table><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`;}
+    function buildCompleteStudentReport(c){let r=(db.students[c]||[]).map((s,i)=>{let x=getStudentResultSummaryData(s,c),subs=x.subjects.map(q=>`${q.name}: ${Number((s.marks||{})[q.name]||0)}/${q.total}`).join(', ');return `<tr><td class="center">${i+1}</td><td>${s.name||''}</td><td class="center">${c}</td><td>${subs||'N/A'}</td><td>${s.father||''}</td><td class="center">${x.overall}%</td></tr>`}).join('');return `<div class="report-page">${reportPrintHeader(`Complete Student Report — Class ${c}`)}<div class="custom-report-meta"><span><b>Class:</b> ${c}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Student Name</th><th>Class</th><th>Subjects</th><th>Father Name</th><th>Total / Overall %</th></tr></thead><tbody>${r||'<tr><td colspan="6" class="center">No students found.</td></tr>'}</tbody></table><div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div></div>`;}
     function populateReportPrintClassSelect(){let s=document.getElementById('reportPrintClassSelect');if(s)s.innerHTML=['PG','Nursery','KG','1','2','3','4','5','6','7','8','9','10'].map(c=>`<option value="${c}">Class ${c}</option>`).join('');}
     function populateReportPrintStudentSelect(){let s=document.getElementById('reportPrintStudentSelect'),c=document.getElementById('reportPrintClassSelect')?.value;if(!s||!c)return;s.innerHTML='<option value="">Select student</option>'+(db.students[c]||[]).map((x,i)=>`<option value="${x.id||i}">${x.name||'Unnamed'}${x.rollNo?' | Roll: '+x.rollNo:''}</option>`).join('');}
     function reportPrintTypeChanged(){let t=document.getElementById('reportPrintType')?.value;let needsClass=!['teacher-list','class-percentage'].includes(t);let needsStudent=['student-result','student-complete','student-fee-detail','student-attendance','previous-class-history','class-student-report'].includes(t);document.getElementById('reportPrintClassWrap')?.classList.toggle('hidden',!needsClass);document.getElementById('reportPrintStudentWrap')?.classList.toggle('hidden',!needsStudent);populateReportPrintClassSelect();populateReportPrintStudentSelect();}
@@ -6988,7 +7428,7 @@ async function printPreviousPromotionData(index) {
         const fees=[...feeGroups.values()];
         const feeTotal=fees.reduce((a,f)=>a+feeAmountValue(f),0), feePaid=fees.reduce((a,f)=>a+feePaidValue(f),0);
         const days=(student.present||0)+(student.absences||0),att=days?Math.round(((student.present||0)/days)*100):0;
-        return `<div class="report-page">${reportPrintHeader('Individual Student Comprehensive Report')}<div class="custom-report-meta"><span><b>Name:</b> ${student.name||''}</span><span><b>Class:</b> ${className}</span><span><b>Roll:</b> ${student.rollNo||'N/A'}</span><span><b>Father:</b> ${student.father||'N/A'}</span><span><b>Academic Year:</b> ${getAcademicYear()}</span></div><h3>Academic Result — All Tests</h3><table class="custom-report-table"><thead><tr><th>Exam</th><th>Subject</th><th>Date</th><th>Obtained</th><th>Total</th><th>%</th><th>Grade</th></tr></thead><tbody>${resultRows||'<tr><td colspan="7">No exam results found.</td></tr>'}</tbody></table><p><b>Overall Result:</b> ${total?((sum/total)*100).toFixed(1):'0.0'}% &nbsp; <b>Grade:</b> ${getGrade(total?((sum/total)*100):0).label}</p><h3>Fees — Complete History</h3><table class="custom-report-table"><thead><tr><th>Date/Month</th><th>Amount</th><th>Paid</th><th>Status</th></tr></thead><tbody>${fees.map(f=>`<tr><td>${f.date||f.month||''}</td><td>${f.amount||f.total||f.feeAmount||0}</td><td>${f.paidAmount||f.paid||0}</td><td>${f.status||''}</td></tr>`).join('')||'<tr><td colspan="4">No fee records found.</td></tr>'}</tbody></table><p><b>Total Fees:</b> ${feeTotal} &nbsp; <b>Paid:</b> ${feePaid} &nbsp; <b>Balance:</b> ${feeTotal-feePaid}</p><h3>Attendance</h3><p>Present: ${student.present||0} &nbsp; Absent: ${student.absences||0} &nbsp; Attendance: ${att}%</p><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`;
+        return `<div class="report-page">${reportPrintHeader('Individual Student Comprehensive Report')}<div class="custom-report-meta"><span><b>Name:</b> ${student.name||''}</span><span><b>Class:</b> ${className}</span><span><b>Roll:</b> ${student.rollNo||'N/A'}</span><span><b>Father:</b> ${student.father||'N/A'}</span><span><b>Academic Year:</b> ${getAcademicYear()}</span></div><h3>Academic Result — All Tests</h3><table class="custom-report-table"><thead><tr><th>Exam</th><th>Subject</th><th>Date</th><th>Obtained</th><th>Total</th><th>%</th><th>Grade</th></tr></thead><tbody>${resultRows||'<tr><td colspan="7">No exam results found.</td></tr>'}</tbody></table><p><b>Overall Result:</b> ${total?((sum/total)*100).toFixed(1):'0.0'}% &nbsp; <b>Grade:</b> ${getGrade(total?((sum/total)*100):0).label}</p><h3>Fees — Complete History</h3><table class="custom-report-table"><thead><tr><th>Date/Month</th><th>Amount</th><th>Paid</th><th>Status</th></tr></thead><tbody>${fees.map(f=>`<tr><td>${f.date||f.month||''}</td><td>${f.amount||f.total||f.feeAmount||0}</td><td>${f.paidAmount||f.paid||0}</td><td>${f.status||''}</td></tr>`).join('')||'<tr><td colspan="4">No fee records found.</td></tr>'}</tbody></table><p><b>Total Fees:</b> ${feeTotal} &nbsp; <b>Paid:</b> ${feePaid} &nbsp; <b>Balance:</b> ${feeTotal-feePaid}</p><h3>Attendance</h3><p>Present: ${student.present||0} &nbsp; Absent: ${student.absences||0} &nbsp; Attendance: ${att}%</p></div></div>`;
     }
     async function buildStudentFeeDetailReport(student,className){
         await ensureStudentReportHistoryLoaded_(student?.id);
@@ -6998,22 +7438,22 @@ async function printPreviousPromotionData(index) {
         const fees=[...feeGroups.values()];
         const rows=fees.map(f=>`<tr><td>${f.date||f.month||''}</td><td>${feeAmountValue(f)}</td><td>${feePaidValue(f)}</td><td>${normalizeFeeStatus(f.status,feeAmountValue(f),feePaidValue(f))}</td></tr>`).join('');
         const total=fees.reduce((a,f)=>a+feeAmountValue(f),0),paid=fees.reduce((a,f)=>a+feePaidValue(f),0);
-        return `<div class="report-page">${reportPrintHeader('Student — Complete Fee History')}<div class="custom-report-meta"><span><b>Name:</b> ${student.name||''}</span><span><b>Class:</b> ${className}</span><span><b>Roll:</b> ${student.rollNo||'N/A'}</span></div><table class="custom-report-table"><thead><tr><th>Date/Month</th><th>Amount</th><th>Paid</th><th>Status</th></tr></thead><tbody>${rows||'<tr><td colspan="4">No fee records found.</td></tr>'}</tbody></table><p><b>Total Fees:</b> ${total} &nbsp; <b>Paid:</b> ${paid} &nbsp; <b>Balance:</b> ${total-paid}</p><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`;
+        return `<div class="report-page">${reportPrintHeader('Student — Complete Fee History')}<div class="custom-report-meta"><span><b>Name:</b> ${student.name||''}</span><span><b>Class:</b> ${className}</span><span><b>Roll:</b> ${student.rollNo||'N/A'}</span></div><table class="custom-report-table"><thead><tr><th>Date/Month</th><th>Amount</th><th>Paid</th><th>Status</th></tr></thead><tbody>${rows||'<tr><td colspan="4">No fee records found.</td></tr>'}</tbody></table><p><b>Total Fees:</b> ${total} &nbsp; <b>Paid:</b> ${paid} &nbsp; <b>Balance:</b> ${total-paid}</p><div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div></div>`;
     }
     function buildClassFeeHistoryReport(c){
         const students=db.students[c]||[], rows=students.map((s,i)=>{const fees=(db.fees||[]).filter(f=>String(f.studentId||f.student_id||'')===String(s.id||''));const total=fees.reduce((a,f)=>a+Number(f.amount||f.total||f.feeAmount||0),0),paid=fees.reduce((a,f)=>a+Number(f.paidAmount||f.paid||0),0);return `<tr><td class="center">${i+1}</td><td>${s.name||''}</td><td>${fees.map(f=>f.date||f.month||'').join(', ')||'—'}</td><td class="center">${total}</td><td class="center">${paid}</td><td class="center">${total-paid}</td></tr>`}).join('');
-        return `<div class="report-page">${reportPrintHeader(`Student — Complete Fee History — Class ${c}`)}<div class="custom-report-meta"><span><b>Class:</b> ${c}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Student Name</th><th>Dates/Months</th><th>Total Fees</th><th>Paid</th><th>Balance</th></tr></thead><tbody>${rows||'<tr><td colspan="6">No students found.</td></tr>'}</tbody></table><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`;
+        return `<div class="report-page">${reportPrintHeader(`Student — Complete Fee History — Class ${c}`)}<div class="custom-report-meta"><span><b>Class:</b> ${c}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Student Name</th><th>Dates/Months</th><th>Total Fees</th><th>Paid</th><th>Balance</th></tr></thead><tbody>${rows||'<tr><td colspan="6">No students found.</td></tr>'}</tbody></table><div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div></div>`;
     }
     async function buildStudentAttendanceReport(student,className){
         await ensureStudentReportHistoryLoaded_(student?.id);
         const log=student.attendanceLog||{}, dates=Object.keys(log).sort();
         const rows=dates.map(d=>`<tr><td>${d}</td><td class="center">${String(log[d]).toUpperCase()==='P'?'Present':'Absent'}</td></tr>`).join('');
         const present=dates.filter(d=>String(log[d]).toUpperCase()==='P').length, absent=dates.filter(d=>String(log[d]).toUpperCase()!=='P').length, total=present+absent;
-        return `<div class="report-page">${reportPrintHeader('Student — Attendance Report')}<div class="custom-report-meta"><span><b>Name:</b> ${student.name||''}</span><span><b>Class:</b> ${className}</span><span><b>Roll:</b> ${student.rollNo||'N/A'}</span></div><table class="custom-report-table"><thead><tr><th>Date</th><th>Status</th></tr></thead><tbody>${rows||'<tr><td colspan="2">No attendance records found.</td></tr>'}</tbody></table><p><b>Present:</b> ${present} &nbsp; <b>Absent:</b> ${absent} &nbsp; <b>Attendance:</b> ${total?Math.round((present/total)*100):0}%</p><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`;
+        return `<div class="report-page">${reportPrintHeader('Student — Attendance Report')}<div class="custom-report-meta"><span><b>Name:</b> ${student.name||''}</span><span><b>Class:</b> ${className}</span><span><b>Roll:</b> ${student.rollNo||'N/A'}</span></div><table class="custom-report-table"><thead><tr><th>Date</th><th>Status</th></tr></thead><tbody>${rows||'<tr><td colspan="2">No attendance records found.</td></tr>'}</tbody></table><p><b>Present:</b> ${present} &nbsp; <b>Absent:</b> ${absent} &nbsp; <b>Attendance:</b> ${total?Math.round((present/total)*100):0}%</p><div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div></div>`;
     }
     function buildClassAttendanceReport(c){
         const rows=(db.students[c]||[]).map((s,i)=>{const log=s.attendanceLog||{},dates=Object.keys(log),p=dates.filter(d=>String(log[d]).toUpperCase()==='P').length,a=dates.length-p;return `<tr><td class="center">${i+1}</td><td>${s.name||''}</td><td class="center">${p}</td><td class="center">${a}</td><td class="center">${dates.length?Math.round((p/dates.length)*100):0}%</td></tr>`}).join('');
-        return `<div class="report-page">${reportPrintHeader(`Student — Attendance Report — Class ${c}`)}<div class="custom-report-meta"><span><b>Class:</b> ${c}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Student Name</th><th>Present</th><th>Absent</th><th>Attendance %</th></tr></thead><tbody>${rows||'<tr><td colspan="5">No students found.</td></tr>'}</tbody></table><div class="footer">Generated on ${new Date().toLocaleString()} | The Educator's School</div></div>`;
+        return `<div class="report-page">${reportPrintHeader(`Student — Attendance Report — Class ${c}`)}<div class="custom-report-meta"><span><b>Class:</b> ${c}</span><span><b>Print Date:</b> ${new Date().toLocaleDateString()}</span></div><table class="custom-report-table"><thead><tr><th>S.No</th><th>Student Name</th><th>Present</th><th>Absent</th><th>Attendance %</th></tr></thead><tbody>${rows||'<tr><td colspan="5">No students found.</td></tr>'}</tbody></table><div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus</div></div>`;
     }
 
     async function ensurePreviousClassDataLoaded_(studentId) {
@@ -7021,7 +7461,7 @@ async function printPreviousPromotionData(index) {
         const relevant = (db.promotionHistory || []).filter(h => String(h.studentId || '') === String(studentId || '') && !h.previousClassData);
         if (!relevant.length) return;
         try {
-            const rows = await supabaseTableRequest('promotion_history', { query: `?student_id=eq.${encodeURIComponent(studentId)}&select=id,previousClassData:extra_data->previousClassData` });
+            const rows = await supabaseTableRequest('promotion_history', { query: `?student_id=eq.${encodeURIComponent(studentId)}&school_id=eq.${encodeURIComponent(SUPABASE_SCHOOL_ID)}&select=id,previousClassData:extra_data->previousClassData` });
             if (!Array.isArray(rows)) return;
             rows.forEach(row => {
                 const entry = (db.promotionHistory || []).find(h => String(h.id) === String(row.id));
@@ -7069,7 +7509,7 @@ async function printPreviousPromotionData(index) {
             const promotedTime = h.promotedAt ? new Date(h.promotedAt).getTime() : NaN;
             const fullLog = student.attendanceLog || {};
             const prevAttendanceDates = Object.keys(fullLog).filter(d => !isNaN(promotedTime) && new Date(d).getTime() < promotedTime);
-            return `<div class="report-page">${reportPrintHeader('Previous Class Historical Report')}<div class="custom-report-meta"><span><b>Student:</b> ${student.name||h.studentName||''}</span><span><b>Previous Class:</b> ${prevClass}</span><span><b>Promoted To:</b> ${h.toClass||''}</span><span><b>Previous Roll:</b> ${h.oldRoll||p.rollNo||''}</span></div><h3>Previous Class Marks</h3><table class="custom-report-table"><thead><tr><th>Subject</th><th>Marks</th></tr></thead><tbody>${Object.entries(p.marks||h.oldMarks||{}).map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('')||'<tr><td colspan="2">No marks snapshot.</td></tr>'}</tbody></table><h3>Previous Class Fees</h3><table class="custom-report-table"><thead><tr><th>Date/Month</th><th>Amount</th><th>Paid</th><th>Status</th></tr></thead><tbody>${fees.map(f=>`<tr><td>${f.date||f.month||''}</td><td>${f.amount||f.total||f.feeAmount||0}</td><td>${f.paidAmount||f.paid||0}</td><td>${f.status||''}</td></tr>`).join('')||'<tr><td colspan="4">No fee records found for this class.</td></tr>'}</tbody></table><h3>Previous Class Exam Results</h3><table class="custom-report-table"><thead><tr><th>Exam</th><th>Subject</th><th>Obtained</th><th>Total</th><th>%</th></tr></thead><tbody>${er||'<tr><td colspan="5">No exam records found for this class.</td></tr>'}</tbody></table><p><b>Previous Attendance:</b> ${prevAttendanceDates.length} saved attendance entries</p><div class="footer">Generated on ${new Date().toLocaleString()} | Previous-class snapshot</div></div>`;
+            return `<div class="report-page">${reportPrintHeader('Previous Class Historical Report')}<div class="custom-report-meta"><span><b>Student:</b> ${student.name||h.studentName||''}</span><span><b>Previous Class:</b> ${prevClass}</span><span><b>Promoted To:</b> ${h.toClass||''}</span><span><b>Previous Roll:</b> ${h.oldRoll||p.rollNo||''}</span></div><h3>Previous Class Marks</h3><table class="custom-report-table"><thead><tr><th>Subject</th><th>Marks</th></tr></thead><tbody>${Object.entries(p.marks||h.oldMarks||{}).map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('')||'<tr><td colspan="2">No marks snapshot.</td></tr>'}</tbody></table><h3>Previous Class Fees</h3><table class="custom-report-table"><thead><tr><th>Date/Month</th><th>Amount</th><th>Paid</th><th>Status</th></tr></thead><tbody>${fees.map(f=>`<tr><td>${f.date||f.month||''}</td><td>${f.amount||f.total||f.feeAmount||0}</td><td>${f.paidAmount||f.paid||0}</td><td>${f.status||''}</td></tr>`).join('')||'<tr><td colspan="4">No fee records found for this class.</td></tr>'}</tbody></table><h3>Previous Class Exam Results</h3><table class="custom-report-table"><thead><tr><th>Exam</th><th>Subject</th><th>Obtained</th><th>Total</th><th>%</th></tr></thead><tbody>${er||'<tr><td colspan="5">No exam records found for this class.</td></tr>'}</tbody></table><p><b>Previous Attendance:</b> ${prevAttendanceDates.length} saved attendance entries</p><div class="footer">Printing Date: ${new Date().toLocaleDateString()} | THE EDUCATORS SCHOOL | Ahmd Haseeb Campus | Previous-class snapshot</div></div>`;
         }).join('');
     }
     function openReportPrintSelection(){if(currentUser&&currentUser.role==='Teacher'){showToast('Only admin can print reports','error');return;}let m=document.getElementById('reportPrintSelectionModal');if(!m){printAllFilteredReports();return;}document.getElementById('reportPrintType').value='class-contact';reportPrintTypeChanged();m.classList.remove('hidden');document.body.style.overflow='hidden';}
@@ -7264,7 +7704,7 @@ async function printPreviousPromotionData(index) {
             const entry = (db.backupHistory || []).find(b => b.backupId === backupId);
             if (!entry) throw new Error('Backup not found');
             if (!entry.snapshot) {
-                const rows = await supabaseTableRequest('backups', { query: `?id=eq.${encodeURIComponent(backupId)}&select=backup_data&limit=1` });
+                const rows = await supabaseTableRequest('backups', { query: `?id=eq.${encodeURIComponent(backupId)}&school_id=eq.${encodeURIComponent(SUPABASE_SCHOOL_ID)}&select=backup_data&limit=1` });
                 entry.snapshot = Array.isArray(rows) && rows[0] ? rows[0].backup_data : null;
             }
             if (!entry.snapshot) throw new Error('Backup data could not be loaded from Supabase.');
@@ -7828,10 +8268,10 @@ async function printPreviousPromotionData(index) {
     // ==================== SETTINGS ====================
     let onlineSettingsLoaded_=false;
     function applySchoolNameToVisibleUI_() {
-        const name=(document.getElementById('schoolName')?.value||'').trim() || "The Educator's School";
+        const name="THE EDUCATORS SCHOOL";
         document.title=name;
         document.querySelectorAll('h1,h2,h3,h4,h5,h6,p,span,div').forEach(el=>{
-            if(el.children.length===0 && el.textContent.trim()==="The Educator's School") el.textContent=name;
+            if(el.children.length===0 && el.textContent.trim()==="THE EDUCATORS SCHOOL") el.textContent=name;
         });
     }
     async function loadOnlineSettings_() {
@@ -7850,7 +8290,7 @@ async function printPreviousPromotionData(index) {
     async function saveSettings() {
         if (currentUser?.role === 'Teacher') { showToast('Only admin can save settings', 'error'); return; }
         const saveBtn = document.querySelector('#tab-settings button[onclick="saveSettings()"]');
-        const schoolName=(document.getElementById('schoolName')?.value||'').trim() || "The Educator's School";
+        const schoolName=(document.getElementById('schoolName')?.value||'').trim() || "THE EDUCATORS SCHOOL";
         const academicYear=document.getElementById('academicYear')?.value||'';
         const defaultFee=document.getElementById('defaultFee')?.value||'';
         if (saveBtn) { saveBtn.disabled = true; saveBtn.dataset.origHtml = saveBtn.dataset.origHtml || saveBtn.innerHTML; saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...'; }
@@ -8171,8 +8611,10 @@ async function printPreviousPromotionData(index) {
         document.getElementById('mainDashboard').classList.add('hidden');
         document.getElementById('loginPassword').value = '';
         document.getElementById('teacherLoginPassword').value = '';
-        const savedSchoolName = AppStorage.get('school_name');
-        if (savedSchoolName) document.getElementById('schoolName').value = savedSchoolName;
+        // SCHOOL BRAND LOCK: never inherit another school's saved branding (shared-origin localStorage safeguard).
+        const SCHOOL_BRAND_NAME = 'THE EDUCATORS SCHOOL';
+        AppStorage.set('school_name', SCHOOL_BRAND_NAME);
+        document.getElementById('schoolName').value = SCHOOL_BRAND_NAME;
         const academicYear = AppStorage.get('academic_year');
         const defaultFee = AppStorage.get('default_fee');
         if (academicYear) document.getElementById('academicYear').value = academicYear;
@@ -8563,7 +9005,6 @@ async function printPreviousPromotionData(index) {
             </div>
         </div>
     </div>
-
 
 <!-- ACADEMIC DATA CLEANUP: DATE-RANGE ONLY; DOES NOT DELETE STUDENT PROFILE OR FEES -->
 <div id="academicCleanupModal" class="fixed inset-0 z-[10001] hidden items-center justify-center bg-black/70 p-4">
